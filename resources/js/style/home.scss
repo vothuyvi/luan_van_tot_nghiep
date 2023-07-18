@@ -1,0 +1,114 @@
+.container_giavi {
+    width: 100%;
+    height: fit-content;
+    margin-top: 2rem
+}
+
+.giavi_title {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4rem;
+}
+
+.giavi_title h3 {
+    color: rgb(14, 165, 233);
+    font-size: 3rem;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.giavi_title p {
+    font-size: 1.7rem;
+    font-weight: 500;
+    text-align: center;
+    color: rgb(14, 165, 233);
+}
+
+.container_giavi_new {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1.5rem;
+    gap: 2rem;
+
+
+}
+
+.giavi_list {
+    height: fit-content;
+    padding-bottom: 4rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    box-shadow: 0px 2px 16px #eeebeb;
+    overflow: hidden;
+    a {
+        display: block;
+        overflow: hidden;
+    }
+}
+
+.giavi_list img {
+    width: 100%;
+    height: 35rem;
+    object-fit: cover;
+    transform: scale(1);
+    transition: all 0.5s;
+}
+
+.giavi_list img:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    transform: scale(1.1);
+
+}
+
+.name_sp {
+    width: 100%;
+    height: 5.7rem;
+    font-size: 2rem;
+    font-weight: bold;
+    align-items: center;
+    text-align: center;
+    margin-top: 1rem;
+
+}
+
+.spice_sp {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+    color: rgb(14, 165, 233);
+}
+
+.btn_buy {
+    display: flex;
+    justify-content: center;
+}
+
+.btn_buy button {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 0;
+    font-weight: bold;
+    font-size: 1.6rem;
+    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid rgb(14, 165, 233);
+
+}
+
+.btn_buy button:hover {
+    background-color: rgb(14, 165, 233);
+    color: #ffff;
+}
+
+.container_giavi_best {
+    margin-top: 2rem;
+}

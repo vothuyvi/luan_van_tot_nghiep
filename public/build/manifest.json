@@ -1,0 +1,41 @@
+{
+  "resources/js/app.css": {
+    "file": "assets/app-3ea2b5b0.css",
+    "src": "resources/js/app.css"
+  },
+  "resources/js/app.js": {
+    "assets": [
+      "assets/slider7-8dc50585.png",
+      "assets/slider5-34b17cf0.jpeg",
+      "assets/slider4-1443d08c.jpeg",
+      "assets/slder6-4ab126bb.jpeg",
+      "assets/slider8-f3fc96d2.jpeg"
+    ],
+    "css": [
+      "assets/app-3ea2b5b0.css"
+    ],
+    "file": "assets/app-8433f582.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  },
+  "resources/js/images/slder6.jpeg": {
+    "file": "assets/slder6-4ab126bb.jpeg",
+    "src": "resources/js/images/slder6.jpeg"
+  },
+  "resources/js/images/slider4.jpeg": {
+    "file": "assets/slider4-1443d08c.jpeg",
+    "src": "resources/js/images/slider4.jpeg"
+  },
+  "resources/js/images/slider5.jpeg": {
+    "file": "assets/slider5-34b17cf0.jpeg",
+    "src": "resources/js/images/slider5.jpeg"
+  },
+  "resources/js/images/slider7.png": {
+    "file": "assets/slider7-8dc50585.png",
+    "src": "resources/js/images/slider7.png"
+  },
+  "resources/js/images/slider8.jpeg": {
+    "file": "assets/slider8-f3fc96d2.jpeg",
+    "src": "resources/js/images/slider8.jpeg"
+  }
+}

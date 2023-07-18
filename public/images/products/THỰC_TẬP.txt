@@ -1,0 +1,74 @@
+
+box-shadow: 0px 2px 8px rgba($color: #000000, $alpha: 0.13); ĐỘ BÓNG
+              X   Y  BLUR
+
+
+//sass--TÍCH HỢP SCSS VÀO SOURCE CODE
+npm i sass --save-dev
+
+//tạo table laravel
+php artisan make:migration create_user(tên table)_table
+
+//kết nối DB
+php artisan migrate
+
+//xoa migrate
+php artisan migrate:rollback
+
+//nếu không chạy lệnh migrate để kết nối DB thì vẫn phải dùng lệnh để tạo model sau đó chỉnh lại model đó trỏ đến table nào và đi các timestamp, create at, update at có sẵn của laravel
+	public $timestamps = false;
+
+//tao model cho table co san
+php artisan make:model admin -mc
+
+//chay kiem tra model lay dc du lieu chua
+php artisan tinker
+\App\Models\Admin::all()
+
+
+//khi clone souce laravel về cần chạy 2 lệnh sau:
+1. composer update/install
+2. npm install
+
+
+//clear cache
+php artisan optimze:clear
+
+//ktra list api
+php artisan route:list
+
+
+//kiem tra dang nhap
+auth();
+
+//check api treen postman
+in :
+Accept(key)
+application/json (value)
+
+//check login tren postman
+Authorization (key)
+Bearer {{token}} (value)
+
+//sử dụng các phiên bản node trong máy
+1. cài đặt nvm( nếu trong máy chưa có)
+2. các bước use
+ nvm list ( ktra all node)
+ nvm install 14.13.0 ( cài theo phiên bản muốn sử dụng)
+ nvm use 14.13.0 (tên phiên bản muốn dùng)	
+ node -v ( ktra phiên bản node trên máy đang sử dụng)	
+
+//set php > 8
+search edit.....
+tim path gán đường dẫn phía dưới và lưu lại
+C:\wamp64\bin\php\php8.1.0
+
+C:\xampp\php
+
+//dang nhap bang google
+https://www.itsolutionstuff.com/post/laravel-8-socialite-login-with-google-account-exampleexample.html
+Laravel 8 Socialite Login with Google Account Example
+
+
+//ckeditor & ckfinder
+https://lebang.vn/lap-trinh/php/huong-dan-su-dung-ckeditor-va-ckfinder.html

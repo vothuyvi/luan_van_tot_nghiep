@@ -1,0 +1,117 @@
+.body_cart {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    background-color: white;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+
+    h3 {
+        text-align: center;
+        font-size: 3.8rem;
+        color: rgb(14, 165, 233);
+        font-weight: bold;
+        // padding: 3rem;
+        margin-top: 2rem;
+    }
+
+    p {
+        font-size: 1.7rem;
+        font-weight: 500;
+        text-align: center;
+        color: rgb(14, 165, 233);
+        margin-bottom: 2rem;
+    }
+}
+
+
+table,
+th,
+td {
+    border: 0;
+    text-align: center;
+}
+
+.body_cart table {
+    width: 100%;
+}
+
+.tr1 th {
+    padding: 2rem;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.tr1,
+.tr2 {
+    border-bottom: 0.1rem solid #e3e0e0;
+}
+
+.tr2 td {
+    font-weight: 400;
+}
+
+.tr3 td {
+    padding: 1rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.td_tt {
+    text-align: right;
+}
+
+.td_price {
+    text-align: center;
+}
+
+.body_cart img {
+    width: 15rem;
+    height: 15rem;
+    object-fit: cover;
+}
+
+.quantity button {
+    width: 2.5rem;
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin: 1.2rem;
+    border-radius: 0.6rem;
+    border: 0.1rem solid rgb(14, 165, 233);
+}
+
+.quantity button:hover {
+    background-color: rgb(14, 165, 233);
+    color: white;
+}
+
+.delete {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.delete i:hover {
+    color: red;
+    cursor: pointer;
+}
+
+.td_btn {
+    text-align: right;
+}
+
+.tr3 button {
+    padding: 1rem 1.2rem;
+    border: 0;
+    font-size: 1.4rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    border: 0.1rem solid rgb(14, 165, 233);
+    background-color: white;
+}
+
+.tr3 button:hover {
+    background-color: rgb(14, 165, 233);
+    cursor: pointer;
+}
