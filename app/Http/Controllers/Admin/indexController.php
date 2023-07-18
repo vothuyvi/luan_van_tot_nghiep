@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class indexController extends Controller
 {
@@ -11,9 +12,6 @@ class indexController extends Controller
      */
     public function index()
     {
-        return redirect()->route('view1.index');
-
+        return view('index');
     }
-
-
 }

@@ -30,9 +30,9 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $arr = ['email' => $request->email, 'password' => $request->password];
-        if (Auth::attempt($arr)) {
+        if (Auth::guard('admin')->attempt($arr)) {
             //đăng nhập đúng
-            return view('index');
+            return redirect('/index');
         } else {
             // dd('Đăng nhập thất bại');
             return view('admin/login');

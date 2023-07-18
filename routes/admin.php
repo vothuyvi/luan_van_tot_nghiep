@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\indexController;
 use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\LoginController;
 use App\Http\Controllers\Admin\BinhluanController;
@@ -24,7 +25,7 @@ use App\Http\Controllers\Admin\TaiKhoanController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin/test', [TestController::class, 'index']);
+// Route::get('/admin/test', [TestController::class, 'index']);
 
 Route::get('/admin/login', function () {
     return view('admin/login');
@@ -45,9 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
 // });
 
 //Trang chủ
-Route::get('/index', function () {
-    return view('index');
-});
+Route::get('/index', [indexController::class, 'index']);
 //quản lý sản phẩm
 Route::get('admin/qlsanpham/view1', function () {
     return view('admin/qlsanpham/view1');

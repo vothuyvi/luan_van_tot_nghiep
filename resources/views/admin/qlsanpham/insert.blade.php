@@ -34,7 +34,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <td>MÃ SẢN PHẨM</td>
-                            <input type="text" name="MaSP" class="form-control">
+                            <input type="text" name="MaSP" value="{{old('MaSP')}}" class="form-control">
                             @if($errors->has('MaSP'))
                             <span class="error-text">
                                 {{$errors->first('MaSP')}}
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <td>TÊN SẢN PHẨM</td>
-                            <input type="text" name="TenSP" class="form-control">
+                            <input type="text" name="TenSP" value="{{old('TenSP')}}" class="form-control">
                             @if($errors->has('TenSP'))
                             <span class="error-text">
                                 {{$errors->first('TenSP')}}
@@ -63,7 +63,7 @@
                         </div> -->
                         <div class="form-group">
                             <td>NGÀY THÊM</td>
-                            <input type="date" name="NgayThem" class="form-control">
+                            <input type="date" name="NgayThem" value="{{old('NgayThem')}}" class="form-control">
                             @if($errors->has('NgayThem'))
                             <span class="error-text">
                                 {{$errors->first('NgayThem')}}
@@ -72,7 +72,7 @@
                         </div>
                         <div class="form-group">
                             <td>MÔ TẢ</td>
-                            <textarea name="MoTa" id="" class="form-control"></textarea>
+                            <textarea name="MoTa" id="" value="{{old('MoTa')}}" class="form-control"></textarea>
                             @if($errors->has('MoTa'))
                             <span class="error-text">
                                 {{$errors->first('MoTa')}}
@@ -81,7 +81,7 @@
                         </div>
                         <div class="form-group">
                             <td>GIÁ TIỀN</td>
-                            <input type="text" name="GiaTien" class="form-control">
+                            <input type="text" name="GiaTien" value="{{old('GiaTien')}}" class="form-control">
                             @if($errors->has('GiaTien'))
                             <span class="error-text">
                                 {{$errors->first('GiaTien')}}
@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group">
                             <td>KÍCH THƯỚC</td>
-                            <input type="text" name="KichThuoc" class="form-control">
+                            <input type="text" name="KichThuoc" value="{{old('KichThuoc')}}" class="form-control">
                             @if($errors->has('KichThuoc'))
                             <span class="error-text">
                                 {{$errors->first('KichThuoc')}}
@@ -117,9 +117,12 @@
                                 <select name="MaLoai" id="" class="select">
                                     <option></option>
                                     @foreach($loai as $id=>$value)
+                                    @if($value->MaLoai == old('MaLoai'))
+                                    <option value="{{$value->MaLoai}}" selected>{{$value->TenLoai}}</option>
+                                    @else
                                     <option value="{{$value->MaLoai}}">{{$value->TenLoai}}</option>
+                                    @endif
                                     @endforeach
-
                                 </select>
                                 @if($errors->has('MaLoai'))
                                 <span class="error-text">
@@ -141,7 +144,8 @@
                             </div>
                         </div> -->
                         <div class="form-group">
-                            <td><a href="{{route('hinhanh.index')}}" class="">Thêm ảnh</a></td>
+                            <td><a href="{{route('hinhanh.index')}}" class="btn btn-primary mt-4">Thêm ảnh</a>
+                            </td>
                         </div>
                     </div>
 

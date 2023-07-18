@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -40,12 +39,15 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        
+
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
         ],
-    
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
     ],
 
     /*
@@ -70,10 +72,13 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\Khachhang::class,
         ],
-
-        // 'users' => [
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin\admin::class,
+        ],
+        // 'admin' => [
         //     'driver' => 'database',
-        //     'table' => 'khachhang',
+        //     'table' => 'admin',
         // ],
     ],
 
@@ -113,5 +118,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];
