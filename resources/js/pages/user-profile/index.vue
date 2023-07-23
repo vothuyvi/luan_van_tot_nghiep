@@ -6,8 +6,10 @@
                     <div class="flex flex-col">
                         <div
                             class="w-[25rem] h-[9rem] border border-solid border-[#e4e7ed] rounded-lg flex items-center p-6 shadow-card">
-                            <el-avatar :src="`/images/uploads/${authStore.user?.hinhanh}`" :size="60" :icon="UserFilled"
-                                class="text-5xl" />
+                            <!-- <el-avatar :src="`/images/uploads/${authStore.user?.hinhanh}`" :size="60" :icon="UserFilled"
+                                class="text-5xl" /> -->
+                            <el-avatar :src="renderFileURL('/images/uploads/', authStore.user?.hinhanh)" :size="60"
+                                :icon="UserFilled" class="text-5xl" />
                             <div class="ml-4 font-medium text-3xl"> {{ authStore.user?.name }}</div>
                         </div>
                         <div
@@ -53,8 +55,15 @@
                             </template>
                             <div class="flex justify-between">
                                 <div class="border-r border-solid border-[#e4e7ed] w-[60%] pt-8 px-16 pb-[10rem]">
+                                    <div v-if="state.error" class="text-red-600 text-xl font-medium">
+                                        <div v-for="(key, value) in state.error" :key="key">
+                                            <div v-for="(item, index) in state.error[value]" :key="index">
+                                                {{ item }}
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="flex items-center gap-4 my-6">
-                                        <div class="w-[9rem] text-[#939FA4]">
+                                        <div class="min-w-[9rem] text-[#939FA4]">
                                             Họ Tên
                                         </div>
                                         <div v-if="!state.isEdit" class="font-medium">
@@ -63,25 +72,28 @@
                                         <el-input v-else v-model="form.name" placeholder="" />
                                     </div>
                                     <div class="flex items-center gap-4 my-6">
-                                        <div class="w-[9rem] text-[#939FA4]">
+                                        <div class="min-w-[9rem] text-[#939FA4]">
                                             Email
                                         </div>
                                         <div v-if="!state.isEdit" class="font-medium">
                                             {{ authStore.user?.email }}
                                         </div>
-                                        <el-input v-else v-model="form.email" placeholder="" />
+                                        <el-input v-else v-model="form.email" placeholder="" disabled />
                                     </div>
                                     <div class="flex items-center gap-4 my-6">
-                                        <div class="w-[9rem] text-[#939FA4]">
+                                        <div class="min-w-[9rem] text-[#939FA4]">
                                             Sinh Nhật
                                         </div>
                                         <div v-if="!state.isEdit" class="font-medium">
                                             {{ authStore.user?.birthday }}
                                         </div>
-                                        <el-input v-else v-model="form.birthday" placeholder="" />
+                                        <!-- <el-input v-else v-model="form.birthday" placeholder="" /> -->
+                                        <el-date-picker v-else v-model="form.birthday" type="date" placeholder=""
+                                            format="DD/MM/YYYY" value-format="DD/MM/YYYY" :disabled-date="disabledDate"
+                                            :clearable="false" />
                                     </div>
                                     <div class="flex items-center gap-4 my-6">
-                                        <div class="w-[9rem] text-[#939FA4]">
+                                        <div class="min-w-[9rem] text-[#939FA4]">
                                             SĐT
                                         </div>
                                         <div v-if="!state.isEdit" class="font-medium">
@@ -91,7 +103,7 @@
                                     </div>
 
                                     <div class="flex items-center gap-4 my-6">
-                                        <div class="w-[9rem] text-[#939FA4]">
+                                        <div class="min-w-[9rem] text-[#939FA4]">
                                             Địa Chỉ
                                         </div>
                                         <div v-if="!state.isEdit" class="font-medium">
@@ -106,7 +118,9 @@
                                     </div>
                                     <div
                                         class="avatar-uploader text-center mt-4 rounded-lg overflow-hidden w-[16rem] h-[16rem] mx-auto">
-                                        <img :src="form.fileUpload ? state.imageUrl : `/images/uploads/${authStore.user?.hinhanh}`"
+                                        <!-- <img :src="form.fileUpload ? state.imageUrl : `/images/uploads/${authStore.user?.hinhanh}`"
+                                            class="avatar object-cover" /> -->
+                                        <img :src="form.fileUpload ? state.imageUrl : renderFileURL('/images/uploads/', authStore.user?.hinhanh)"
                                             class="avatar object-cover" />
                                     </div>
                                     <div v-if="state.isEdit" class="mt-4 text-center">
@@ -156,7 +170,9 @@
                                             <div v-for="(item, index) in item.chitietdonhang" :key="index"
                                                 class="flex justify-between py-5 border-b border-solid border-[#e4e7ed]">
                                                 <div class="h-[8rem] w-[8rem] rounded-md overflow-hidden">
-                                                    <img :src="`/images/products/${item.sanpham.HinhAnh}`" alt="Sample 1"
+                                                    <!-- <img :src="`/images/products/${item.sanpham.HinhAnh}`" alt="Sample 1"
+                                                        class="object-cover w-full h-[8rem]" /> -->
+                                                    <img :src="renderFileURL('/images/products/', item.sanpham.HinhAnh)"
                                                         class="object-cover w-full h-[8rem]" />
                                                 </div>
                                                 <div class="flex-1 ml-4">
@@ -236,7 +252,9 @@ import { UserFilled } from '@element-plus/icons-vue';
 import { logout, statusAll, orders } from '@/api/auth';
 import { updateProfile } from '@/api/auth';
 import { removeToken } from '@/utils/auth';
+import { renderFileURL } from '@/utils/helper.js'
 import moment from 'moment'
+import { ElMessage } from 'element-plus'
 
 
 const router = useRouter();
@@ -254,6 +272,7 @@ const state = reactive({
     allOrderData: [],
     chitietdonhang: [],
     totalPrice: 0,
+    error: '',
 });
 const form = reactive({
     name: '',
@@ -300,7 +319,9 @@ const handleLogout = async () => {
         });
     }
 };
-
+const disabledDate = (time) => {
+    return time.getTime() > Date.now()
+}
 const handleUpdateProfile = async () => {
     try {
         const formData = new FormData()
@@ -312,6 +333,11 @@ const handleUpdateProfile = async () => {
         const { data: res } = await updateProfile(formData);
         if (res) {
             authStore.user = res?.data
+            ElMessage({
+                message: 'Cập nhật thành công!',
+                type: 'success',
+                grouping: true,
+            });
         }
         state.error = null;
         state.isEdit = false;

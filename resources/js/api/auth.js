@@ -208,6 +208,30 @@ export function orderDetail(MaDH) {
   });
 }
 
+export function verifyEmail(token) {
+  return request({
+      url: `/verify-mail?token=${token}`,
+      method: 'post',
+  });
+}
+
+export function forgotPassword(form) {
+  return request({
+      url: `/forgot-password`,
+      method: 'post',
+      data: form,
+  });
+}
+
+export function resetPassword(form) {
+  return request({
+      url: `/reset-password`,
+      method: 'post',
+      data: form,
+  });
+}
+
+
 
 
 

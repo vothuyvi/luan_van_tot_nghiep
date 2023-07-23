@@ -3,6 +3,12 @@ import Home from '@/pages/Home.vue';
 import Login from '@/pages/user-profile/Login.vue';
 import Register from '@/pages/user-profile/Register.vue';
 import UserProfile from '@/pages/user-profile/index.vue';
+import RegisterSuccess from '@/pages/user-profile/RegisterSuccess.vue';
+import VerifyEmail from '@/pages/verify-mail/VerifyEmail.vue';
+import VerifyEmailError from '@/pages/verify-mail/VerifyEmailError.vue';
+import ForgotPassword from '@/pages/user-profile/ForgotPassword.vue';
+import ResetPassword from '@/pages/user-profile/ResetPassword.vue';
+import SentForgotPassword from '@/pages/user-profile/SentForgotPassSuccess.vue';
 import Product from '@/pages/product/Product.vue';
 import ProductDetail from '@/pages/product/ProductDetail.vue';
 import News from '@/pages/news/News.vue';
@@ -15,7 +21,7 @@ import PaymentMoMoReturn from '@/pages/payment/PaymentMoMoReturn.vue';
 import PaymentSuccess from '@/pages/payment/PaymentSuccess.vue';
 import PaymentError from '@/pages/payment/PaymentError.vue';
 import OrderDetail from '@/pages/OrderDetail.vue';
-// import NotFound from '@/components/404.vue';
+
 
 
 const path = [
@@ -108,13 +114,43 @@ const path = [
                 name: 'OrderDetailView',
                 component: OrderDetail,
             },
-            
+            {
+                path: 'register-success',
+                name: 'RegisterSuccessView',
+                component: RegisterSuccess,
+            },
+            {
+                path: 'verify/:token',
+                name: 'VerifyEmailView',
+                component: VerifyEmail,
+            },
+            {
+                path: 'verify-email-error',
+                name: 'VerifyEmailErrorView',
+                component: VerifyEmailError,
+            },
+            {
+                path: 'reset-password/:token',
+                name: 'ResetPasswordView',
+                component: ResetPassword,
+            },
+            {
+                path: 'forgot-password',
+                name: 'ForgotPasswordView',
+                component: ForgotPassword,
+            },
+            {
+                path: 'forgot-password/sent-email',
+                name: 'SentForgotPasswordView',
+                component: SentForgotPassword,
+            },
+            { path: '/:pathMatch(.*)*', redirect: '/404', hidden: true },
         ], 
         
     },
     {
         path: '/404',
-        name: '404View',
+        name: '404',
         component: () => import('@/components/404.vue'),
     }
     

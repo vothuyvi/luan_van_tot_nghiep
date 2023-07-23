@@ -87,6 +87,7 @@ a {
     justify-content: space-between;
     overflow: hidden;
     width: 115%;
+    flex-wrap: nowrap !important;
 }
 
 .nav a {
@@ -213,7 +214,7 @@ a {
         <!-- <div class="search"> Tìm kiếm
                 <input type="text"><i class='bx bx-search-alt nav_icon'></i>
             </div> -->
-        <div style="margin-left: auto; margin-right: 0.5rem">{{adminUser()->email}}</div>
+        <div style="margin-left: auto; margin-right: 0.5rem">{{adminUser() ? adminUser()->email : null}}</div>
         <div class="header_img"> <img src="https://pluspng.com/img-png/png-user-icon-customer-icon-1600.png" `>
             <a href="#"></a>
         </div>
@@ -221,12 +222,11 @@ a {
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                        class="nav_logo-name">AdMin</span> </a>
+                        class="nav_logo-name">Admin</span> </a>
                 <div class="nav_list">
                     <a href="http://127.0.0.1:8000/sanpham" class="nav_link active"> <i
                             class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Quản lý sản phẩm</span>
-
                     </a>
                     <a href="http://127.0.0.1:8000/admin/qlloai/view" class="nav_link"><i
                             class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Quản lý loại sản phẩm</span></a>

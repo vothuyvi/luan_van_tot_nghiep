@@ -1,5 +1,5 @@
 <template>
-    <div class="w-4/5 mr-auto ml-auto mt-8">
+    <div v-loading="state.loading" class="w-4/5 mr-auto ml-auto mt-8">
         <div class="grid grid-cols-[300px_minmax(900px,_1fr)_100px]">
             <div>
                 <div class="border m-8" style="box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.13)">
@@ -58,7 +58,9 @@
                     <div class="mb-10 p-3">
                         <Splide :options="options" aria-label="My Favorite Images">
                             <SplideSlide v-for="(item, index) in state.bestData" :key="index">
-                                <img :src="`/images/products/${item.HinhAnh}`" class="object-cover w-full h-96" />
+                                <!-- <img :src="`/images/products/${item.HinhAnh}`" class="object-cover w-full h-96" /> -->
+                                <img :src="renderFileURL('/images/products/', item.HinhAnh)"
+                                    class="object-cover w-full h-96" />
                                 <div class="name_sp">
                                     <span>{{ item.TenSP }} </span>
                                 </div>
@@ -89,7 +91,8 @@
                     <div v-for="(item, index) in state.allProductData " :key="index"
                         class="giavi_list list-image-none relative">
                         <router-link :to="{ name: 'ProductDetailView', params: { MaSP: item.MaSP } }">
-                            <img :src="`/images/products/${item.HinhAnh}`" class="object-cover w-full h-96" />
+                            <!-- <img :src="`/images/products/${item.HinhAnh}`" class="object-cover w-full h-96" /> -->
+                            <img :src="renderFileURL('/images/products/', item.HinhAnh)" class="object-cover w-full h-96" />
                         </router-link>
 
                         <router-link :to="{ name: 'ProductDetailView', params: { MaSP: item.MaSP } }">
@@ -129,11 +132,9 @@ import { reactive, onMounted, watch } from "vue";
 import { useRouter } from 'vue-router'
 import { useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores';
-import VueSlider from "vue-slider-component";
 import "vue-slider-component/theme/antd.css";
 import Slider from "@vueform/slider";
-import { ElMessage } from 'element-plus'
-import { addOrder } from '@/utils/helper.js'
+import { addOrder, renderFileURL } from '@/utils/helper.js'
 
 const options = {
     rewind: true,
@@ -178,7 +179,8 @@ const state = reactive({
     bestData: [],
     allProductData: [],
     allProductTypeData: [],
-    totalRecord: 0
+    totalRecord: 0,
+    loading: true,
 });
 const query = reactive({
     MaLoai: MaLoai || '',
@@ -244,6 +246,7 @@ const getProductList = async () => {
         state.allProductData = res?.data.data;
         state.totalRecord = res?.data.total;
     }
+    state.loading = false;
 }
 
 const onClickCategory = (MaLoai, TenLoai) => {
@@ -259,7 +262,6 @@ const handelOnSearch = () => {
     query.MinPrice = state.filterValue2[0];
     query.MaxPrice = state.filterValue2[1];
     router.push({ name: 'ProductView', query: query })
-
     getProductList();
 }
 

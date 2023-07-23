@@ -1,6 +1,6 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-3ea2b5b0.css",
+    "file": "assets/app-4fa3be42.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -12,11 +12,29 @@
       "assets/slider8-f3fc96d2.jpeg"
     ],
     "css": [
-      "assets/app-3ea2b5b0.css"
+      "assets/app-4fa3be42.css"
     ],
-    "file": "assets/app-8433f582.js",
+    "dynamicImports": [
+      "resources/js/components/404.vue"
+    ],
+    "file": "assets/app-50392645.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "resources/js/components/404.css": {
+    "file": "assets/404-f0703e72.css",
+    "src": "resources/js/components/404.css"
+  },
+  "resources/js/components/404.vue": {
+    "css": [
+      "assets/404-f0703e72.css"
+    ],
+    "file": "assets/404-4910d4de.js",
+    "imports": [
+      "resources/js/app.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "resources/js/components/404.vue"
   },
   "resources/js/images/slder6.jpeg": {
     "file": "assets/slder6-4ab126bb.jpeg",

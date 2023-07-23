@@ -1,11 +1,12 @@
 @extends('menu')
 <style>
-    .container {
-        padding-top: 70px;
-    }
-    .table{
-        text-align: center;
-    }
+.container {
+    padding-top: 70px;
+}
+
+.table {
+    text-align: center;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -28,7 +29,8 @@
                         <th>SỐ ĐIỆN THOẠI</th>
                         <th>NGÀY ĐẶT</th>
                         <th>TRẠNG THÁI ĐƠN</th>
-                        <!-- <th>TRẠNG THÁI THANH TOÁN</th> -->
+                        <!-- <th>PHƯƠNG THỨC THANH TOÁN</th>
+                        <th>TRẠNG THÁI THANH TOÁN</th> -->
                         <th>THAO TÁC</th>
 
                     </tr>
@@ -48,7 +50,7 @@
                             @elseif ($value->MaTT== 2)
                             Đã duyệt đơn
                             @elseif ($value->MaTT== 3)
-                            Đang vận giao
+                            Đang giao
                             @elseif ($value->MaTT== 4)
                             Hoàn thành
                             @elseif ($value->MaTT== 5)
@@ -56,7 +58,7 @@
                             @elseif ($value->MaTT== 6)
                             Trả hàng/Hoàn tiền
                             @endif </td>
-                            <!-- <td>{{$value->thanhtoan->TrangThaiThanhToan}}</td> -->
+                        <!-- <td>{{$value->thanhtoan->TrangThaiThanhToan}}</td> -->
 
                         <td col>
                             <form action="" method="post" class="form">

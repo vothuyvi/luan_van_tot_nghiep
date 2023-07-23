@@ -56,11 +56,10 @@
             <div class="">
               <el-dropdown class="focus-visible:outline-none">
                 <div class="flex items-center shadow-card focus-visible:outline-none">
-                  <!-- <div class="text-sky-500 text-4xl font-medium cursor-pointer focus-visible:outline-none mr-2">
-                  {{ authStore.user.name }}
-                </div> -->
-                  <el-avatar :src="`/images/uploads/${authStore.user?.hinhanh}`" :size="60" :icon="UserFilled"
-                    class="text-5xl w-20 h-20" />
+                  <!-- <el-avatar :src="`/images/uploads/${authStore.user?.hinhanh}`" :size="60" :icon="UserFilled"
+                    class="text-5xl w-20 h-20" /> -->
+                  <el-avatar :src="renderFileURL('/images/uploads/', authStore.user?.hinhanh)" :size="60"
+                    :icon="UserFilled" class="text-5xl w-20 h-20" />
                 </div>
                 <template #dropdown>
                   <el-dropdown-menu class="w-[16rem] font-medium">
@@ -126,6 +125,7 @@ import { getInformation, productTypeAll, productList } from '@/api/auth';
 import { logout } from '@/api/auth';
 import { removeToken } from '@/utils/auth';
 import { useAuthStore } from '@/stores'
+import { renderFileURL } from '@/utils/helper.js'
 
 const state = reactive({
   user: [],

@@ -39,11 +39,11 @@
                         </div>
                         <div class="form-group">
                             <td>GIÁ TIỀN</td>
-                            <input type="text" name="GiaTien" value="{{$chitiet->GiaTien}}"  class="form-control">
+                            <input type="text" name="GiaTien" value="{{$chitiet->GiaTien}}" class="form-control">
                         </div>
                         <div class="form-group">
                             <td>SỐ LƯỢNG</td>
-                            <input type="text" name="SoLuong" value="{{$chitiet->SoLuong}}"  class="form-control">
+                            <input type="text" name="SoLuong" value="{{$chitiet->SoLuong}}" class="form-control">
                         </div>
                     </div>
                 </div>

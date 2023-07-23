@@ -83,7 +83,8 @@
 
                                 <tr v-for="(item, index) in state.orders" :key="index">
                                     <td class="w-[12rem]">
-                                        <img :src="`/images/products/${item.HinhAnh}`" />
+                                        <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
+                                        <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
                                     </td>
                                     <td class="text-2xl font-medium w-[22.5rem] text-center">
                                         {{ item.TenSP }}
@@ -148,6 +149,7 @@ import { reactive, onMounted, watch, ref } from "vue";
 import { getProducts, checkOut, khuyenMai, payment, paymentMoMo } from '@/api/auth';
 import { useAuthStore } from '@/stores';
 import { useRoute } from 'vue-router'
+import { renderFileURL } from '@/utils/helper.js'
 import { ElMessage } from 'element-plus'
 
 const state = reactive({
@@ -404,7 +406,7 @@ const handlePayment = async (order) => {
     }
     const { data: res } = await payment(form);
     console.log('payment', res);
-    location.href = res;
+    window.location.href = res;
 
 }
 
@@ -416,7 +418,7 @@ const handlePaymentMoMo = async (order) => {
     }
     const { data: res } = await paymentMoMo(form);
     console.log('payment momo', res.data.payUrl);
-    // location.href = res.data.payUrl;
+    location.href = res.data.payUrl;
 }
 
 onMounted(async () => {

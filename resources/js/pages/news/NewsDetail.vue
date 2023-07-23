@@ -16,7 +16,8 @@
         <div v-for="(item, index) in state.newsList" :key="index">
           <div class="flex py-5 border-b border-solid border-[#dfdfdf]">
             <div class="w-[9rem] h-[6rem] rounded-md overflow-hidden">
-              <img :src="`/images/news/${item.HinhAnh}`" alt="" class="object-cover w-full h-full" />
+              <!-- <img :src="`/images/news/${item.HinhAnh}`" alt="" class="object-cover w-full h-full" /> -->
+              <img :src="renderFileURL('/images/news/', item.HinhAnh)" class="object-cover w-full h-full" />
             </div>
             <div class="pl-4 flex-1">
               <div class="text-[#06c] font-medium text-[1.4rem]">{{ item.TieuDe }}</div>
@@ -37,6 +38,7 @@
 import { reactive, onMounted } from "vue";
 import { newsDetail, news } from "@/api/auth";
 import { useRoute } from 'vue-router'
+import { renderFileURL } from '@/utils/helper.js'
 
 const route = useRoute();
 const MaTT = route.params.MaTT;

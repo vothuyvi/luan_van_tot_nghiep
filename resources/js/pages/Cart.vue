@@ -30,7 +30,8 @@
             </tr>
             <tr v-for="(item, index) in state.orders" :key="index" class="tr2">
                 <td>
-                    <img :src="`/images/products/${item.HinhAnh}`" />
+                    <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
+                    <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
                 </td>
                 <td>{{ item.TenSP }}</td>
                 <td>{{ formatMoney(item.GiaTien) }} đ</td>
@@ -80,6 +81,7 @@ import { getProducts } from '@/api/auth';
 import { useAuthStore } from '@/stores';
 import { useRouter } from 'vue-router';
 import { handelDelete } from '@/utils/helper.js'
+import { renderFileURL } from '@/utils/helper.js'
 import { ElMessageBox } from 'element-plus';
 
 const state = reactive({
