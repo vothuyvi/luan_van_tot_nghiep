@@ -14,4 +14,13 @@ const router = createRouter({
     }
   },
 });
+// router.beforeEach((to, from, next) => {
+//   if(to.name == '404'){
+//     next();
+//   }
+//   if(!to.name) {
+//     next('/404');
+//   }
+// });
+
 export default router;

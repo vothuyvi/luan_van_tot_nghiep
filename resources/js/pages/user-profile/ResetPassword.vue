@@ -2,7 +2,7 @@
     <div v-loading="state.loading" class="container__login">
         <div class="container__login-body">
             <div class="login-body__header">
-                <span> Đăng ký thành viên</span>
+                <span> Khôi phục mật khẩu</span>
             </div>
             <div v-if="state.error" class="text-red-600 text-xl font-medium">
                 <div v-for="(key, value) in state.error" :key="key">
@@ -12,11 +12,6 @@
                 </div>
             </div>
             <div class="login-body__center">
-                <div class="login">
-                    <span>Tên đăng nhập </span>
-                    <input v-model="state.email" type="mail" name="" id="" class="fontAwesome"
-                        placeholder=" &#xf0e0;  Enter your email" />
-                </div>
                 <div class="login">
                     <span>Mật khẩu </span>
                     <input v-model="state.password" type="password" class="fontAwesome"
@@ -29,51 +24,29 @@
                 </div>
             </div>
             <div class="login-body__bot">
-                <button @click="handleRegister()">Đăng ký</button>
-                <div class="login-body-bot__signup">
-                    <div class="text-xl text-black-600 mt-3">
-                        Bạn đã có tài khoản?
-                        <router-link :to="{ name: 'LoginView' }">
-                            <b class="text-sky-500 hover:text-red-600">Đăng nhập</b></router-link>
-                    </div>
-                </div>
+                <button @click="handleResetPassword()">Cập nhật</button>
+
             </div>
         </div>
     </div>
-    <Footer />
 </template>
 <script setup>
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { register } from '@/api/auth';
+import { reactive, onMounted } from "vue";
+import { useRoute, useRouter } from 'vue-router'
+import { ElMessage } from 'element-plus'
+import { resetPassword } from '@/api/auth';
 
+const route = useRoute()
 const router = useRouter();
+const { token } = route.params
 const state = reactive({
-    email: '',
     password: '',
     password_confirmation: '',
     error: '',
     loading: false,
-});
+})
 
 const checkValidate = () => {
-    if (state.email === '') {
-        ElMessage({
-            message: 'Vui lòng nhập email.',
-            type: 'error',
-            grouping: true,
-        })
-        return false;
-    }
-    if (!isEmailValid(state.email)) {
-        ElMessage({
-            message: 'Email không đúng định dạng',
-            type: 'error',
-            grouping: true,
-        })
-        return false;
-    }
     if (state.password === '') {
         ElMessage({
             message: 'Vui lòng nhập mật khẩu.',
@@ -93,39 +66,36 @@ const checkValidate = () => {
     return true;
 }
 
-const isEmailValid = (email) => {
-    const re =
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
-
-
-const handleRegister = async () => {
+const handleResetPassword = async () => {
     try {
         const form = {
-            email: state.email,
+            token: token,
             password: state.password,
             password_confirmation: state.password_confirmation,
         };
-
         if (checkValidate()) {
             state.loading = true;
-            const { data: user } = await register(form);
+            const { data: res } = await resetPassword(form)
             state.error = null;
             state.loading = false;
+            ElMessage({
+                message: 'Thay đổi mật khẩu thành công!',
+                type: 'success',
+                grouping: true,
+            })
             router.push({
-                name: 'RegisterSuccessView',
+                name: 'LoginView',
             });
+
         }
-
-
-    } catch (error) {
-        console.log(error);
-        console.log(error.response.data);
-        state.error = error.response.data.errors;
+    } catch {
+        router.push({
+            name: 'VerifyEmailErrorView',
+        });
     }
-};
 
+
+}
 
 </script>
 <style lang="scss" scoped>

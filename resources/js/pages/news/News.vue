@@ -13,7 +13,8 @@
             <!-- ITEM_IMAGE -->
             <div class="w-[15rem] h-[12rem] rounded-lg overflow-hidden">
               <router-link :to="{ name: 'NewsDetailView', params: { MaTT: item.MaTT } }">
-                <img :src="`/images/news/${item.HinhAnh}`" alt="" class="object-cover w-full h-full" />
+                <!-- <img :src="`/images/news/${item.HinhAnh}`" alt="" class="object-cover w-full h-full" /> -->
+                <img :src="renderFileURL('/images/news/', item.HinhAnh)" class="object-cover w-full h-full" />
               </router-link>
 
             </div>
@@ -52,7 +53,8 @@
           <div class="flex py-5 border-b border-solid border-[#dfdfdf]">
             <router-link :to="{ name: 'NewsDetailView', params: { MaTT: item.MaTT } }">
               <div class="w-[9rem] h-[6rem] rounded-md overflow-hidden">
-                <img :src="`/images/news/${item.HinhAnh}`" alt="" class="object-cover w-full h-full" />
+                <!-- <img :src="`/images/news/${item.HinhAnh}`" alt="" class="object-cover w-full h-full" /> -->
+                <img :src="renderFileURL('/images/news/', item.HinhAnh)" class="object-cover w-full h-full" />
               </div>
             </router-link>
             <div class="pl-4 flex-1">
@@ -76,6 +78,7 @@
 import { reactive, onMounted } from "vue";
 import { news } from "@/api/auth";
 import { useRoute } from 'vue-router';
+import { renderFileURL } from '@/utils/helper.js'
 
 const state = reactive({
   newsList: {},

@@ -2,9 +2,9 @@
     <Splide :options="options">
         <SplideSlide v-for="(item, index) in state.bestData" :key="index">
             <router-link :to="{ name: 'ProductDetailView', params: { MaSP: item.MaSP } }">
-                <img :src="`/images/products/${item.HinhAnh}`" class="object-cover w-full h-96" />
+                <!-- <img :src="`/images/products/${item.HinhAnh}`" class="object-cover w-full h-96" /> -->
+                <img :src="renderFileURL('/images/products/', item.HinhAnh)" class="object-cover w-full h-96" />
             </router-link>
-
             <div class="name_sp">
                 <span>{{ item.TenSP }}</span>
             </div>
@@ -28,8 +28,8 @@
 <script setup>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { productBest } from '@/api/auth';
-import { reactive, toRefs, onMounted } from "vue";
-import { addOrder } from '@/utils/helper.js'
+import { reactive, onMounted } from "vue";
+import { addOrder, renderFileURL } from '@/utils/helper.js'
 
 
 const options = {

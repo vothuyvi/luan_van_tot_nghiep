@@ -19,7 +19,11 @@
       </div>
       <div class="login-body__bot">
         <button @click="handleLogin()">Đăng nhập</button>
-        <div class="text-red-600 text-xl font-bold mb-6 mt-2">Quên mật khẩu?</div>
+        <router-link :to="{ name: 'ForgotPasswordView' }">
+          <div class="text-red-600 text-xl font-bold mb-6 mt-2 cursor-pointer">
+            Quên mật khẩu?
+          </div>
+        </router-link>
         <div class="login-body-bot__signup">
           <div class="text-xl text-black-600">
             Bạn chưa có tài khoản?
@@ -36,8 +40,8 @@
 import { reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { setToken } from '@/utils/auth';
-import { login } from '@/api/auth';
-import { ElMessage} from 'element-plus'
+import { login, forgotPassword } from '@/api/auth';
+import { ElMessage } from 'element-plus'
 import { useAuthStore } from '@/stores'
 
 const authStore = useAuthStore();
@@ -67,7 +71,7 @@ const checkValidate = () => {
   }
   if (state.password === '') {
     ElMessage({
-      message: 'Vui lòng nhập password.',
+      message: 'Vui lòng nhập mật khẩu.',
       type: 'error',
       grouping: true,
     })
@@ -113,6 +117,7 @@ const handleLogin = async () => {
     state.error = error.response.data.message;
   }
 };
+
 </script>
 <style lang="scss" scoped>
 @import '@/style/login.scss';

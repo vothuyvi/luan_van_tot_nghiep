@@ -36,7 +36,8 @@
 
             <div v-for="(item, index) in state.newData" :key="index" class="giavi_list list-image-none relative">
                 <router-link :to="{ name: 'ProductDetailView', params: { MaSP: item.MaSP } }">
-                    <img :src="`/images/products/${item.HinhAnh}`" />
+                    <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
+                    <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
                 </router-link>
                 <router-link :to="{ name: 'ProductDetailView', params: { MaSP: item.MaSP } }">
                     <div class="name_sp">
@@ -81,7 +82,7 @@ import ProductBest from "@/components/ProductBest.vue";
 import { productNew, khuyenMai } from '@/api/auth';
 import { reactive, onMounted } from "vue";
 import moment from 'moment'
-import { addOrder } from '@/utils/helper.js'
+import { addOrder, renderFileURL } from '@/utils/helper.js'
 
 const state = reactive({
     newData: [],

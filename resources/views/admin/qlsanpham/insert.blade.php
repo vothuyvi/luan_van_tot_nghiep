@@ -117,11 +117,7 @@
                                 <select name="MaLoai" id="" class="select">
                                     <option></option>
                                     @foreach($loai as $id=>$value)
-                                    @if($value->MaLoai == old('MaLoai'))
-                                    <option value="{{$value->MaLoai}}" selected>{{$value->TenLoai}}</option>
-                                    @else
                                     <option value="{{$value->MaLoai}}">{{$value->TenLoai}}</option>
-                                    @endif
                                     @endforeach
                                 </select>
                                 @if($errors->has('MaLoai'))

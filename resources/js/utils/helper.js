@@ -56,3 +56,12 @@ export const handelDelete = dataMaSP => {
     }
   }
 };
+export const renderFileURL = (path, url) => {
+  if (window.location.origin?.includes('127.0.0.1') || window.location.origin?.includes('localhost')) {
+    const fileURL = path + url;
+    return url ? fileURL : null;
+  } else {
+    const fileURL = '/public' + path + url;
+    return url ? fileURL : null;
+  }
+};

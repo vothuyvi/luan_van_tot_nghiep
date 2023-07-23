@@ -33,6 +33,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/search/{TenSP}', 'SanphamController@searchName');
     Route::get('/sale', 'KhuyenmaiController@index');
     Route::post('/get-products', 'SanphamController@getProduct');
+    Route::get('/test-send-mail', 'KhachhangController@testSendMail');
+    Route::post('/verify-mail', 'KhachhangController@verifyMail');
+    Route::post('/forgot-password', 'KhachhangController@forgotPassword');
+    Route::post('/reset-password', 'KhachhangController@resetPassword');
 
     Route::group(['middleware' => 'auth:api'], function () {
         Route::post('/logout', 'KhachhangController@logout');

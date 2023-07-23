@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-[120rem] w-full mx-auto mt-[25rem]">
+    <div class="max-w-[120rem] w-full mx-auto">
         <div class="flex items-center justify-center my-[10rem] flex-col">
             <div class="w-[5rem]">
                 <svg width="50" height="50" viewBox="0 0 449 449" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,11 +8,11 @@
                         fill="#F21E1E" fill-opacity="0.93" />
                 </svg>
             </div>
-            <h1 class="text-[4rem] mt-6 text-[#F21E1E]">404</h1>
-            <div class="text-3xl mt-2 text-[#F21E1E]">NOT FOUND</div>
+            <h1 class="text-[4rem] mt-6 text-[#F21E1E]">Xác thực thất bại!</h1>
+            <div class="text-3xl mt-2">Mã xác thực không tồn tại hoặc đã xác thực.</div>
             <router-link :to="{ name: 'HomeView' }">
                 <el-button type="success bg-[#F21E1E] hover:bg-[#f66262] mt-8" round size="large" color="#F21E1E">
-                    Trở lại trang chủ
+                    Quay về trang chủ
                 </el-button>
             </router-link>
         </div>

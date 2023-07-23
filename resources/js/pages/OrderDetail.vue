@@ -1,5 +1,5 @@
 <template>
-    <div class="body_cart">
+    <div v-loading="state.loading" class="body_cart">
         <h3>CHI TIẾT ĐƠN HÀNG</h3>
         <p class="">
             <i class="fa-regular fa-window-minimize"></i>
@@ -113,7 +113,8 @@
             </tr>
             <tr v-for="(item, index) in state.orderDetail.chitietdonhang" :key="index" class="tr2">
                 <td>
-                    <img :src="`/images/products/${item.sanpham.HinhAnh}`" />
+                    <!-- <img :src="`/images/products/${item.sanpham.HinhAnh}`" /> -->
+                    <img :src="renderFileURL('/images/products/', item.sanpham.HinhAnh)" />
                 </td>
                 <td>{{ item.sanpham.TenSP }}</td>
                 <td>{{ formatMoney(item.sanpham.GiaTien) }} đ</td>
@@ -169,12 +170,14 @@ import { orderDetail, khuyenMai } from '@/api/auth';
 import { useAuthStore } from '@/stores';
 import { useRoute } from 'vue-router'
 import { useRouter } from 'vue-router'
+import { renderFileURL } from '@/utils/helper.js'
 import moment from 'moment'
 const state = reactive({
     orderDetail: {},
     khuyenMai: {},
     totalPriceTmp: 0,
-    totalPrice: 0
+    totalPrice: 0,
+    loading: true,
 })
 const authStore = useAuthStore();
 const router = useRouter();
@@ -194,9 +197,10 @@ const getOrderDetail = async () => {
     console.log('order detail', res);
     if (!res?.data) {
         router.push({
-            name: '404View',
+            name: '404',
         });
     }
+    state.loading = false;
     if (res) {
         state.orderDetail = res.data
     }
