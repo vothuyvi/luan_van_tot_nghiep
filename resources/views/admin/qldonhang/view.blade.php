@@ -1,17 +1,25 @@
 @extends('menu')
 <style>
-.container {
-    padding-top: 70px;
-}
-
-.table {
-    text-align: center;
-}
+    .container {
+        padding-top: 70px;
+    }
+    .table{
+        text-align: center;
+    }
 </style>
 <div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
+            <form action=""  class="form-inline">
+                    <div class="form-group">
+                        <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                    </div>
+                    <button type="submit" class="btn btn-primary  search">
+                        <i class='bx bx-search nav_icon'></i>
+                    </button>
+                </form>
+
                 <div class="col-md-6">
                     <h5>Quản lý đơn hàng</h5>
                 </div>
@@ -29,8 +37,7 @@
                         <th>SỐ ĐIỆN THOẠI</th>
                         <th>NGÀY ĐẶT</th>
                         <th>TRẠNG THÁI ĐƠN</th>
-                        <!-- <th>PHƯƠNG THỨC THANH TOÁN</th>
-                        <th>TRẠNG THÁI THANH TOÁN</th> -->
+                        <!-- <th>TRẠNG THÁI THANH TOÁN</th> -->
                         <th>THAO TÁC</th>
 
                     </tr>
@@ -45,30 +52,35 @@
                         <!-- <td>{{$value->MoTa}}</td> -->
                         <td>{{$value->NgayDat}}</td>
                         <td>
-                            @if ( $value->MaTT== 1)
-                            Đang chờ duyệt
+                        @if ( $value->MaTT== 1)
+                            <span class="error-text1">Đang chờ duyệt</span>
                             @elseif ($value->MaTT== 2)
-                            Đã duyệt đơn
+                            <span class="error-text1">Đã duyệt đơn</span>
                             @elseif ($value->MaTT== 3)
-                            Đang giao
+                            <span class="error-text1">Đang giao</span>
                             @elseif ($value->MaTT== 4)
-                            Hoàn thành
+                            <span class="error-text1">Hoàn thành</span>
                             @elseif ($value->MaTT== 5)
-                            Đã hủy
+                            <span class="error-text">Đã hủy</span>
                             @elseif ($value->MaTT== 6)
-                            Trả hàng/Hoàn tiền
+                            <span class="error-text1">Trả hàng/Hoàn tiền</span>
                             @endif </td>
-                        <!-- <td>{{$value->thanhtoan->TrangThaiThanhToan}}</td> -->
+                         </td>
+                            <!-- <td>{{$value->thanhtoan->TrangThaiThanhToan}}</td> -->
 
                         <td col>
                             <form action="" method="post" class="form">
                                 <a href="{{route('donhang.edit',$value->MaDH)}}" class="btn btn-info">Xem chi tiết</a>
-                                @csrf
+                                @if ( $value->MaTT== 4)
+                                <a href="{{route('mail.edit',$value->MaDH)}}" class="btn btn-danger">Gửi mail</a>
+                                @endif
                             </form>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
+            {{$donhang->appends(request()->all())->links()}}
+
         </div>
     </div>

@@ -35,6 +35,15 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <td>HÌNH ẢNH</td>
+                            <input type="file" name='upload_file' class="form-control">
+                            @if($errors->has('upload_file'))
+                            <span class="error-text">
+                                {{$errors->first('upload_file')}}
+                            </span>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <td>NGÀY ĐĂNG</td>
                             <input type="date" name="NgayDang" class="form-control">
                             @if($errors->has('NgayDang'))

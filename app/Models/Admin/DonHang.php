@@ -30,4 +30,7 @@ class DonHang extends Model
     public function thanhtoan(){
         return $this->belongsTo(thanhtoan::class,'MaThanhToan');
      }
+     public function ChiTietDonHang(){
+        return $this->hasOne(ChiTietDonHang::class,'MaDH','MaDH');
+     }
 }

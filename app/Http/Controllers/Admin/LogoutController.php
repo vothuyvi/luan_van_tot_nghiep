@@ -9,7 +9,7 @@ class LogoutController extends Controller
 {
     public function perform()
     {
-        dd(1);
+        // dd(1);
         Auth::logout();
         return redirect('admin/login');
     }

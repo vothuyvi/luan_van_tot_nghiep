@@ -11,13 +11,23 @@
     <div class="card">
         <div class="card-header">
             <div class="row">
+            <form action=""  class="form-inline">
+
+                <div class="form-group">
+                    <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                </div>
+                <button type="submit" class="btn btn-primary  search">
+                    <i class='bx bx-search nav_icon'></i>
+                </button>
+            </form>
                 <div class="col-md-6">
-                    <h5>Quản lý loại tài khoản</h5>
+                    <h5>Quản lý tài khoản</h5>
                 </div>
                 <!-- <div class="col-md-6">
                     <a href="" class="btn btn-primary float-end">Thêm loại</a>
                 </div> -->
             </div>
+
         </div>
         <div class="card-body">
             <table class="table table-bordered ">
@@ -51,6 +61,6 @@
 
                 </tbody>
             </table>
-            {{$taikhoan->links()}}
+            {{$taikhoan->appends(request()->all())->links()}}
         </div>
     </div>

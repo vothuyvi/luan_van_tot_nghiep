@@ -18,6 +18,11 @@
                         <div class="form-group">
                             <td>NGÀY NHẬP</td>
                             <input type="date" name="NgayNhap" value="{{$phieunhap->NgayNhap}}" class="form-control">
+                            @if($errors->has('NgayNhap'))
+                            <span class="error-text">
+                                {{$errors->first('NgayNhap')}}
+                            </span>
+                            @endif
                         </div>
 
                 </div>

@@ -14,4 +14,6 @@ class admin extends Authenticatable
     protected $fillable = ['Ma', 'email', 'Ten', 'password'];
     protected $primaryKey = 'Ma';
     protected $hidden = ['password'];
+    public $timestamps = false;
+
 }

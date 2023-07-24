@@ -10,10 +10,20 @@ class KhuyenMaiController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+
+        $this->middleware('admin');
+    }
     public function index()
     {
-        //
-        return View('admin/qlkhuyenmai/view',['khuyenmai'=>Khuyenmai::paginate(5)]);
+        $khuyenmai = Khuyenmai::orderBy('PhanTram','ASC')->paginate(3);
+
+        if($key = request()->key)
+        {
+            $khuyenmai =  Khuyenmai::orderBy('PhanTram','ASC')->where('MaKM','like','%'.$key.'%')->paginate(3);
+        }
+        return View('admin/qlkhuyenmai/view')->with(compact('khuyenmai'));
 
     }
 
@@ -35,22 +45,22 @@ class KhuyenMaiController extends Controller
         //
         $request->validate([
             'MaKM'=>'required|unique:khuyenmai',
-            'TenKM'=>'required|unique:khuyenmai',
+            'TenKM'=>'required|',
+            'DieuKienApDung'=>'required',
             'PhanTram'=>'required',
             'NgayBatDau'=>'required',
-            'NgayKetThuc'=>'required',
-            'TrangThai'=>'required',
+            'NgayKetThuc'=>'required|date|after:NgayBatDau',
 
 
          ],[
             'MaKM.required'=>'Không bỏ trống',
             'TenKM.required'=>'Không được bỏ trống',
+            'DieuKienApDung.required'=>'Không được bỏ trống',
             'PhanTram.required'=>'Không bỏ trống',
             'NgayBatDau.required'=>'Không bỏ trống',
             'NgayKetThuc.required'=>'Không bỏ trống',
-            'TrangThai.required'=>'Không bỏ trống',
+            'NgayKetThuc.after'=>'Ngày kết thúc phải sau ngày bắt đầu nhé!',
             'MaKM.unique'=>'Mã khuyến mãi không được trùng',
-            'TenKM.unique'=>'Tên loại sản phẩm đã có',
 
         ]);
         Khuyenmai::create($request->all());
@@ -81,15 +91,34 @@ class KhuyenMaiController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $khuyenmai=Khuyenmai::find($id);
-        $khuyenmai->TenKM=$request->input('TenKM');
-        $khuyenmai->PhanTram=$request->input('PhanTram');
-        $khuyenmai->NgayKetThuc=$request->input('NgayKetThuc');
-        $khuyenmai->NgayBatDau=$request->input('NgayBatDau');
-        $khuyenmai->TrangThai=$request->input('TrangThai');
+        $request->validate([
+            'TenKM'=>'required',
+            'DieuKienApDung'=>'required',
+            'PhanTram'=>'required',
+            'NgayBatDau'=>'required',
+            'NgayKetThuc'=>'required|date|after:NgayBatDau',
 
-        $khuyenmai->update();
-        return redirect()->route('khuyenmai.index')->with('success','Sửa thành công');
+
+         ],[
+            'TenKM.required'=>'Không được bỏ trống',
+            'PhanTram.required'=>'Không bỏ trống',
+            'DieuKienApDung.required'=>'Không bỏ trống',
+            'NgayBatDau.required'=>'Không bỏ trống',
+            'NgayKetThuc.required'=>'Không bỏ trống',
+            'NgayKetThuc.after'=>'Ngày kết thúc phải sau ngày bắt đầu nhé!',
+            'MaKM.unique'=>'Mã khuyến mãi không được trùng',
+
+        ]);
+
+        $khuyenmai=Khuyenmai::find($id);
+            $khuyenmai->TenKM=$request->input('TenKM');
+            $khuyenmai->DieuKienApDung=$request->input('DieuKienApDung');
+            $khuyenmai->PhanTram=$request->input('PhanTram');
+            $khuyenmai->NgayKetThuc=$request->input('NgayKetThuc');
+            $khuyenmai->NgayBatDau=$request->input('NgayBatDau');
+            $khuyenmai->update();
+            return redirect()->route('khuyenmai.index')->with('success','Sửa thành công');
+
     }
 
     /**

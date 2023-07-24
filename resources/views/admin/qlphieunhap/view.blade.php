@@ -21,6 +21,16 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
+                <form action=""  class="form-inline">
+
+                    <div class="form-group">
+                        <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                    </div>
+                    <button type="submit" class="btn btn-primary  search">
+                        <i class='bx bx-search nav_icon'></i>
+                    </button>
+                </form>
+
                 <div class="col-md-6">
                     <h5>Quản lý phiếu nhập</h5>
                 </div>
@@ -57,6 +67,7 @@
 
                 </tbody>
             </table>
+            {{$phieunhap->appends(request()->all())->links()}}
         </div>
     </div>
 </div>
@@ -80,7 +91,6 @@
                         <th>MÃ SẢN PHẨM</th>
                         <th>GIÁ TIỀN</th>
                         <th>SỐ LƯỢNG</th>
-                        <th>THAO TÁC</th>
 
                     </tr>
                 </thead>
@@ -91,17 +101,13 @@
                         <td>{{$value->MaSP}}</td>
                         <td>{{$value->GiaTien}}</td>
                         <td>{{$value->SoLuong}}</td>
-                        <td col>
-                            <form action="" method="post" class="form">
-                                <a href="{{route('chitiet.edit',$value->MaChiTiet)}}" class="btn btn-info"><i
-                                        class='bx bx-pen nav_icon'></i></a>
-                            </form>
-                        </td>
+
                     </tr>
                     @endforeach
 
                 </tbody>
             </table>
+            {{$chitiet->appends(request()->all())->links()}}
         </div>
     </div>
 </div>
