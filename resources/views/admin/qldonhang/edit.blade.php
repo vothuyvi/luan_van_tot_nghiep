@@ -1,9 +1,9 @@
 @extends('layout')
 <style>
-    .select {
-        border: none;
-        padding-left: 30px;
-    }
+.select {
+    border: none;
+    padding-left: 30px;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -20,6 +20,9 @@
                 @csrf
                 @method('PUT')
                 <div class="row">
+                    <div class="form-group">
+                        <p>Mã đơn hàng: {{$donhang->MaDH}}</p>
+                    </div>
                     <div class="form-group">
                         <p>Email: {{$donhang->email}}</p>
                     </div>
@@ -43,12 +46,12 @@
                     </div>
                     <div class="form-group">
                         <P>Trạng thái đơn hàng hiện tại:
-                             @if ($donhang->MaTT== 1)
+                            @if ($donhang->MaTT== 1)
                             Đang chờ duyệt
                             @elseif ($donhang->MaTT== 2)
                             Đã duyệt
                             @elseif ($donhang->MaTT== 3)
-                            Đang vận chuyển
+                            Đang giao
                             @elseif ($donhang->MaTT== 4)
                             Hoàn thành
                             @elseif ($donhang->MaTT== 5)
@@ -58,10 +61,13 @@
                     <div class="form-group">
                         <td>Thay đổi trạng thái đơn hàng</td>
                         <select name="MaTT" id="" class="select">
-                        <!-- <option>{{$donhang->MaTT}}</option> -->
+                            <!-- <option>{{$donhang->MaTT}}</option> -->
                             @foreach($TT as $id=>$value)
+                            @if($value->MaTT === old('MaTT'))
+                            <option value="{{$value->MaTT}}" selected>{{$value->MaTT}}</option>
+                            @else
                             <option value="{{$value->MaTT}}">{{$value->TrangThaiDon}}</option>
-
+                            @endif
                             @endforeach
                         </select>
                     </div>
@@ -69,10 +75,12 @@
                     <div class="form-group">
                         <P>Trạng thái thanh toán:
                             @if($donhang->MaThanhToan==01)
-                           <a href="https://sandbox.vnpayment.vn/merchantv2/Home/Dashboard.htm" class=""> {{$donhang->thanhtoan->TrangThaiThanhToan}}</a>
-                           @else
-                           {{$donhang->thanhtoan->TrangThaiThanhToan}}</P>
-                           @endif
+                            <a href="https://sandbox.vnpayment.vn/merchantv2/Home/Dashboard.htm" class="">
+                                {{$donhang->thanhtoan->TrangThaiThanhToan}}</a>
+                            @else
+                            {{$donhang->thanhtoan->TrangThaiThanhToan}}
+                        </P>
+                        @endif
 
 
                     </div>

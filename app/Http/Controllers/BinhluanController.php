@@ -16,6 +16,7 @@ class BinhluanController extends Controller
         $MaSP = $request->MaSP;
         $cmts = Binhluan::with('khachhang')
             ->where('MaSP', $MaSP)
+            ->where('TrangThai', '=', 0)
             ->orderBy('MaBL', 'desc')
             ->get();
 

@@ -5,9 +5,13 @@ use App\Models\Donhang;
 use App\Models\Trangthaithanhtoan;
 use App\Models\Chitietdonhang;
 use App\Models\Sanpham;
+use App\Models\Khachhang;
+use App\Models\Khuyenmai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\ResponseApi;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Order;
 
 class DonhangController extends Controller
 {
@@ -150,7 +154,7 @@ class DonhangController extends Controller
         $extraData = '';
 
         $requestId = time() . '_' . $MaDH;
-        $requestType = 'payWithATM';
+        $requestType = 'payWithCC';
         //before sign HMAC SHA256 signature
         $rawHash =
             'accessKey=' .
@@ -205,7 +209,9 @@ class DonhangController extends Controller
         $MaDH = $request->get('MaDH');
         $MaThanhToan = $request->get('MaThanhToan');
         $MaTT = $request->get('MaTT');
-        $order = Donhang::with('chitietdonhang')
+        $user = Auth::user();
+        // dd($user->email);
+        $order = Donhang::with('chitietdonhang', 'chitietdonhang.sanpham')
             ->where('MaDH', $MaDH)
             ->first();
         if ($order) {
@@ -214,6 +220,8 @@ class DonhangController extends Controller
             $order->save();
             // cap nhat so luong san pham
             $chitietdonhang = $order->chitietdonhang;
+            $tongtien = 0;
+            $khuyenmai = 0;
             if ($chitietdonhang) {
                 foreach ($chitietdonhang as $item) {
                     $sanpham = Sanpham::findOrfail($item->MaSP);
@@ -222,9 +230,32 @@ class DonhangController extends Controller
                         $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
                         $sanpham->save();
                     }
+                    if ($order->MaKM) {
+                        $tongtien += $item->quantity * $sanpham->GiaTien;
+                    }
                 }
             }
+            if ($order->MaKM) {
+                // $khuyenmai = Khuyenmai::where('MaKM', $order->MaKM)->first();
+                $khuyenmai = $order->TongTienDonHang - $tongtien;
+                $khuyenmai = number_format($khuyenmai, 0, '', ',');
+            }
+            $tongtien = number_format($tongtien, 0, '', ',');
 
+            $mailData = [
+                'email' => $user->email,
+                'tongtien' => $tongtien,
+                'thanhtien' => number_format($order->TongTienDonHang, 0, '', ','),
+                'khuyenmai' => $khuyenmai,
+                'orderData' => $order->chitietdonhang,
+                'MaPT' => $order->MaPT,
+                'MaThanhToan' => $order->MaThanhToan,
+                'DiaChiNguoiNhan' => $order->DiaChiNguoiNhan,
+                'SDTNguoiNhan' => $order->SDTNguoiNhan,
+                'TenNguoiNhan' => $order->TenNguoiNhan,
+                'NgayDat' => date('d/m/Y', strtotime($order->NgayDat)),
+            ];
+            Mail::to($user->email)->send(new Order($mailData));
             return ResponseApi::success($order, '');
         }
     }

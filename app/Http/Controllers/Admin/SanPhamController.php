@@ -19,6 +19,7 @@ class SanPhamController extends Controller
      */
     public function index()
     {
+        // dd(adminUser()->email);
         $data = sanpham::with('loai')->paginate(5);
         return View('admin/qlsanpham/view1')->with(compact('data'));
     }
@@ -51,16 +52,20 @@ class SanPhamController extends Controller
                 'MaLoai' => 'required',
             ],
             [
-                'MaSP.required' => 'Không được bỏ trống',
-                'TenSP.required' => 'Không được bỏ trống',
-                'NgayThem.required' => 'Không được bỏ trống',
-                'MoTa.required' => 'Không được bỏ trống',
-                'GiaTien.required' => 'Không được bỏ trống',
-                'KichThuoc.required' => 'Không được bỏ trống',
-                'upload_file.required' => 'sai định dạng ảnh',
-                'MaLoai.required' => 'Không được bỏ trống',
+                'MaSP.required' => 'Không được bỏ trống.',
+                'MaSP.unique' => 'Mã sản phẩm đã tồn tại.',
+                'TenSP.required' => 'Không được bỏ trống.',
+                'NgayThem.required' => 'Không được bỏ trống.',
+                'MoTa.required' => 'Không được bỏ trống.',
+                'GiaTien.required' => 'Không được bỏ trống.',
+                'KichThuoc.required' => 'Không được bỏ trống.',
+                'upload_file.required' => 'Không được bỏ trống.',
+                'upload_file.image' => 'Sai định dạng ảnh.',
+                'upload_file.mimes' => 'Sai định dạng ảnh.',
+                'MaLoai.required' => 'Không được bỏ trống.',
             ],
         );
+
         if ($request->hasFile('upload_file')) {
             $file = $request->upload_file;
 
@@ -89,20 +94,46 @@ class SanPhamController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate(
+            [
+                'TenSP' => 'required',
+                'MoTa' => 'required',
+                'GiaTien' => 'required',
+                'KichThuoc' => 'required',
+                'upload_file' => 'image|mimes:png,jpg,jpeg,bmp',
+                'MaLoai' => 'required',
+            ],
+            [
+                'TenSP.required' => 'Không được bỏ trống.',
+                'MoTa.required' => 'Không được bỏ trống.',
+                'GiaTien.required' => 'Không được bỏ trống.',
+                'KichThuoc.required' => 'Không được bỏ trống.',
+                'upload_file.image' => 'Sai định dạng ảnh.',
+                'upload_file.mimes' => 'Sai định dạng ảnh.',
+                'MaLoai.required' => 'Không được bỏ trống.',
+            ],
+        );
         $sanpham = sanpham::find($id);
         $sanpham->TenSP = $request->input('TenSP');
-        // $sanpham->SoLuong = $request->input('SoLuong');
         $sanpham->MoTa = $request->input('MoTa');
         $sanpham->GiaTien = $request->input('GiaTien');
         $sanpham->KichThuoc = $request->input('KichThuoc');
+        if ($request->hasFile('upload_file')) {
+            $file = $request->upload_file;
+
+            $file_name = $file->getClientoriginalName();
+            // dd($file_name);
+            $file->move(public_path('images/products/'), $file_name);
+            $request->merge(['HinhAnh' => $file_name]);
+            $sanpham->HinhAnh = $file_name;
+        }
+
         $sanpham->MaLoai = $request->input('MaLoai');
-        $sanpham->MaKM = $request->input('MaKM');
         $sanpham->update();
         return redirect()
             ->route('sanpham.index')
             ->with('success', 'Sửa thành công');
     }
-
     /**
      * Remove the specified resource from storage.
      */

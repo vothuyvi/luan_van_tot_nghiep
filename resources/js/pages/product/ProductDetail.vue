@@ -1,19 +1,23 @@
 <template>
-    <div class="w-4/5 mx-auto my-10">
+    <div v-loading="state.loading" class="w-4/5 mx-auto my-10">
         <div class="grid grid-cols-2 mb-16">
             <div class="mx-auto">
                 <div class="w-[45rem]">
                     <div class="w-[45rem] h-[45rem] ">
                         <Splide :options="mainOptions" ref="main" class="border border-solid border-[#e5e5e5]">
                             <SplideSlide v-for="(item, index) in state.images" :key="index" class="h-[45rem]">
-                                <img :src="`/images/products/${item?.HinhAnh}`" class="object-contain w-full h-full" />
+                                <!-- <img :src="`/images/products/${item?.HinhAnh}`" class="object-contain w-full h-full" /> -->
+                                <img :src="renderFileURL('/images/products/', item?.HinhAnh)"
+                                    class="object-contain w-full h-full" />
                             </SplideSlide>
                         </Splide>
                     </div>
 
                     <Splide :options="thumbsOptions" ref="thumbs">
                         <SplideSlide v-for="(item, index) in state.images " :key="index">
-                            <img :src="`/images/products/${item?.HinhAnh}`" class="object-cover w-full h-96" />
+                            <!-- <img :src="`/images/products/${item?.HinhAnh}`" class="object-cover w-full h-96" /> -->
+                            <img :src="renderFileURL('/images/products/', item?.HinhAnh)"
+                                class="object-cover w-full h-96" />
                         </SplideSlide>
                     </Splide>
                 </div>
@@ -87,8 +91,10 @@
         <div v-if="state.type === 'cmt'">
             <div v-if="authStore.isLogin" class="flex w-full">
                 <div class="w-[8%]">
-                    <el-avatar :src="`/images/uploads/${authStore?.user?.hinhanh}`" :size="60" :icon="UserFilled"
-                        class="text-5xl" />
+                    <!-- <el-avatar :src="`/images/uploads/${authStore?.user?.hinhanh}`" :size="60" :icon="UserFilled"
+                        class="text-5xl" /> -->
+                    <el-avatar :src="renderFileURL('/images/uploads/', authStore?.user?.hinhanh)" :size="60"
+                        :icon="UserFilled" class="text-5xl" />
                 </div>
                 <div class="w-[92%]">
                     <div class="border h-[8rem]">
@@ -116,8 +122,10 @@
             </div>
             <div v-for="(item, index) in state.commentList" :key="index" class="flex w-full mt-10">
                 <div class="w-[8%]">
-                    <el-avatar :src="`/images/uploads/${item?.khachhang?.hinhanh}`" :size="60" :icon="UserFilled"
-                        class="text-5xl" />
+                    <!-- <el-avatar :src="`/images/uploads/${item?.khachhang?.hinhanh}`" :size="60" :icon="UserFilled"
+                        class="text-5xl" /> -->
+                    <el-avatar :src="renderFileURL('/images/uploads/', item?.khachhang?.hinhanh)" :size="60"
+                        :icon="UserFilled" class="text-5xl" />
                 </div>
                 <div class="w-[92%]">
                     <div class="text-2xl text-sky-600 font-bold pb-[0.5rem]">
@@ -158,6 +166,7 @@ import { useAuthStore } from '@/stores'
 import { UserFilled } from '@element-plus/icons-vue'
 import moment from 'moment'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { renderFileURL } from '@/utils/helper.js'
 
 const route = useRoute();
 const router = useRouter();
@@ -187,6 +196,7 @@ const state = reactive({
 
     },
     SoLuongOrder: 1,
+    loading: true,
 });
 
 const setType = (type) => {
@@ -208,9 +218,10 @@ const getProductDetail = async (dataMaSP) => {
         state.form = res;
     } else {
         router.push({
-            name: '404View',
+            name: '404',
         });
     }
+    state.loading = false;
     const listImage = [];
     res.anh.forEach((item) => {
         const itemData = {

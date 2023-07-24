@@ -1,18 +1,17 @@
 @extends('menu')
 <style>
-    .container {
-        padding-top: 70px;
-    }
+.container {
+    padding-top: 70px;
+}
 
-    .form {
-        display: flex;
-    }
+.form {
+    display: flex;
+}
 </style>
 <div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
-
                 @if(Session::has('error'))
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -52,9 +51,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $currentPage = Request::get('page') ? Request::get('page') - 1 : 0;
+                    @endphp
                     @foreach($data as $id=>$value)
                     <tr>
-                        <td>{{++$id}}</td>
+                        <td>{{++$id+($currentPage*5)}}</td>
                         <td>{{$value->MaSP}}</td>
                         <td>{{$value->TenSP}}</td>
                         <td>{{$value->SoLuong}}
@@ -68,7 +70,8 @@
 
                         <td col>
                             <form action="{{route('sanpham.destroy',$value->MaSP)}}" method="post" class="form">
-                                <a href="{{route('sanpham.edit',$value->MaSP)}}" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
+                                <a href="{{route('sanpham.edit',$value->MaSP)}}" class="btn btn-info"><i
+                                        class='bx bx-pen nav_icon'></i></a>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger"><i class='bx bx-x nav_icon'></i></button>

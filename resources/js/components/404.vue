@@ -9,10 +9,10 @@
                 </svg>
             </div>
             <h1 class="text-[4rem] mt-6 text-[#F21E1E]">404</h1>
-
+            <div class="text-3xl mt-2 text-[#F21E1E]">NOT FOUND</div>
             <router-link :to="{ name: 'HomeView' }">
                 <el-button type="success bg-[#F21E1E] hover:bg-[#f66262] mt-8" round size="large" color="#F21E1E">
-                    Trở về
+                    Trở lại trang chủ
                 </el-button>
             </router-link>
         </div>

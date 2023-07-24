@@ -10,7 +10,7 @@ use App\Services\ResponseApi;
 
 class SanphamController extends Controller
 {
-    //
+    ///
     function new()
     {
         $productNews = Sanpham::with('anh')

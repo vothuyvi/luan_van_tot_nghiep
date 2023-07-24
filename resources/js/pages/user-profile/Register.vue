@@ -1,5 +1,5 @@
 <template>
-    <div class="container__login">
+    <div v-loading="state.loading" class="container__login">
         <div class="container__login-body">
             <div class="login-body__header">
                 <span> Đăng ký thành viên</span>
@@ -54,6 +54,7 @@ const state = reactive({
     password: '',
     password_confirmation: '',
     error: '',
+    loading: false,
 });
 
 const checkValidate = () => {
@@ -75,7 +76,7 @@ const checkValidate = () => {
     }
     if (state.password === '') {
         ElMessage({
-            message: 'Vui lòng nhập password.',
+            message: 'Vui lòng nhập mật khẩu.',
             type: 'error',
             grouping: true,
         })
@@ -83,7 +84,7 @@ const checkValidate = () => {
     }
     if (state.password_confirmation === '') {
         ElMessage({
-            message: 'Vui lòng nhập xác nhận password.',
+            message: 'Vui lòng nhập xác nhận mật khẩu.',
             type: 'error',
             grouping: true,
         })
@@ -108,15 +109,12 @@ const handleRegister = async () => {
         };
 
         if (checkValidate()) {
+            state.loading = true;
             const { data: user } = await register(form);
             state.error = null;
-            ElMessage({
-                message: 'Đăng ký tài khoản thành công!',
-                type: 'success',
-                grouping: true,
-            });
+            state.loading = false;
             router.push({
-                name: 'LoginView',
+                name: 'RegisterSuccessView',
             });
         }
 
