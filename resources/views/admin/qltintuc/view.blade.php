@@ -51,7 +51,7 @@
 
                         <td col>
                             <!-- <form action="{{route('tintuc.destroy',$value->MaTT)}}" method="post" class="form"> -->
-                            <a href="" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
+                            <a href="{{route('tintuc.edit',$value->MaTT)}}" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
                             @csrf
                             @method('DELETE')
                             <a type="submit" href="{{route('tintuc.destroy',$value->MaTT)}}"  class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
@@ -63,6 +63,8 @@
 
                 </tbody>
             </table>
+            {{$Tintuc->links()}}
+
             <form action="" method="post" id="form-delete">
                 @csrf
                 @method('DELETE')

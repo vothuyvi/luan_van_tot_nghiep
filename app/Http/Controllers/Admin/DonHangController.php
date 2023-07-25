@@ -2,76 +2,97 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin\ChiTietDonHang;
 use App\Models\Admin\DonHang;
 use App\Models\Admin\Sanpham;
 use App\Models\Admin\TrangThaiDon;
 use Illuminate\Http\Request;
-
+use Mail;
 class DonHangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+
+        $this->middleware('admin');
+    }
     public function index()
     {
-        // return View('admin/qldonhang/view',['data'=>DonHang::all()]);
-        $donhang = DonHang::with('thanhtoan')->get();
+        $donhang = DonHang::with('thanhtoan')->paginate(6);
+        if($key = request()->key)
+        {
+            $donhang = DonHang::where('MaDH','like',$key)->paginate(6);
+        }
         return View('admin/qldonhang/view')->with(compact('donhang'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+   //edit
     public function edit(string $id)
     {
         //
         $donhang = DonHang::find($id);
-        return view('admin/qldonhang/edit', compact('donhang'), ['TT' => TrangThaiDon::all()]);
+        return view('admin/qldonhang/edit', compact('donhang'), ['TT' => TrangThaiDon::all(),'ChiTietDon'=>ChiTietDonHang::all()]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    //update
     public function update(Request $request, string $id)
     {
+        // $donhang = DonHang::find($id);
+        // $donhang->MaTT = $request->input('MaTT');
+        // $donhang->update();
+        // return redirect()
+        //     ->route('donhang.index')
+        //     ->with('success', 'cập nhập trạng thái thành công');
+
         $donhang = DonHang::find($id);
-        $donhang->MaTT = $request->input('MaTT');
-        $donhang->update();
-        return redirect()
+        //  dd($donhang);
+        // $MaDH=DonHang::get('MaDH');
+        // $MaTT=DonHang::get('MaTT');
+        // // dd($MaTT);
+        // $order = Donhang::with('chitietdonhang')
+        // ->where('MaDH', $MaDH)
+        // ->first();
+        // dd($order);
+        // dd($ChiTietDonHang);
+        // $ChiTietDonHang->save();
+        $MaDH = $request->get('MaDH');
+        // dd($MaDH);
+        $MaTT = $request->get('MaTT');
+        // dd($MaTT);
+        $order = Donhang::with('chitietdonhang')
+            ->where('MaDH', $MaDH)
+            ->first();
+            // dd($order);
+            if ($order) {
+                $order->MaTT = $MaTT;
+                $order->save();
+                // cap nhat so luong san pham
+                $chitietdonhang = $donhang->MaDH;
+                if ($chitietdonhang) {
+                    foreach ($chitietdonhang as $item) {
+                        $sanpham = sanpham::findOrfail($item->MaSP);
+                        if ($sanpham) {
+                            $newSL = $sanpham->SoLuong - $item->quantity;
+                            $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
+                            $sanpham->save();
+                        }
+                    }
+                }
+            }
+            // $MaTT = $request->get('MaTT');
+            // dd($MaTT);
+            $donhang->MaTT = $request->input('MaTT');
+            $donhang->update();
+            return redirect()
             ->route('donhang.index')
             ->with('success', 'cập nhập trạng thái thành công');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function SendMail()
     {
-        //
+
     }
     public function chitiet(Request $request)
     {

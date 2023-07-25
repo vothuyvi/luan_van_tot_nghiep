@@ -13,6 +13,7 @@
 }
 
 .select {
+    padding-top: 20px;
     padding-left: 12px;
     border: none;
 }
@@ -79,6 +80,21 @@
                             </span>
                             @endif
                         </div>
+
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <td>HÌNH ẢNH</td>
+                            <input type="file" name='upload_file' class="form-control">
+                            @if($errors->has('upload_file'))
+                            <span class="error-text">
+                                {{$errors->first('upload_file')}}
+                            </span>
+                            @endif
+                        </div>
                         <div class="form-group">
                             <td>GIÁ TIỀN</td>
                             <input type="text" name="GiaTien" value="{{old('GiaTien')}}" class="form-control">
@@ -97,27 +113,16 @@
                             </span>
                             @endif
                         </div>
-
-
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <td>HÌNH ẢNH</td>
-                            <input type="file" name='upload_file' class="form-control">
-                            @if($errors->has('upload_file'))
-                            <span class="error-text">
-                                {{$errors->first('upload_file')}}
-                            </span>
-                            @endif
-                        </div>
-                        <div class="form-group1">
-                            <td>TÊN LOẠI:</td>
-                            <div class="select">
+                            <div class="choice type">
+                                <td>TÊN LOẠI:</td>
                                 <select name="MaLoai" id="" class="select">
                                     <option></option>
                                     @foreach($loai as $id=>$value)
+                                    @if($value->MaLoai == old('MaLoai'))
+                                    <option value="{{$value->MaLoai}}" selected>{{$value->TenLoai}}</option>
+                                    @else
                                     <option value="{{$value->MaLoai}}">{{$value->TenLoai}}</option>
+                                    @endif
                                     @endforeach
                                 </select>
                                 @if($errors->has('MaLoai'))
@@ -126,7 +131,6 @@
                                 </span>
                                 @endif
                             </div>
-                        </div>
 
                         <!-- <div class="form-group1">
                             <td>MÃ KM:</td>
@@ -139,10 +143,7 @@
                                 </select>
                             </div>
                         </div> -->
-                        <div class="form-group">
-                            <td><a href="{{route('hinhanh.index')}}" class="btn btn-primary mt-4">Thêm ảnh</a>
-                            </td>
-                        </div>
+
                     </div>
 
 

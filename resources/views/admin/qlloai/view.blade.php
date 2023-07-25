@@ -3,6 +3,15 @@
     .container {
         padding-top: 70px;
     }
+    .form-inline{
+    display: flex;
+}
+.search {
+height: 100%;
+}
+.btn{
+    padding-left: 12px;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -21,6 +30,16 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
+                <!--tìm kiếm-->
+                <form action=""  class="form-inline">
+
+                    <div class="form-group">
+                        <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                    </div>
+                    <button type="submit" class="btn btn-primary  search">
+                    <i class='bx bx-search nav_icon'></i>
+                    </button>
+                </form>
                 <div class="col-md-6">
                     <h5>Quản lý loại sản phẩm</h5>
                 </div>

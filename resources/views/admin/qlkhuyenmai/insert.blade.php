@@ -51,6 +51,15 @@
                         @endif
                     </div>
                     <div class="form-group">
+                            <td>ĐIỀU KIỆN ÁP DỤNG</td>
+                            <input type="text" name="DieuKienApDung"class="form-control">
+                            @if($errors->has('DieuKienApDung'))
+                            <span class="error-text">
+                                {{$errors->first('DieuKienApDung')}}
+                            </span>
+                            @endif
+                        </div>
+                    <div class="form-group">
                         <td>PHẦN TRĂM</td>
                         <input type="text" name="PhanTram" class="form-control">
                         @if($errors->has('PhanTram'))
@@ -77,15 +86,7 @@
                         </span>
                         @endif
                     </div>
-                    <div class="form-group">
-                        <td>TRẠNG THÁI</td>
-                        <input type="text" name="TrangThai" class="form-control">
-                        @if($errors->has('TrangThai'))
-                        <span class="error-text">
-                            {{$errors->first('TrangThai')}}
-                        </span>
-                        @endif
-                    </div>
+
                 </div>
 
         </div>

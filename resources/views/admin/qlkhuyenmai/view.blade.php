@@ -11,6 +11,15 @@
     .form {
         display: flex;
     }
+    .form-inline{
+    display: flex;
+}
+.search {
+height: 100%;
+}
+.btn{
+    padding-left: 12px;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -29,9 +38,22 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
+                <!-- tìm kiếm-->
+
+                <form action=""  class="form-inline">
+
+                <div class="form-group">
+                    <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                </div>
+                <button type="submit" class="btn btn-primary  search">
+                <i class='bx bx-search nav_icon'></i>
+                </button>
+            </form>
+
                 <div class="col-md-6">
                     <h5>Quản lý khuyến mãi</h5>
                 </div>
+
                 <div class="col-md-6">
                     <a href="{{route('khuyenmai.create')}}" class="btn btn-primary float-end">Tạo khuyến mãi</a>
                 </div>
@@ -74,7 +96,7 @@
 
                 </tbody>
             </table>
-            {{$khuyenmai->links()}}
+            {{$khuyenmai->appends(request()->all())->links()}}
             <form action="" method="post" id="form-delete">
                 @csrf
                 @method('DELETE')

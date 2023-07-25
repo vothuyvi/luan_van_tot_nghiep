@@ -11,10 +11,22 @@ class PhieuNhapController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+
+        $this->middleware('admin');
+    }
     public function index()
     {
         //
-        return View('admin/qlphieunhap/view', ['phieunhap' => PhieuNhap::all(), 'chitiet' => ChiTietPhieuNhap::all()]);
+        $phieunhap = PhieuNhap::paginate(5);
+        $chitiet=ChiTietPhieuNhap::paginate(5);
+        if($key = request()->key)
+        {
+            $phieunhap = PhieuNhap::where('MaPN','like',$key)->paginate(5);
+        }
+        return View('admin/qlphieunhap/view')->with(compact('phieunhap','chitiet'));
+        // return View('admin/qlphieunhap/view', ['phieunhap' => PhieuNhap::paginate(5), 'chitiet' => ChiTietPhieuNhap::paginate(5)]);
     }
 
     /**
@@ -34,11 +46,13 @@ class PhieuNhapController extends Controller
         //
         $request->validate(
             [
-                'MaPN' => 'required',
+                'MaPN' => 'required|unique:phieunhap',
                 'NgayNhap' => 'required',
             ],
             [
                 'MaPN.required' => 'Không được bỏ trống',
+                'MaPN.unique' => 'Mã tồn tại',
+
                 'NgayNhap.required' => 'Không được bỏ trống',
             ],
         );
@@ -59,9 +73,10 @@ class PhieuNhapController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id,Request $request)
     {
         //
+
         $phieunhap = PhieuNhap::find($id);
         return view('admin/qlphieunhap/edit', compact('phieunhap'));
     }
@@ -73,6 +88,14 @@ class PhieuNhapController extends Controller
     {
         //
         //
+        $request->validate(
+            [
+                'NgayNhap' => 'required',
+            ],
+            [
+                'NgayNhap.required' => 'Không được bỏ trống',
+            ],
+        );
         $phieunhap = PhieuNhap::find($id);
         $phieunhap->NgayNhap = $request->input('NgayNhap');
         $phieunhap->update();

@@ -7,6 +7,18 @@
 .form {
     display: flex;
 }
+.page{
+    padding-top: 12px;
+}
+.form-inline{
+    display: flex;
+}
+.search {
+height: 100%;
+}
+.btn{
+    padding-left: 12px;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -25,7 +37,16 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
+<!-- tìm kiếm-->
+        <form action=""  class="form-inline">
 
+            <div class="form-group">
+                <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+            </div>
+           <button type="submit" class="btn btn-primary  search">
+                <i class='bx bx-search nav_icon'></i>
+            </button>
+        </form>
                 <div class="col-md-6">
                     <h5> Quản lý sản phẩm</h5>
                 </div>
@@ -80,7 +101,17 @@
                     </tr>
                     @endforeach
                 </tbody>
+
             </table>
-            {{$data->links()}}
+            <table>
+            <div class="form-group ">
+                            <td><a href="{{route('hinhanh.index')}}" class="btn btn-primary mt-4">Thêm nhiều ảnh</a>
+                            </td>
+                        </div>
+            </table>
+            <div class="page">
+            {{$data->appends(request()->all())->links()}}
+
+            </div>
         </div>
     </div>

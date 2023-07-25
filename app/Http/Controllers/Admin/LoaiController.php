@@ -9,11 +9,24 @@ class LoaiController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+
+        $this->middleware('admin');
+    }
     public function index()
     {
         //
         // dd(loai::all());
-        return view('admin/qlloai/view')->with('Loai', loai::all());
+
+        $Loai = loai::get();
+        $key = request()->key;
+        // dd($key);
+        if($key = request()->key)
+        {
+            $Loai = loai::where('TenLoai','like','%'.$key.'%')->get();
+        }
+        return view('admin/qlloai/view')->with(compact('Loai'));
     }
 
     /**
@@ -74,6 +87,15 @@ class LoaiController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $request->validate(
+            [
+                'TenLoai' => 'required|unique:loaisp',
+            ],
+            [
+                'TenLoai.required' => 'Không được bỏ trống',
+                'TenLoai.unique' => 'Tên loại sản phẩm đã có',
+            ],
+        );
         $loai = loai::find($id);
         $loai->TenLoai = $request->input('TenLoai');
         $loai->update();

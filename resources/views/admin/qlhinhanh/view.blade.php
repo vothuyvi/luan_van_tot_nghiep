@@ -28,7 +28,7 @@
                     <h5> Quản lý hình ảnh của sản phẩm</h5>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{route('hinhanh.create')}}" class="btn btn-primary float-end"><i class='bx bx-plus nav_icon'></i>Thêm hình ảnh</a>
+                    <a href="{{route('hinhanh.create')}}" class="btn btn-primary float-end">Thêm hình ảnh</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                         <td>{{$value->MaSP}}</td>
                         <td col>
                             <form action="" method="post" class="form">
-                            <a href="" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
+                            <a href="{{route('hinhanh.edit',$value->MaAnh)}}" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
                             @csrf
                             @method('DELETE')
                             <button type="submit"  class="btn btn-danger"><i class='bx bx-x nav_icon'></i></button>
@@ -59,5 +59,6 @@
                     @endforeach
                 </tbody>
             </table>
+            {{$data->links()}}
         </div>
     </div>

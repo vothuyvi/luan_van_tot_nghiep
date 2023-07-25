@@ -2,42 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\admin;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
-    public function index()
+    //
+    public function admin_login()
     {
         return view('admin/login');
     }
-    //    public function Postlogin( Request $request)
-    //    {
-    //     $arr=
-    //     ['email' => $request ->email,
-    //      'password' => $request->password];
-    //     if (Auth::attempt($arr)){
-    //         //đăng nhập đúng
-    //         Redirect::to('/');
-    //     }else
-    //     {
-    //         dd('Đăng nhập thất bại');
-    //         //đăng nhập sai
-    //     }
-    //    }
-    public function store(Request $request)
+    public function Postlogin( Request $request)
     {
-        $arr = ['email' => $request->email, 'password' => $request->password];
-        if (Auth::guard('admin')->attempt($arr)) {
-            //đăng nhập đúng
-            return redirect('/index');
-        } else {
-            // dd('Đăng nhập thất bại');
-            return view('admin/login');
+        $request->validate([
+            'email'=>'required',
+            'password'=>'required',
 
-            //đăng nhập sai
-        }
+         ],[
+            'email.required'=>'Không được bỏ trống',
+            'password.required'=>'Không được bỏ trống',
+
+        ]);
+     $arr = ['email' => $request->email, 'password' => $request->password];
+     if (Auth::guard('admin')->attempt($arr)) {
+         //đăng nhập đúng
+         return redirect('/index');
+     } else {
+         // dd('Đăng nhập thất bại');
+
+         return redirect('admin/login')->with('error','email or password wrong');
+
+         //đăng nhập sai
+     }
     }
+
 }

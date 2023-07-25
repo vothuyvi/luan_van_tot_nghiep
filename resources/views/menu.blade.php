@@ -88,6 +88,7 @@ a {
     overflow: hidden;
     width: 115%;
     flex-wrap: nowrap !important;
+
 }
 
 .nav a {
@@ -209,23 +210,27 @@ a {
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
-
         </div>
-        <!-- <div class="search"> Tìm kiếm
-                <input type="text"><i class='bx bx-search-alt nav_icon'></i>
-            </div> -->
-        <div style="margin-left: auto; margin-right: 0.5rem">{{adminUser() ? adminUser()->email : null}}</div>
+
+        <a style="margin-left: auto; margin-right: 0.5rem; border:none;background-color: #F7F6FB;" class="btn btn-info"
+            data-bs-toggle="modal" data-bs-target="#exampleModal">
+            {{adminUser()->Ten}}
+        </a>
+
+
         <div class="header_img"> <img src="https://pluspng.com/img-png/png-user-icon-customer-icon-1600.png" `>
             <a href="#"></a>
         </div>
+
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div> <a href="" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                        class="nav_logo-name">Admin</span> </a>
+            <div> <a href="http://127.0.0.1:8000/index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i>
+                    <span class="nav_logo-name">AdMin</span> </a>
                 <div class="nav_list">
                     <a href="/sanpham" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Quản lý sản phẩm</span>
+
                     </a>
                     <a href="/admin/qlloai/view" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span
                             class="nav_name">Quản lý loại sản phẩm</span></a>
@@ -246,12 +251,37 @@ a {
                     <a href="/admin/thongke/view" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
                             class="nav_name">Thống kê</span> </a>
                 </div>
-            </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+            </div> <a href="{{route('logout')}}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
                     class="nav_name">SignOut</span> </a>
         </nav>
 
     </div>
+    <!--modal thông tin admin và đổi mật khẩu-->
 
+    <!-- Modal -->
+    <form action="" method="post">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Tên tài khoản: {{adminUser()->Ten}}
+                    </div>
+                    <div class="modal-body">
+                        Email: {{adminUser()->email}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-primary" href="{{route('editpass.edit', adminUser()->Ma)}}">Đổi
+                            mật khẩu</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     <!--Container Main start-->
     <div class="height-100 bg-light">
 
@@ -259,6 +289,16 @@ a {
 
 
 
+
+    <!--modal -->
+    <script>
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function() {
+        myInput.focus()
+    })
+    </script>
     <!--Container Main end-->
     <script>
     document.addEventListener("DOMContentLoaded", function(event) {

@@ -216,84 +216,286 @@ a {
         border: #AFA5D9;
     }
 
+    .container {
+        padding-top: 70px;
+    }
+
+    .char_2 {
+        display: flex;
+    }
+
+    .dunot {
+        width: 1000px;
+    }
+
+    .cardBox1 {
+        position: relative;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 30px;
+        justify-content: center;
+        /* padding-left: 200px; */
+    }
+
+    /* .card1 div{display:flex;} */
+
+    .cardBox1 .card1 {
+
+        position: relative;
+        border-radius: 6px;
+        padding: 40px;
+        background: rgba(56, 195, 234, 0.91);
+        box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
+        justify-content: space-between;
+        cursor: pointer;
+        display: flex;
+        text-align: center;
+
+    }
+
+    .cardBox1 .card2 {
+
+        position: relative;
+        border-radius: 6px;
+        padding: 40px;
+        background: rgba(13, 136, 63, 0.91);
+        box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
+        justify-content: space-between;
+        cursor: pointer;
+        display: flex;
+
+    }
+
+    .cardBox1 .card3 {
+
+        position: relative;
+        border-radius: 6px;
+        padding: 40px;
+        background: rgba(240, 160, 5, 0.91);
+        box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
+        justify-content: space-between;
+        cursor: pointer;
+        display: flex;
+
+    }
+
+    .cardBox1 .card4 {
+
+        position: relative;
+        border-radius: 6px;
+        padding: 40px;
+        background: rgba(240, 98, 53, 0.91);
+        box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
+        justify-content: space-between;
+        cursor: pointer;
+        display: flex;
+
+    }
+
+    .cardBox1 .card1 .name {
+        position: relative;
+        font-size: 1.5em;
+        font-weight: 500;
+
+    }
+
+    .cardBox1 .card1 .number {
+        font-weight: 500;
+        font-family: 'Noto Serif', serif;
+        font-size: 1.5em;
+        text-align: center;
+    }
+
+    .cardBox1 .card2 .name {
+        position: relative;
+        font-size: 1.5em;
+        font-weight: 500;
+
+    }
+
+    .cardBox1 .card2 .number {
+        font-weight: 500;
+        font-size: 1.5em;
+        text-align: center;
+        font-family: 'Noto Serif', serif;
+
+    }
+
+    .cardBox1 .card3 .name {
+        position: relative;
+        font-size: 1.5em;
+        font-weight: 500;
+
+    }
+
+    .cardBox1 .card3 .number {
+        font-weight: 500;
+        font-size: 1.5em;
+        text-align: center;
+        font-family: 'Noto Serif', serif;
+
+    }
+
+    .cardBox1 .card4 .name {
+        position: relative;
+        font-size: 1.5em;
+        font-weight: 500;
+
+    }
+
+    .cardBox1 .card4 .number {
+        font-weight: 500;
+        font-size: 1.5em;
+        text-align: center;
+        font-family: 'Noto Serif', serif;
+
+    }
+
+    .cardBox1 .card1 .icon i {
+        font-weight: 500;
+        font-size: 3em;
+        color: yellow;
+        text-align: center;
+    }
+
 }
 </style>
 
 <body id="body-pd">
     <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
 
+        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
         </div>
-        <!-- <div class="search"> Tìm kiếm
-                <input type="text"><i class='bx bx-search-alt nav_icon'></i>
-            </div> -->
-        <div style="margin-left: auto; margin-right: 0.5rem">{{adminUser() ? adminUser()->email : null}}</div>
+        <button
+            style="margin-left: auto; margin-right: 0.5rem; border:none;background-color: #F7F6FB;">{{adminUser()->Ten}}</button>
+
         <div class="header_img"> <img src="https://pluspng.com/img-png/png-user-icon-customer-icon-1600.png">
-            <a href="http://"></a>
+            <a href=""></a>
         </div>
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
-            <div> <a href="" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
-                        class="nav_logo-name">Admin</span> </a>
+            <div> <a href="http://127.0.0.1:8000/index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i>
+                    <span class="nav_logo-name">AdMin</span> </a>
                 <div class="nav_list">
-                    <a href="/sanpham" class="nav_link active"> <i
-                            class='bx bx-grid-alt nav_icon'></i>
+                    <a href="/sanpham" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Quản lý sản phẩm</span>
 
                     </a>
-                    <a href="/admin/qlloai/view" class="nav_link"><i
-                            class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Quản lý loại sản phẩm</span></a>
-                    <a href="/taikhoan" class="nav_link"><i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Quản lý tài khoản</span> </a>
+                    <a href="/admin/qlloai/view" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span
+                            class="nav_name">Quản lý loại sản phẩm</span></a>
+                    <a href="/taikhoan" class="nav_link"><i class='bx bx-user nav_icon'></i> <span class="nav_name">Quản
+                            lý tài khoản</span> </a>
                     <a href="/admin/qlbinhluan/view" class="nav_link"><i
                             class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name"> Quản lý bình
                             luận</span> </a>
-                    <a href="/admin/qltintuc/view" class="nav_link"><i
-                            class='bx bx-news nav_icon'></i> <span class="nav_name"> Quản lý tin tức</span> </a>
-                    <a href="/khuyenmai" class="nav_link"><i class='bx bx-gift nav_icon'></i> <span
-                            class="nav_name"> Quản lý khuyến mãi</span> </a>
-
-                    <a href="/admin/qldonhang/view" class="nav_link"><i
-                            class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Quản lý đơn hàng</span> </a>
-                    <a href="/admin/qlphieunhap/view" class="nav_link"> <i
-                            class='bx bx-folder nav_icon'></i> <span class="nav_name">Quản lý phiếu nhập</span> </a>
-                    <a href="/admin/thongke/view" class="nav_link"><i
-                            class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Thống kê</span> </a>
+                    <a href="/admin/qltintuc/view" class="nav_link"><i class='bx bx-news nav_icon'></i> <span
+                            class="nav_name"> Quản lý tin tức</span> </a>
+                    <a href="/khuyenmai" class="nav_link"><i class='bx bx-gift nav_icon'></i> <span class="nav_name">
+                            Quản lý khuyến mãi</span> </a>
+                    <a href="/admin/qldonhang/view" class="nav_link"><i class='bx bx-bookmark nav_icon'></i> <span
+                            class="nav_name">Quản lý đơn hàng</span> </a>
+                    <a href="/admin/qlphieunhap/view" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span
+                            class="nav_name">Quản lý phiếu nhập</span> </a>
+                    <a href="/admin/thongke/view" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                            class="nav_name">Thống kê</span> </a>
                 </div>
             </div>
-            <a href="" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span>
+            <a href="{{route('logout')}}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
+                    class="nav_name">SignOut</span>
             </a>
         </nav>
 
     </div>
 
     <!--Container Main start-->
-    <div class="height-100 bg-light" style="text-align: center;">
-        <h5>Thống kê đơn hàng doanh số</h5>
-        <div id="chart" style="height: 250px;"></div>
-        <div class="char_2">
-            <div class="dunot">
-                <div id="Donutchart" style="height: 250px;"></div>
+
+
+    <div class="height-100 bg-light">
+        <p style="text-align: center;font-weight: 500;font-size: 1.5em;">Thống kê theo tháng {{$thang}}</p>
+        <div class="cardBox1">
+            <div class="card1">
+                <div>
+                    <div class="name">TỔNG ĐƠN HÀNG</div>
+                    <div class="number">{{$don}}</div>
+                </div>
+                <!-- <div class="icon">
+                <i class='bx bx-cart nav_icon'></i>
+                </div> -->
             </div>
+            <div class="card2">
+                <div>
+                    <div class="name">TỔNG DOANH THU</div>
+                    <div class="number">{{number_format($total)}}</div>
+                </div>
+            </div>
+            <div class="card3">
+                <div>
+                    <div class="name"></div>
+                    <div class="number"></div>
+                </div>
+            </div>
+            <div class="card4">
+                <div>
+                    <div class="name"></div>
+                    <div class="number"></div>
+                </div>
+            </div>
+
+        </div>
+        <div class="char_2">
+
             <div class="table">
+
                 <div class="card-body">
                     <table class="table table-bordered ">
-                        <h5>Thống kê sản phẩm bán chạy nhất</h5>
+                        <h5 style="text-align: center;font-weight: 500;font-size: 1.5em;">Sản phẩm tồn</h5>
                         <thead>
                             <tr>
                                 <th>STT</th>
+                                <th>MÃ SẢN PHẨM</th>
                                 <th>TÊN SẢN PHẨM</th>
                                 <th>SỐ LƯỢNG</th>
-                                <th>KÍCH THƯỚC</th>
-                                <th>LOẠI</th>
                             </tr>
                         </thead>
+                        <tbody>
+
+                            @foreach($data as $id=>$value)
+                            <tr>
+                                <td>{{++$id}}</td>
+                                <td>{{$value->MaSP}}</td>
+                                <td>{{$value->TenSP}}</td>
+                                <td>{{$value->SoLuong}}</td>
+
+
+                            </tr>
+                            @endforeach
+                        </tbody>
                     </table>
+                    {{$data->links()}}
+
                 </div>
             </div>
         </div>
     </div>
+
+
+
+
+    <!-- Modal -->
+
+
+    <!--modal -->
+    <script>
+    var myModal = document.getElementById('myModal')
+    var myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', function() {
+        myInput.focus()
+    })
+    </script>
+
     <!--Container Main end-->
     <script>
     document.addEventListener("DOMContentLoaded", function(event) {

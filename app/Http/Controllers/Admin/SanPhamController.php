@@ -14,30 +14,34 @@ use App\Services\ResponseApi;
 
 class SanPhamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+
+        $this->middleware('admin');
+    }
+
     public function index()
     {
         // dd(adminUser()->email);
-        $data = sanpham::with('loai')->paginate(5);
+        // dd(request()->key);
+        $data = sanpham::with('loai')->paginate(7);
+
+        if($key = request()->key)
+        {
+            $data = sanpham::with('loai')->where('TenSP','like','%'.$key.'%')->paginate(7);
+            // $data = sanpham::with('loai')->where('TenSP','like','%'.$key.'%')->orWhere('MaSP','like','%'.$key.'%')->paginate(7);
+
+        }
         return View('admin/qlsanpham/view1')->with(compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
-        // $a=['loai'=>loai::all()];
-        // $b=['khuyenmai'=>Khuyenmai::all()];
+
         return View('admin/qlsanpham/insert', ['loai' => loai::all(), 'khuyenmai' => Khuyenmai::all()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $request->validate(
@@ -118,6 +122,7 @@ class SanPhamController extends Controller
         $sanpham->MoTa = $request->input('MoTa');
         $sanpham->GiaTien = $request->input('GiaTien');
         $sanpham->KichThuoc = $request->input('KichThuoc');
+
         if ($request->hasFile('upload_file')) {
             $file = $request->upload_file;
 

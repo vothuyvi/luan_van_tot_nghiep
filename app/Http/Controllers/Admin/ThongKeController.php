@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Admin\DonHang;
 use App\Models\Admin\sanpham;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
-class indexController extends Controller
+class ThongKeController extends Controller
 {
-    /*
-     điều hướng các trang
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-
-        $this->middleware('admin');
-    }
     public function index()
     {
+        //
         $thang= now()->month;
         // dd($thang);
         $current = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
@@ -28,6 +26,8 @@ class indexController extends Controller
         // dd($don);
         $total=DonHang::whereBetween('NgayDat', [$current,$current1])->sum('TongTienDonHang');
         $data = sanpham::orderBy('SoLuong','DESC')->paginate(7);
-        return view('index')->with(compact('data','don','thang','total'));
+
+        return View('admin/thongke/view')->with(compact('data','don','thang','total'));
     }
+
 }

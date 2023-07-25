@@ -113,17 +113,7 @@
                                 </select>
                             </div>
                         </div>
-                        <!-- <div class="choice KM">
-                            <td>MÃ KHUYẾN MÃI:</td>
-                            <div class="select">
-                                <select name="MaKM" id="" class="select">
-                                    @foreach($khuyenmai as $id=>$value)
-                                    <option></option>
-                                    <option>{{$value->MaKM}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div> -->
+                       
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success mt-4">Cập nhập</button>

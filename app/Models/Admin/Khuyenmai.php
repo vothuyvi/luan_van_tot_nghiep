@@ -14,10 +14,10 @@ class Khuyenmai extends Model
     protected $fillable=[
         'MaKM',
         'TenKM',
+        'DieuKienApDung',
         'PhanTram',
         'NgayKetThuc',
         'NgayBatDau',
-        'TrangThai',
     ];
     public $timestamps = false;
 }

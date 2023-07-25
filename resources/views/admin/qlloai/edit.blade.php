@@ -18,6 +18,11 @@
                         <div class="form-group">
                             <td>TÊN LOẠI SẢN PHẨM</td>
                             <input type="text" name="TenLoai" value="{{$loai->TenLoai}}" class="form-control">
+                            @if($errors->has('TenLoai'))
+                            <span class="error-text">
+                                {{$errors->first('TenLoai')}}
+                            </span>
+                            @endif
                         </div>
 
                     </div>
