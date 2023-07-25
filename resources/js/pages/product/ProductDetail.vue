@@ -43,17 +43,28 @@
                     <span class="text-2xl mr-5">Số lượng tồn kho: {{ state.form.SoLuong }}</span>
                 </div> -->
                 <div class="p-4 mb-4" :class="state.form.SoLuong == 0 ? 'hidden' : ''">
-                    <button
+                    <button v-if="state.SoLuongOrder"
+                        class="border border-sky-600 w-10 rounded-lg text-2xl font-bold mr-5 hover:bg-sky-600 hover:text-white cursor-not-allowed"
+                        @click="handelQuantity('MINUS')" disabled>
+                        -
+                    </button>
+                    <button v-else
                         class="border border-sky-600 w-10 rounded-lg text-2xl font-bold mr-5 hover:bg-sky-600 hover:text-white"
                         @click="handelQuantity('MINUS')">
                         -
                     </button>
                     <span class="text-2xl mr-5">{{ state.SoLuongOrder }}</span>
-                    <button
+                    <button v-if="state.SoLuongOrder < state.form.SoLuong"
                         class="border border-sky-600 w-10 rounded-lg text-2xl font-bold hover:bg-sky-600 hover:text-white"
                         @click="handelQuantity('PLUS')">
                         +
                     </button>
+                    <button v-else
+                        class="border border-sky-600 w-10 rounded-lg text-2xl font-bold hover:bg-sky-600 hover:text-white cursor-not-allowed"
+                        @click="handelQuantity('PLUS')" disabled>
+                        +
+                    </button>
+
                 </div>
                 <div class="btn_buy mb-4">
                     <button v-if="state.form.SoLuong === 0" disabled class="cursor-not-allowed opacity-50">Thêm vào giỏ
@@ -165,7 +176,7 @@ import { productDetail, comments, commentStore } from "@/api/auth";
 import { useAuthStore } from '@/stores'
 import { UserFilled } from '@element-plus/icons-vue'
 import moment from 'moment'
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { renderFileURL } from '@/utils/helper.js'
 
 const route = useRoute();
@@ -290,7 +301,7 @@ const thumbsOptions = {
 
 
 const handelQuantity = (type) => {
-    console.log('type', type);
+    // console.log('type', type);
     if (type === 'PLUS') {
         state.SoLuongOrder += 1;
 
