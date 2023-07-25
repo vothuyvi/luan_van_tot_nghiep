@@ -1,14 +1,18 @@
 @extends('menu')
 <style>
-    .container {
-        padding-top: 70px;
-    }
+.container {
+    padding-top: 70px;
+}
+
+.table {
+    text-align: center;
+}
 </style>
 <div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
-            @if(Session::has('error'))
+                @if(Session::has('error'))
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{Session::get('error')}}
@@ -21,7 +25,7 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
-                <form action=""  class="form-inline">
+                <form action="" class="form-inline">
                     <div class="form-group">
                         <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
                     </div>
@@ -34,7 +38,7 @@
                     <h5>Quản lý bình luận</h5>
                 </div>
                 <div id="notify_comment"></div>
-                
+
             </div>
         </div>
         <div class="card-body">
@@ -60,17 +64,16 @@
                         <td>{{$value->MaKH}}</td>
                         <td>{{$value->MaSP}}</td>
                         <td>{{$value->products->TenSP}} </td>
-                    <td col>
+                        <td col>
                             @if($value->Status==0)
-                            <input type="button" value="HIỂN THỊ"  data-comment_status="1" data-comment_id="{{$value->MaBL}}" id="{{$value->MaSP}}"
-                            class="btn btn-primary btn-xs comment_status_btn">
+                            <input type="button" value="HIỂN THỊ" data-comment_status="1"
+                                data-comment_id="{{$value->MaBL}}" id="{{$value->MaSP}}"
+                                class="btn btn-primary btn-xs comment_status_btn">
                             @else
-                            <input type="button" value="ẨN" data-comment_status ="0" data-comment_id="{{$value->MaBL}}" id="{{$value->MaSP}}"
-                            class="btn btn-danger btn-xs comment_status_btn">
-
+                            <input type="button" value="ẨN" data-comment_status="0" data-comment_id="{{$value->MaBL}}"
+                                id="{{$value->MaSP}}" class="btn btn-danger btn-xs comment_status_btn">
                             @endif
-
-                    </td>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

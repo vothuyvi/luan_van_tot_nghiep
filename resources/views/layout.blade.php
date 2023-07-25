@@ -97,7 +97,6 @@
         // alert(comment_MaBL);
         // alert(comment_MaSP);
 
-
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

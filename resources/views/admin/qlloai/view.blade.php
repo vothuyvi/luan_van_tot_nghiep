@@ -1,15 +1,22 @@
 @extends('menu')
 <style>
-    .container {
-        padding-top: 70px;
-    }
-    .form-inline{
+.container {
+    padding-top: 70px;
+}
+
+.form-inline {
     display: flex;
 }
-.search {
-height: 100%;
+
+.table {
+    text-align: center;
 }
-.btn{
+
+.search {
+    height: 100%;
+}
+
+.btn {
     padding-left: 12px;
 }
 </style>
@@ -31,13 +38,13 @@ height: 100%;
                 </div>
                 @endif
                 <!--tìm kiếm-->
-                <form action=""  class="form-inline">
+                <form action="" class="form-inline">
 
                     <div class="form-group">
                         <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
                     </div>
                     <button type="submit" class="btn btn-primary  search">
-                    <i class='bx bx-search nav_icon'></i>
+                        <i class='bx bx-search nav_icon'></i>
                     </button>
                 </form>
                 <div class="col-md-6">
@@ -73,10 +80,12 @@ height: 100%;
 
                         <td col>
                             <!-- <form action="{{route('loai.destroy',$value->MaLoai)}}" method="post" class="form"> -->
-                                <a href="{{route('loai.edit',$value->MaLoai)}}" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
-                                @csrf
-                                @method('DELETE')
-                                <a type="submit" href="{{route('loai.destroy',$value->MaLoai)}}" class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
+                            <a href="{{route('loai.edit',$value->MaLoai)}}" class="btn btn-info"><i
+                                    class='bx bx-pen nav_icon'></i></a>
+                            @csrf
+                            @method('DELETE')
+                            <a type="submit" href="{{route('loai.destroy',$value->MaLoai)}}"
+                                class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
                             <!-- </form> -->
                         </td>
                     </tr>
@@ -92,15 +101,14 @@ height: 100%;
     </div>
     @section('js')
     <script>
-        $('.btndelete').click(function(ev){
-            ev.preventDefault();
-            var  _href=$(this).attr('href');
-            $('form#form-delete').attr('action',_href);
-            if(confirm('Bạn có chắc chắn xóa không ?'))
-            {
-                $('form#form-delete').submit();
-            }
-            // alert(_href);
-        })
+    $('.btndelete').click(function(ev) {
+        ev.preventDefault();
+        var _href = $(this).attr('href');
+        $('form#form-delete').attr('action', _href);
+        if (confirm('Bạn có chắc chắn xóa không ?')) {
+            $('form#form-delete').submit();
+        }
+        // alert(_href);
+    })
     </script>
     @stop()

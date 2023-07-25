@@ -8,6 +8,10 @@
     display: flex;
 }
 
+.table {
+    text-align: center;
+}
+
 .page {
     padding-top: 12px;
 }
