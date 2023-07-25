@@ -224,28 +224,27 @@ a {
             <div> <a href="" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span
                         class="nav_logo-name">Admin</span> </a>
                 <div class="nav_list">
-                    <a href="http://127.0.0.1:8000/sanpham" class="nav_link active"> <i
-                            class='bx bx-grid-alt nav_icon'></i>
+                    <a href="/sanpham" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Quản lý sản phẩm</span>
                     </a>
-                    <a href="http://127.0.0.1:8000/admin/qlloai/view" class="nav_link"><i
-                            class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Quản lý loại sản phẩm</span></a>
-                    <a href="http://127.0.0.1:8000/taikhoan" class="nav_link"><i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Quản lý tài khoản</span> </a>
-                    <a href="http://127.0.0.1:8000/admin/qlbinhluan/view" class="nav_link"><i
+                    <a href="/admin/qlloai/view" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span
+                            class="nav_name">Quản lý loại sản phẩm</span></a>
+                    <a href="/taikhoan" class="nav_link"><i class='bx bx-user nav_icon'></i> <span class="nav_name">Quản
+                            lý tài khoản</span> </a>
+                    <a href="/admin/qlbinhluan/view" class="nav_link"><i
                             class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name"> Quản lý bình
                             luận</span> </a>
-                    <a href="http://127.0.0.1:8000/admin/qltintuc/view" class="nav_link"><i
-                            class='bx bx-news nav_icon'></i> <span class="nav_name"> Quản lý tin tức</span> </a>
-                    <a href="http://127.0.0.1:8000/khuyenmai" class="nav_link"><i class='bx bx-gift nav_icon'></i> <span
-                            class="nav_name"> Quản lý khuyến mãi</span> </a>
+                    <a href="/admin/qltintuc/view" class="nav_link"><i class='bx bx-news nav_icon'></i> <span
+                            class="nav_name"> Quản lý tin tức</span> </a>
+                    <a href="/khuyenmai" class="nav_link"><i class='bx bx-gift nav_icon'></i> <span class="nav_name">
+                            Quản lý khuyến mãi</span> </a>
 
-                    <a href="http://127.0.0.1:8000/admin/qldonhang/view" class="nav_link"><i
-                            class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Quản lý đơn hàng</span> </a>
-                    <a href="http://127.0.0.1:8000/admin/qlphieunhap/view" class="nav_link"> <i
-                            class='bx bx-folder nav_icon'></i> <span class="nav_name">Quản lý phiếu nhập</span> </a>
-                    <a href="http://127.0.0.1:8000/admin/thongke/view" class="nav_link"><i
-                            class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Thống kê</span> </a>
+                    <a href="/admin/qldonhang/view" class="nav_link"><i class='bx bx-bookmark nav_icon'></i> <span
+                            class="nav_name">Quản lý đơn hàng</span> </a>
+                    <a href="/admin/qlphieunhap/view" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span
+                            class="nav_name">Quản lý phiếu nhập</span> </a>
+                    <a href="/admin/thongke/view" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                            class="nav_name">Thống kê</span> </a>
                 </div>
             </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
                     class="nav_name">SignOut</span> </a>

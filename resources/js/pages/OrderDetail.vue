@@ -29,7 +29,7 @@
                         Email
                     </span>
                     <span class="text-[#10284b] font-bold text-[1.6rem]">
-                        {{ state.orderDetail?.email }}
+                        {{ authStore.user?.email }}
                     </span>
                 </div>
             </div>

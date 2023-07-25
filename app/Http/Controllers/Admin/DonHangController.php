@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\DonHang;
+use App\Models\Admin\Sanpham;
 use App\Models\Admin\TrangThaiDon;
 use Illuminate\Http\Request;
 
@@ -71,5 +72,34 @@ class DonHangController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    public function chitiet(Request $request)
+    {
+        $MaDH = $request->route('MaDH');
+        $donhang = Donhang::with('chitietdonhang', 'chitietdonhang.sanpham')
+            ->where('MaDH', $MaDH)
+            ->first();
+        // $chitietdonhang = $donhang->chitietdonhang;
+        // $tongtien = 0;
+        // $khuyenmai = 0;
+        // if ($chitietdonhang) {
+        //     foreach ($chitietdonhang as $item) {
+        //         $sanpham = Sanpham::findOrfail($item->MaSP);
+        //         $tongtien += $item->quantity * $sanpham->GiaTien;
+        //     }
+        // }
+        // if ($donhang->MaKM) {
+        //     // $khuyenmai = Khuyenmai::where('MaKM', $order->MaKM)->first();
+        //     $khuyenmai = $donhang->TongTienDonHang - $tongtien;
+        //     $khuyenmai = number_format($khuyenmai, 0, '', ',');
+        // }
+        // $tongtien = number_format($tongtien, 0, '', ',');
+
+        return view('admin/qldonhang/chitiet')->with('donhang', $donhang);
+    }
+    public function updateStatus(Request $request)
+    {
+        $MaDH = $request->route('MaDH');
+        return view('admin/qldonhang/update');
     }
 }

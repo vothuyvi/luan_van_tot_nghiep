@@ -40,7 +40,7 @@ class DonhangController extends Controller
         try {
             $user = Auth::user();
             $order = new Donhang();
-            $order->email = $request->email;
+            // $order->email = $request->email;
             $order->TenNguoiNhan = $request->TenNguoiNhan;
             $order->DiaChiNguoiNhan = $request->DiaChiNguoiNhan;
             $order->SDTNguoiNhan = $request->SDTNguoiNhan;
@@ -154,7 +154,7 @@ class DonhangController extends Controller
         $extraData = '';
 
         $requestId = time() . '_' . $MaDH;
-        $requestType = 'payWithCC';
+        $requestType = 'payWithATM';
         //before sign HMAC SHA256 signature
         $rawHash =
             'accessKey=' .
@@ -230,9 +230,7 @@ class DonhangController extends Controller
                         $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
                         $sanpham->save();
                     }
-                    if ($order->MaKM) {
-                        $tongtien += $item->quantity * $sanpham->GiaTien;
-                    }
+                    $tongtien += $item->quantity * $sanpham->GiaTien;
                 }
             }
             if ($order->MaKM) {
@@ -267,7 +265,6 @@ class DonhangController extends Controller
             $MaDH = $request->MaDH;
             $order = Donhang::with('chitietdonhang', 'chitietdonhang.sanpham')
                 ->where('MaDH', $MaDH)
-                ->where('MaKH', $user->MaKH)
                 ->first();
             return ResponseApi::success($order, '');
         } catch (\Exception $e) {

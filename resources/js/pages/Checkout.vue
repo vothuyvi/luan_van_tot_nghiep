@@ -14,19 +14,22 @@
                         <i class="fa-solid fa-location-dot mr-2"></i> THÔNG TIN
                         KHÁCH HÀNG
                     </div>
-                    <div class="grid grid-rows-4">
+                    <div class="grid grid-rows-3">
                         <input v-model="state.form.TenNguoiNhan" type="text" name="name" id=""
                             class="fontAwesome p-4 border border-sky-600 mt-4 mb-4"
                             placeholder="&#xf007;  Tên người nhận" />
-                        <input v-model="state.form.email" type="email" name="email" id=""
-                            class="fontAwesome p-4 border border-sky-600 mt-4 mb-4" placeholder="&#xf0e0;  Email" />
+                        <!-- <input v-model="state.form.email" type="email" name="email" id=""
+                            class="fontAwesome p-4 border border-sky-600 mt-4 mb-4" placeholder="&#xf0e0;  Email" /> -->
                         <input v-model="state.form.SDTNguoiNhan" name="phone" id=""
                             class="fontAwesome p-4 border border-sky-600 mt-4 mb-4"
                             placeholder="&#xf095;  Số điện thoại người nhận" />
                         <input v-model="state.form.DiaChiNguoiNhan" type="text" name="address" id=""
                             class="fontAwesome p-4 border border-sky-600 mt-4 mb-4"
                             placeholder="&#xf3c5;  Địa chỉ nhận hàng" />
+
                     </div>
+                    <textarea v-model="state.form.GhiChu" class="border-sky-600 mt-4 mb-4 p-4 border fontAwesome w-full"
+                        rows="3" name="note_customer" placeholder=" &#xf075;  Ghi chú"></textarea>
                 </div>
 
                 <div class="bg-white p-8 rounded mt-6" style="box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.13)">
@@ -126,8 +129,6 @@
                         {{ formatMoney(state.totalPrice) }} đ
                     </div>
                 </div>
-                <textarea v-model="state.form.GhiChu" class="border-sky-600 mt-4 mb-4 p-4 border fontAwesome w-full"
-                    rows="3" name="note_customer" placeholder=" &#xf075;  Ghi chú"></textarea>
                 <div v-if="state.orders.length === 0"
                     class="p-5 hover:bg-sky-500 border border-sky-600 rounded-lg text-center font-bold text-3xl cursor-pointer hover:text-white">
                     <button @click="onClickCheckOut()" disabled class="cursor-not-allowed opacity-50">Thanh toán</button>
@@ -149,6 +150,7 @@ import { reactive, onMounted, watch, ref } from "vue";
 import { getProducts, checkOut, khuyenMai, payment, paymentMoMo } from '@/api/auth';
 import { useAuthStore } from '@/stores';
 import { useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { renderFileURL } from '@/utils/helper.js'
 import { ElMessage } from 'element-plus'
 
@@ -171,6 +173,7 @@ const state = reactive({
     listKM: []
 })
 const authStore = useAuthStore();
+const router = useRouter();
 
 const formatMoney = (money) => {
     return money
@@ -282,22 +285,22 @@ const checkValidate = () => {
         })
         return false;
     }
-    if (state.form.email === '') {
-        ElMessage({
-            message: 'Vui lòng nhập email.',
-            type: 'error',
-            grouping: true,
-        })
-        return false;
-    }
-    if (!isEmailValid(state.form.email)) {
-        ElMessage({
-            message: 'Email không đúng định dạng',
-            type: 'error',
-            grouping: true,
-        })
-        return false;
-    }
+    // if (state.form.email === '') {
+    //     ElMessage({
+    //         message: 'Vui lòng nhập email.',
+    //         type: 'error',
+    //         grouping: true,
+    //     })
+    //     return false;
+    // }
+    // if (!isEmailValid(state.form.email)) {
+    //     ElMessage({
+    //         message: 'Email không đúng định dạng',
+    //         type: 'error',
+    //         grouping: true,
+    //     })
+    //     return false;
+    // }
 
     if (state.form.SDTNguoiNhan === '') {
         ElMessage({
@@ -371,6 +374,9 @@ const onClickCheckOut = async () => {
                 state.orders = [];
                 state.totalPrice = 0;
                 handelDeleteCart();
+                router.push({
+                    name: 'HomeView',
+                });
             }
         }
     } catch {

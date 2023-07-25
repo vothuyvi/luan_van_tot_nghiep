@@ -25,12 +25,10 @@
                     <tr>
                         <th>MÃ ĐƠN HÀNG</th>
                         <th>TÊN NGƯỜI NHẬN</th>
-                        <th>ĐỊA CHỈ NGƯỜI NHẬN</th>
+                        <!-- <th>ĐỊA CHỈ NGƯỜI NHẬN</th> -->
                         <th>SỐ ĐIỆN THOẠI</th>
                         <th>NGÀY ĐẶT</th>
                         <th>TRẠNG THÁI ĐƠN</th>
-                        <!-- <th>PHƯƠNG THỨC THANH TOÁN</th>
-                        <th>TRẠNG THÁI THANH TOÁN</th> -->
                         <th>THAO TÁC</th>
 
                     </tr>
@@ -40,10 +38,9 @@
                     <tr>
                         <td>{{$value->MaDH}}</td>
                         <td>{{$value->TenNguoiNhan}}</td>
-                        <td>{{$value->DiaChiNguoiNhan}}</td>
+                        <!-- <td>{{$value->DiaChiNguoiNhan}}</td> -->
                         <td>{{$value->SDTNguoiNhan}}</td>
-                        <!-- <td>{{$value->MoTa}}</td> -->
-                        <td>{{$value->NgayDat}}</td>
+                        <td>{{date('d/m/Y H:m:s', strtotime($value->NgayDat))}}</td>
                         <td>
                             @if ( $value->MaTT== 1)
                             Đang chờ duyệt
@@ -58,13 +55,10 @@
                             @elseif ($value->MaTT== 6)
                             Trả hàng/Hoàn tiền
                             @endif </td>
-                        <!-- <td>{{$value->thanhtoan->TrangThaiThanhToan}}</td> -->
-
                         <td col>
-                            <form action="" method="post" class="form">
-                                <a href="{{route('donhang.edit',$value->MaDH)}}" class="btn btn-info">Xem chi tiết</a>
-                                @csrf
-                            </form>
+                            <a href="{{'chitiet/'.$value->MaDH}}" class="btn btn-info">Xem chi tiết</a>
+                            <a href="{{'update/'.$value->MaDH}}" class="btn btn-success">Cập nhập trạng thái</a>
+                            @csrf
                         </td>
                     </tr>
                     @endforeach
