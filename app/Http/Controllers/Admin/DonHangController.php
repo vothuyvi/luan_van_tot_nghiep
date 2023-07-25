@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\ChiTietDonHang;
 use App\Models\Admin\DonHang;
 use App\Models\Admin\Sanpham;
 use App\Models\Admin\TrangThaiDon;
@@ -15,25 +14,15 @@ class DonHangController extends Controller
      */
     public function __construct()
     {
-
         $this->middleware('admin');
     }
     public function index()
     {
         $donhang = DonHang::with('thanhtoan')->paginate(6);
-        if($key = request()->key)
-        {
-            $donhang = DonHang::where('MaDH','like',$key)->paginate(6);
+        if ($key = request()->key) {
+            $donhang = DonHang::where('MaDH', 'like', $key)->paginate(6);
         }
         return View('admin/qldonhang/view')->with(compact('donhang'));
-    }
-
-   //edit
-    public function edit(string $id)
-    {
-        //
-        $donhang = DonHang::find($id);
-        return view('admin/qldonhang/edit', compact('donhang'), ['TT' => TrangThaiDon::all(),'ChiTietDon'=>ChiTietDonHang::all()]);
     }
 
     //update
@@ -64,35 +53,34 @@ class DonHangController extends Controller
         $order = Donhang::with('chitietdonhang')
             ->where('MaDH', $MaDH)
             ->first();
-            // dd($order);
-            if ($order) {
-                $order->MaTT = $MaTT;
-                $order->save();
-                // cap nhat so luong san pham
-                $chitietdonhang = $donhang->MaDH;
-                if ($chitietdonhang) {
-                    foreach ($chitietdonhang as $item) {
-                        $sanpham = sanpham::findOrfail($item->MaSP);
-                        if ($sanpham) {
-                            $newSL = $sanpham->SoLuong - $item->quantity;
-                            $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
-                            $sanpham->save();
-                        }
+        // dd($order);
+        if ($order) {
+            $order->MaTT = $MaTT;
+            $order->save();
+            // cap nhat so luong san pham
+            $chitietdonhang = $donhang->MaDH;
+            if ($chitietdonhang) {
+                foreach ($chitietdonhang as $item) {
+                    $sanpham = sanpham::findOrfail($item->MaSP);
+                    if ($sanpham) {
+                        $newSL = $sanpham->SoLuong - $item->quantity;
+                        $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
+                        $sanpham->save();
                     }
                 }
             }
-            // $MaTT = $request->get('MaTT');
-            // dd($MaTT);
-            $donhang->MaTT = $request->input('MaTT');
-            $donhang->update();
-            return redirect()
+        }
+        // $MaTT = $request->get('MaTT');
+        // dd($MaTT);
+        $donhang->MaTT = $request->input('MaTT');
+        $donhang->update();
+        return redirect()
             ->route('donhang.index')
             ->with('success', 'cập nhập trạng thái thành công');
     }
 
     public function SendMail()
     {
-
     }
     public function chitiet(Request $request)
     {
