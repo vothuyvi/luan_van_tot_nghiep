@@ -97,6 +97,7 @@ const handleLogin = async () => {
       const { data: res } = await login(form);
       if (res?.data) {
         setToken(res?.data.token);
+        // console.log('token', res.data.token);
         authStore.user = res?.data?.users
         authStore.isLogin = true
         state.error = null;

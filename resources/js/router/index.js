@@ -15,11 +15,18 @@ const router = createRouter({
   },
 });
 // router.beforeEach((to, from, next) => {
-//   if(to.name == '404'){
-//     next();
-//   }
-//   if(!to.name) {
-//     next('/404');
+//   if (localStorage.getItem(TOKEN_LOGIN)) {
+//       if (WHITE_LIST.includes(to.name)) {
+//           next('/checkout');
+//       } else {
+//           next('');
+//       }
+//   } else {
+//       if (WHITE_LIST.includes(to.name)) {
+//           next();
+//       } else {
+//           next('/login');
+//       }
 //   }
 // });
 

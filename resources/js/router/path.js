@@ -21,8 +21,7 @@ import PaymentMoMoReturn from '@/pages/payment/PaymentMoMoReturn.vue';
 import PaymentSuccess from '@/pages/payment/PaymentSuccess.vue';
 import PaymentError from '@/pages/payment/PaymentError.vue';
 import OrderDetail from '@/pages/OrderDetail.vue';
-
-
+import { getToken } from '@/utils/auth'
 
 const path = [
     {
@@ -83,11 +82,31 @@ const path = [
                 path: 'checkout',
                 name: 'CheckoutView',
                 component: Checkout,
+                beforeEnter: (to, from, next ) => {
+                    const token = getToken()
+                    // console.log(token);
+                    if(!token) {
+                        return next({
+                            name: 'LoginView'
+                        })
+                    }
+                    next();
+                }
             },
             {
                 path: 'profile',
                 name: 'UserProfile',
                 component: UserProfile,
+                beforeEnter: (to, from, next ) => {
+                    const token = getToken()
+                    // console.log(token);
+                    if(!token) {
+                        return next({
+                            name: 'LoginView'
+                        })
+                    }
+                    next();
+                }
             },
             {
                 path: 'return-vnpay',
