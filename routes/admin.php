@@ -52,7 +52,7 @@ Route::get('admin/qlhinhanh/view', function () {
 Route::resource('/hinhanh', HinhAnhController::class);
 
 //quản lý loại sản phẩm
-// Route::get('admin/qlloai/view', [LoaiController::class, 'index']);
+Route::get('admin/qlloai/view', [LoaiController::class, 'index']);
 Route::resource('/loai', LoaiController::class);
 
 Route::get('admin/qltaikhoan/view', function () {
