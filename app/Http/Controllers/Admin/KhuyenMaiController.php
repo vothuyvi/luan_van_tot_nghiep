@@ -116,6 +116,7 @@ class KhuyenMaiController extends Controller
             $khuyenmai->PhanTram=$request->input('PhanTram');
             $khuyenmai->NgayKetThuc=$request->input('NgayKetThuc');
             $khuyenmai->NgayBatDau=$request->input('NgayBatDau');
+            $khuyenmai->TrangThai=$request->input('TrangThai');
             $khuyenmai->update();
             return redirect()->route('khuyenmai.index')->with('success','Sửa thành công');
 
