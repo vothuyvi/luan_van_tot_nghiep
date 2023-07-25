@@ -3,6 +3,10 @@
 .container {
     padding-top: 70px;
 }
+
+.table {
+    text-align: center;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -21,7 +25,7 @@
                     {{Session::get('success')}}
                 </div>
                 @endif
-                <form action=""  class="form-inline">
+                <form action="" class="form-inline">
 
                     <div class="form-group">
                         <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">

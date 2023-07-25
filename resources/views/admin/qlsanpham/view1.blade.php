@@ -7,16 +7,20 @@
 .form {
     display: flex;
 }
-.page{
+
+.page {
     padding-top: 12px;
 }
-.form-inline{
+
+.form-inline {
     display: flex;
 }
+
 .search {
-height: 100%;
+    height: 100%;
 }
-.btn{
+
+.btn {
     padding-left: 12px;
 }
 </style>
@@ -37,16 +41,16 @@ height: 100%;
                     {{Session::get('success')}}
                 </div>
                 @endif
-<!-- tìm kiếm-->
-        <form action=""  class="form-inline">
+                <!-- tìm kiếm-->
+                <form action="" class="form-inline">
 
-            <div class="form-group">
-                <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
-            </div>
-           <button type="submit" class="btn btn-primary  search">
-                <i class='bx bx-search nav_icon'></i>
-            </button>
-        </form>
+                    <div class="form-group">
+                        <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                    </div>
+                    <button type="submit" class="btn btn-primary  search">
+                        <i class='bx bx-search nav_icon'></i>
+                    </button>
+                </form>
                 <div class="col-md-6">
                     <h5> Quản lý sản phẩm</h5>
                 </div>
@@ -77,7 +81,7 @@ height: 100%;
                     @endphp
                     @foreach($data as $id=>$value)
                     <tr>
-                        <td>{{++$id+($currentPage*5)}}</td>
+                        <td>{{++$id+($currentPage*7)}}</td>
                         <td>{{$value->MaSP}}</td>
                         <td>{{$value->TenSP}}</td>
                         <td>{{$value->SoLuong}}
@@ -104,13 +108,13 @@ height: 100%;
 
             </table>
             <table>
-            <div class="form-group ">
-                            <td><a href="{{route('hinhanh.index')}}" class="btn btn-primary mt-4">Thêm nhiều ảnh</a>
-                            </td>
-                        </div>
+                <div class="form-group ">
+                    <td><a href="{{route('hinhanh.index')}}" class="btn btn-primary mt-4">Thêm nhiều ảnh</a>
+                    </td>
+                </div>
             </table>
             <div class="page">
-            {{$data->appends(request()->all())->links()}}
+                {{$data->appends(request()->all())->links()}}
 
             </div>
         </div>

@@ -1,23 +1,30 @@
 @extends('menu')
 <style>
-    .container {
-        padding-top: 70px;
-    }
+.container {
+    padding-top: 70px;
+}
 
-    .container {
-        padding-top: 70px;
-    }
+.table {
+    text-align: center;
+}
 
-    .form {
-        display: flex;
-    }
-    .form-inline{
+.container {
+    padding-top: 70px;
+}
+
+.form {
     display: flex;
 }
-.search {
-height: 100%;
+
+.form-inline {
+    display: flex;
 }
-.btn{
+
+.search {
+    height: 100%;
+}
+
+.btn {
     padding-left: 12px;
 }
 </style>
@@ -40,15 +47,15 @@ height: 100%;
                 @endif
                 <!-- tìm kiếm-->
 
-                <form action=""  class="form-inline">
+                <form action="" class="form-inline">
 
-                <div class="form-group">
-                    <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
-                </div>
-                <button type="submit" class="btn btn-primary  search">
-                <i class='bx bx-search nav_icon'></i>
-                </button>
-            </form>
+                    <div class="form-group">
+                        <input class="form-control" name="key" placeholder="Tìm kiếm tại đây">
+                    </div>
+                    <button type="submit" class="btn btn-primary  search">
+                        <i class='bx bx-search nav_icon'></i>
+                    </button>
+                </form>
 
                 <div class="col-md-6">
                     <h5>Quản lý khuyến mãi</h5>
@@ -85,10 +92,12 @@ height: 100%;
 
                         <td col>
                             <!-- <form action="{{route('khuyenmai.destroy',$value->MaKM)}}" method="post"class="form"> -->
-                            <a href="{{route('khuyenmai.edit',$value->MaKM)}}" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
+                            <a href="{{route('khuyenmai.edit',$value->MaKM)}}" class="btn btn-info"><i
+                                    class='bx bx-pen nav_icon'></i></a>
                             @csrf
                             @method('DELETE')
-                            <a type="submit" href="{{route('khuyenmai.destroy',$value->MaKM)}}" class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
+                            <a type="submit" href="{{route('khuyenmai.destroy',$value->MaKM)}}"
+                                class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
                             <!-- </form> -->
                         </td>
                     </tr>
@@ -105,14 +114,14 @@ height: 100%;
     </div>
     @section('js')
     <script>
-        $('.btndelete').click(function(ev) {
-            ev.preventDefault();
-            var _href = $(this).attr('href');
-            $('form#form-delete').attr('action', _href);
-            if (confirm('Bạn có chắc chắn xóa không ?')) {
-                $('form#form-delete').submit();
-            }
-            // alert(_href);
-        })
+    $('.btndelete').click(function(ev) {
+        ev.preventDefault();
+        var _href = $(this).attr('href');
+        $('form#form-delete').attr('action', _href);
+        if (confirm('Bạn có chắc chắn xóa không ?')) {
+            $('form#form-delete').submit();
+        }
+        // alert(_href);
+    })
     </script>
     @stop()

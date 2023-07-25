@@ -12,7 +12,6 @@ class adminmiddleware
 {
     public function __construct()
     {
-
     }
     /**
      * Handle an incoming request.
@@ -21,7 +20,7 @@ class adminmiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next,$guard='admin')
+    public function handle(Request $request, Closure $next, $guard = 'admin')
     {
         //return $next($request);
         // $guards = empty($guards) ? [null] : $guards;
@@ -29,7 +28,6 @@ class adminmiddleware
         if (Auth::guard($guard)->check()) {
             return $next($request);
         }
-        return redirect()->route('admin_login');
-
+        return redirect('admin/login');
     }
 }

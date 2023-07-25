@@ -7,6 +7,21 @@
 .table {
     text-align: center;
 }
+
+td {
+    vertical-align: middle !important;
+}
+
+.custom-operation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-operation form {
+    margin-bottom: 0;
+    margin-left: 10px;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -65,13 +80,10 @@
                             <span class="error-text1">Trả hàng/Hoàn tiền</span>
                             @endif
                         </td>
-                        <td col>
-                            <a href="{{'chitietdonhang/'.$value->MaDH}}" class="btn btn-info">Xem chi tiết</a>
-                            <a href="{{'update/'.$value->MaDH}}" class="btn btn-success">Cập nhập trạng thái</a>
+                        <td class="custom-operation">
+                            <a href=" {{'chitietdonhang/'.$value->MaDH}}" class="btn btn-info">Xem chi tiết</a>
                             <form action="" method="post" class="form">
-                                @if ( $value->MaTT== 4)
                                 <a href="{{route('mail.edit',$value->MaDH)}}" class="btn btn-danger">Gửi mail</a>
-                                @endif
                             </form>
                             @csrf
                         </td>

@@ -207,9 +207,9 @@ a {
 }
 </style>
 
-<body id="body-pd">
-    <header class="header" id="header">
-        <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i>
+<body id="body-pd" class="body-pd">
+    <header class=" header body-pd" id="header">
+        <div class="header_toggle"> <i class='bx bx-menu bx-x' id="header-toggle"></i>
         </div>
 
         <a style="margin-left: auto; margin-right: 0.5rem; border:none;background-color: #F7F6FB;" class="btn btn-info"
@@ -223,34 +223,33 @@ a {
         </div>
 
     </header>
-    <div class="l-navbar" id="nav-bar">
+    <div class="l-navbar show" id="nav-bar">
         <nav class="nav">
             <div> <a href="/index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i>
                     <span class="nav_logo-name">AdMin</span> </a>
                 <div class="nav_list">
-                    <a href="/sanpham" class="nav_link active"> <i
-                            class='bx bx-grid-alt nav_icon'></i>
+                    <a href="/sanpham" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Quản lý sản phẩm</span>
 
                     </a>
-                    <a href="/loai" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span
-                            class="nav_name">Quản lý loại sản phẩm</span></a>
-                    <a href="/taikhoan" class="nav_link"><i class='bx bx-user nav_icon'></i> <span
-                            class="nav_name">Quản lý tài khoản</span> </a>
-                    <a href="/binhluan" class="nav_link"><i
-                            class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name"> Quản lý bình
+                    <a href="/loai" class="nav_link"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Quản
+                            lý loại sản phẩm</span></a>
+                    <a href="/taikhoan" class="nav_link"><i class='bx bx-user nav_icon'></i> <span class="nav_name">Quản
+                            lý tài khoản</span> </a>
+                    <a href="/binhluan" class="nav_link"><i class='bx bx-message-square-detail nav_icon'></i> <span
+                            class="nav_name"> Quản lý bình
                             luận</span> </a>
-                    <a href="/tintuc" class="nav_link"><i class='bx bx-news nav_icon'></i> <span
-                            class="nav_name"> Quản lý tin tức</span> </a>
-                    <a href="/khuyenmai" class="nav_link"><i class='bx bx-gift nav_icon'></i> <span
-                            class="nav_name"> Quản lý khuyến mãi</span> </a>
+                    <a href="/tintuc" class="nav_link"><i class='bx bx-news nav_icon'></i> <span class="nav_name"> Quản
+                            lý tin tức</span> </a>
+                    <a href="/khuyenmai" class="nav_link"><i class='bx bx-gift nav_icon'></i> <span class="nav_name">
+                            Quản lý khuyến mãi</span> </a>
 
                     <a href="/donhang" class="nav_link"><i class='bx bx-bookmark nav_icon'></i>
                         <span class="nav_name">Quản lý đơn hàng</span> </a>
                     <a href="/phieunhap" class="nav_link"> <i class='bx bx-folder nav_icon'></i>
                         <span class="nav_name">Quản lý phiếu nhập</span> </a>
-                    <a href="/thongke" class="nav_link"><i
-                            class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Thống kê</span> </a>
+                    <a href="/thongke" class="nav_link"><i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span
+                            class="nav_name">Thống kê</span> </a>
                 </div>
             </div> <a href="{{route('logout')}}" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span
                     class="nav_name">SignOut</span> </a>

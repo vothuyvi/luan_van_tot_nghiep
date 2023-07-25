@@ -77,7 +77,8 @@ Route::resource('/khuyenmai', KhuyenMaiController::class);
 // Route::get('admin/qldonhang/view', [DonHangController::class, 'index']);
 Route::resource('/donhang', DonHangController::class);
 Route::get('/chitietdonhang/{MaDH}', [DonHangController::class, 'chitiet']);
-Route::get('/update/{MaDH}', [DonHangController::class, 'updateStatus']);
+Route::get('chitietdonhang/update/{MaDH}', [DonHangController::class, 'showUpdateStatus']);
+Route::post('chitietdonhang/update/{MaDH}', [DonHangController::class, 'updateStatus']);
 //Quản lý phiếu nhập
 Route::get('admin/qlphieunhap/view', [PhieuNhapController::class, 'index']);
 Route::resource('/phieunhap', PhieuNhapController::class);

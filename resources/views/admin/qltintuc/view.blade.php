@@ -1,12 +1,18 @@
 @extends('menu')
 <style>
-    .container{ padding-top: 70px;}
+.container {
+    padding-top: 70px;
+}
+
+.table {
+    text-align: center;
+}
 </style>
 <div class="container">
     <div class="card">
         <div class="card-header">
             <div class="row">
-            @if(Session::has('error'))
+                @if(Session::has('error'))
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     {{Session::get('error')}}
@@ -31,16 +37,16 @@
             <table class="table table-bordered ">
                 <thead>
                     <tr>
-                       <th>MaTT</th>
-                       <!-- <th>NỘI DUNG</th> -->
-                       <th>NGÀY ĐĂNG</th>
-                       <th>THAO TÁC</th>
+                        <th>MaTT</th>
+                        <!-- <th>NỘI DUNG</th> -->
+                        <th>NGÀY ĐĂNG</th>
+                        <th>THAO TÁC</th>
 
                     </tr>
                 </thead>
                 <tbody>
 
-                @foreach($Tintuc as $id=>$value)
+                    @foreach($Tintuc as $id=>$value)
                     <tr>
                         <td>{{$value->MaTT}}</td>
                         <!-- <td>{{$value->NoiDung}}</td> -->
@@ -51,10 +57,12 @@
 
                         <td col>
                             <!-- <form action="{{route('tintuc.destroy',$value->MaTT)}}" method="post" class="form"> -->
-                            <a href="{{route('tintuc.edit',$value->MaTT)}}" class="btn btn-info"><i class='bx bx-pen nav_icon'></i></a>
+                            <a href="{{route('tintuc.edit',$value->MaTT)}}" class="btn btn-info"><i
+                                    class='bx bx-pen nav_icon'></i></a>
                             @csrf
                             @method('DELETE')
-                            <a type="submit" href="{{route('tintuc.destroy',$value->MaTT)}}"  class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
+                            <a type="submit" href="{{route('tintuc.destroy',$value->MaTT)}}"
+                                class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
                             <!-- </form> -->
                         </td>
                     </tr>
@@ -73,15 +81,14 @@
     </div>
     @section('js')
     <script>
-        $('.btndelete').click(function(ev){
-            ev.preventDefault();
-            var  _href=$(this).attr('href');
-            $('form#form-delete').attr('action',_href);
-            if(confirm('Bạn có chắc chắn xóa không ?'))
-            {
-                $('form#form-delete').submit();
-            }
-            // alert(_href);
-        })
+    $('.btndelete').click(function(ev) {
+        ev.preventDefault();
+        var _href = $(this).attr('href');
+        $('form#form-delete').attr('action', _href);
+        if (confirm('Bạn có chắc chắn xóa không ?')) {
+            $('form#form-delete').submit();
+        }
+        // alert(_href);
+    })
     </script>
     @stop()

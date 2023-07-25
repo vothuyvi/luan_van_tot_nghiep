@@ -1,6 +1,6 @@
 {
   "resources/js/app.css": {
-    "file": "assets/app-02670bdd.css",
+    "file": "assets/app-c75052ec.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -12,12 +12,12 @@
       "assets/slider8-f3fc96d2.jpeg"
     ],
     "css": [
-      "assets/app-02670bdd.css"
+      "assets/app-c75052ec.css"
     ],
     "dynamicImports": [
       "resources/js/components/404.vue"
     ],
-    "file": "assets/app-cf3fa0c1.js",
+    "file": "assets/app-84da9576.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -29,7 +29,7 @@
     "css": [
       "assets/404-f0703e72.css"
     ],
-    "file": "assets/404-5f9f4ae4.js",
+    "file": "assets/404-5542eb19.js",
     "imports": [
       "resources/js/app.js"
     ],

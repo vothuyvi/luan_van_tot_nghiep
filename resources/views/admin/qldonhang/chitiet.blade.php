@@ -13,6 +13,14 @@
     height: 62px;
 
 }
+
+td {
+    vertical-align: middle !important;
+}
+
+.text-right {
+    text-align: right;
+}
 </style>
 
 <div class="container">
@@ -23,6 +31,7 @@
                     <h5>Chi tiết đơn hàng</h5>
                 </div>
                 <div class="col-md-6">
+                    <a href="{{route('donhang.index')}}" class="btn btn-primary float-end">BACK</a>
                 </div>
             </div>
         </div>
@@ -30,6 +39,9 @@
 
             <div class="form-group">
                 <p>Mã đơn hàng: {{$donhang->MaDH}}</p>
+            </div>
+            <div class="form-group">
+                <P>Email: {{$khachhang->email}}</P>
             </div>
             <div class="form-group">
                 <P>Tên người nhận: {{$donhang->TenNguoiNhan}}</P>
@@ -48,9 +60,9 @@
                     <span>
                         @if ($donhang->MaPT== 'PTOFF')
                         THANH TOÁN KHI NHẬN HÀNG.
-                        @elseif ($donhang->MaTT== 'PTOL')
+                        @elseif ($donhang->MaPT== 'PTOL')
                         THANH TOÁN TRỰC TUYẾN VỚI VNPAY.
-                        @elseif ($donhang->MaTT== 'PTOLMOMO')
+                        @elseif ($donhang->MaPT== 'PTOLMOMO')
                         THANH TOÁN TRỰC TUYẾN VỚI MOMO.
                         @endif
                     </span>
@@ -60,23 +72,35 @@
                 <P>Trạng thái đơn hàng:
                     <span class="">
                         @if ($donhang->MaTT== 1)
-                        Đang chờ duyệt
+                        <span class="error-text1">
+                            ĐANG CHỜ DUYỆT
+                        </span>
                         @elseif ($donhang->MaTT== 2)
-                        Đã duyệt
+                        <span class="error-text1">
+                            ĐÃ DUYỆT ĐƠN
+                        </span>
                         @elseif ($donhang->MaTT== 3)
-                        Đang giao
+                        <span class="error-text1">
+                            ĐANG GIAO
+                        </span>
                         @elseif ($donhang->MaTT== 4)
-                        Hoàn thành
+                        <span class="error-text1">
+                            HOÀN THÀNH
+                        </span>
                         @elseif ($donhang->MaTT== 5)
-                        Đã hủy
+                        <span class="error-text">
+                            ĐÃ HUỶ
+                        </span>
                         @endif
                     </span>
                 </P>
             </div>
-            <!-- <div>
+            @if ($donhang->MaTT != '4' && $donhang->MaTT != '5')
+            <div>
                 <a href="{{'update/'.$donhang->MaDH}}" class="btn btn-success">Cập nhập trạng thái</a>
-                @csrf
-            </div> -->
+            </div>
+            @endif
+
             <div class="card-body">
                 <table class="table table-bordered h">
                     <thead>
@@ -89,11 +113,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                        $chitietdonhang = $donhang->chitietdonhang;
-                        $tongtien = 0;
-                        @endphp
-                        @foreach($chitietdonhang as $id=>$value)
+                        @foreach($donhang->chitietdonhang as $id=>$value)
                         <tr>
                             <td>{{$value->MaSP}}</td>
                             <td><img src="{{ asset('images/products/' .$value->sanpham->HinhAnh)}}" alt="" class="img
@@ -105,26 +125,17 @@
                         </tr>
                         @endforeach
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Tổng tiền: </td>
+                            <td colspan="4" class="text-right">Tổng tiền: </td>
                             <td>
-                                đ
+                                {{$tongtien}} đ
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Khuyến mãi: </td>
-                            <td> đ</td>
+                            <td colspan="4" class="text-right">Khuyến mãi: </td>
+                            <td>{{$khuyenmai}} đ</td>
                         </tr>
                         <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>Thành tiền: </td>
+                            <td colspan="4" class="text-right">Thành tiền: </td>
                             <td>{{number_format($donhang->TongTienDonHang, 0, '', ',')}} đ</td>
                         </tr>
                     </tbody>

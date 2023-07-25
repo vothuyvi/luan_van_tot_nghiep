@@ -210,7 +210,6 @@ class DonhangController extends Controller
         $MaThanhToan = $request->get('MaThanhToan');
         $MaTT = $request->get('MaTT');
         $user = Auth::user();
-        // dd($user->email);
         $order = Donhang::with('chitietdonhang', 'chitietdonhang.sanpham')
             ->where('MaDH', $MaDH)
             ->first();
@@ -239,21 +238,22 @@ class DonhangController extends Controller
                 $khuyenmai = number_format($khuyenmai, 0, '', ',');
             }
             $tongtien = number_format($tongtien, 0, '', ',');
-
-            $mailData = [
-                'email' => $user->email,
-                'tongtien' => $tongtien,
-                'thanhtien' => number_format($order->TongTienDonHang, 0, '', ','),
-                'khuyenmai' => $khuyenmai,
-                'orderData' => $order->chitietdonhang,
-                'MaPT' => $order->MaPT,
-                'MaThanhToan' => $order->MaThanhToan,
-                'DiaChiNguoiNhan' => $order->DiaChiNguoiNhan,
-                'SDTNguoiNhan' => $order->SDTNguoiNhan,
-                'TenNguoiNhan' => $order->TenNguoiNhan,
-                'NgayDat' => date('d/m/Y', strtotime($order->NgayDat)),
-            ];
-            Mail::to($user->email)->send(new Order($mailData));
+            if ($order->MaTT == '2') {
+                $mailData = [
+                    'email' => $user->email,
+                    'tongtien' => $tongtien,
+                    'thanhtien' => number_format($order->TongTienDonHang, 0, '', ','),
+                    'khuyenmai' => $khuyenmai,
+                    'orderData' => $order->chitietdonhang,
+                    'MaPT' => $order->MaPT,
+                    'MaThanhToan' => $order->MaThanhToan,
+                    'DiaChiNguoiNhan' => $order->DiaChiNguoiNhan,
+                    'SDTNguoiNhan' => $order->SDTNguoiNhan,
+                    'TenNguoiNhan' => $order->TenNguoiNhan,
+                    'NgayDat' => date('d/m/Y', strtotime($order->NgayDat)),
+                ];
+                Mail::to($user->email)->send(new Order($mailData));
+            }
             return ResponseApi::success($order, '');
         }
     }

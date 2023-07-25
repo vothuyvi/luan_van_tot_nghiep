@@ -124,6 +124,7 @@ const getKhuyenMai = async () => {
 
 
 onMounted(async () => {
+    console.log('up code nè,hiiiiiiii')
     await getNew();
     await getKhuyenMai();
 

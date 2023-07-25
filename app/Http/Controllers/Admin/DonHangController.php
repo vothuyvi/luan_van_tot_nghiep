@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\DonHang;
+use App\Models\Admin\Khachhang;
 use App\Models\Admin\Sanpham;
 use App\Models\Admin\TrangThaiDon;
 use Illuminate\Http\Request;
@@ -88,27 +89,77 @@ class DonHangController extends Controller
         $donhang = Donhang::with('chitietdonhang', 'chitietdonhang.sanpham')
             ->where('MaDH', $MaDH)
             ->first();
-        // $chitietdonhang = $donhang->chitietdonhang;
-        // $tongtien = 0;
-        // $khuyenmai = 0;
-        // if ($chitietdonhang) {
-        //     foreach ($chitietdonhang as $item) {
-        //         $sanpham = Sanpham::findOrfail($item->MaSP);
-        //         $tongtien += $item->quantity * $sanpham->GiaTien;
-        //     }
-        // }
-        // if ($donhang->MaKM) {
-        //     // $khuyenmai = Khuyenmai::where('MaKM', $order->MaKM)->first();
-        //     $khuyenmai = $donhang->TongTienDonHang - $tongtien;
-        //     $khuyenmai = number_format($khuyenmai, 0, '', ',');
-        // }
-        // $tongtien = number_format($tongtien, 0, '', ',');
+        $MaKH = $donhang->MaKH;
+        $khachhang = Khachhang::where('MaKH', $MaKH)->first();
+        $chitietdonhang = $donhang->chitietdonhang;
+        $tongtien = 0;
+        $khuyenmai = 0;
+        if ($chitietdonhang) {
+            foreach ($chitietdonhang as $item) {
+                $sanpham = Sanpham::findOrfail($item->MaSP);
+                $tongtien += $item->quantity * $sanpham->GiaTien;
+            }
+        }
+        if ($donhang->MaKM) {
+            // $khuyenmai = Khuyenmai::where('MaKM', $order->MaKM)->first();
+            $khuyenmai = $donhang->TongTienDonHang - $tongtien;
+            $khuyenmai = number_format($khuyenmai, 0, '', ',');
+        }
+        $tongtien = number_format($tongtien, 0, '', ',');
 
-        return view('admin/qldonhang/chitiet')->with('donhang', $donhang);
+        return view('admin/qldonhang/chitiet')
+            ->with('donhang', $donhang)
+            ->with('tongtien', $tongtien)
+            ->with('khachhang', $khachhang)
+            ->with('khuyenmai', $khuyenmai);
     }
+
+    public function showUpdateStatus(Request $request)
+    {
+        $MaDH = $request->route('MaDH');
+        $donhang = Donhang::where('MaDH', $MaDH)->first();
+        if ($donhang->MaTT == '4' || $donhang->MaTT == '5') {
+            return redirect('chitietdonhang/' . $donhang->MaDH);
+        } else {
+            return view('admin/qldonhang/update')->with('donhang', $donhang);
+        }
+    }
+
     public function updateStatus(Request $request)
     {
         $MaDH = $request->route('MaDH');
-        return view('admin/qldonhang/update');
+        $MaTT = $request->MaTT;
+        $donhang = Donhang::with('chitietdonhang')
+            ->where('MaDH', $MaDH)
+            ->first();
+
+        $MaTTHienTai = $donhang->MaTT;
+        if ($MaTT == '2') {
+            if ($MaTTHienTai != '2') {
+                foreach ($donhang->chitietdonhang as $item) {
+                    $sanpham = Sanpham::where('MaSP', $item->MaSP)->first();
+                    if ($sanpham) {
+                        $newSL = $sanpham->SoLuong - $item->quantity;
+                        $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
+                        $sanpham->save();
+                    }
+                }
+            }
+        }
+        if ($MaTT == '5') {
+            if ($MaTTHienTai == '2' || $MaTTHienTai == '3') {
+                foreach ($donhang->chitietdonhang as $item) {
+                    $sanpham = Sanpham::where('MaSP', $item->MaSP)->first();
+                    if ($sanpham) {
+                        $newSL = $sanpham->SoLuong + $item->quantity;
+                        $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
+                        $sanpham->save();
+                    }
+                }
+            }
+        }
+        $donhang->MaTT = $MaTT;
+        $donhang->save();
+        return redirect('chitietdonhang/' . $donhang->MaDH);
     }
 }

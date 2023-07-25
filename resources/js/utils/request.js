@@ -2,8 +2,8 @@ import axios from "axios";
 import { getToken } from '@/utils/auth'
 
 const service = axios.create({
-    baseURL: 'http://127.0.0.1:8000/api',
-    // baseURL: 'https://dogom.click/api',
+    // baseURL: 'http://127.0.0.1:8000/api',
+    baseURL: 'https://dogom.click/api',
     timeout: 60000
 })
 
