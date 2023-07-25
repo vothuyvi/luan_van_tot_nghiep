@@ -1,8 +1,13 @@
-<template></template>
+<template>
+    <div v-loading.fullscreen.lock="true">
+
+    </div>
+</template>
 <script setup>
 import { onMounted } from "vue";
 import { useRouter, useRoute } from 'vue-router'
 import { updateOrder } from '@/api/auth';
+
 
 
 const router = useRouter();
