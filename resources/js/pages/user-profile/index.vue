@@ -152,6 +152,8 @@
                                         </div>
                                         <div v-if="item.MaTT == 4" class="text-green-500">Đơn hàng đã được giao thành công
                                         </div>
+                                        <div v-if="item.MaTT == 5" class="text-red-500">Đơn hàng đã bị huỷ
+                                        </div>
                                     </div>
                                     <router-link :to="{ name: 'OrderDetailView', params: { MaDH: item.MaDH } }">
                                         <div>

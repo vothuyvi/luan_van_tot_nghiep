@@ -69,6 +69,17 @@ td {
                 </P>
             </div>
             <div class="form-group">
+                <P>Trạng thái thanh toán:
+                    <span>
+                        @if ($donhang->MaThanhToan== '01')
+                        ĐÃ THANH TOÁN.
+                        @elseif ($donhang->MaThanhToan== '02')
+                        CHƯA THANH TOÁN.
+                        @endif
+                    </span>
+                </P>
+            </div>
+            <div class="form-group">
                 <P>Trạng thái đơn hàng:
                     <span class="">
                         @if ($donhang->MaTT== 1)

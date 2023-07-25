@@ -223,15 +223,17 @@ class DonhangController extends Controller
             $chitietdonhang = $order->chitietdonhang;
             $tongtien = 0;
             $khuyenmai = 0;
-            if ($chitietdonhang) {
-                foreach ($chitietdonhang as $item) {
-                    $sanpham = Sanpham::findOrfail($item->MaSP);
-                    if ($sanpham) {
-                        $newSL = $sanpham->SoLuong - $item->quantity;
-                        $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
-                        $sanpham->save();
+            if ($order->MaTT == '2') {
+                if ($chitietdonhang) {
+                    foreach ($chitietdonhang as $item) {
+                        $sanpham = Sanpham::findOrfail($item->MaSP);
+                        if ($sanpham) {
+                            $newSL = $sanpham->SoLuong - $item->quantity;
+                            $sanpham->SoLuong = $newSL > 0 ? $newSL : 0;
+                            $sanpham->save();
+                        }
+                        $tongtien += $item->quantity * $sanpham->GiaTien;
                     }
-                    $tongtien += $item->quantity * $sanpham->GiaTien;
                 }
             }
             if ($order->MaKM) {

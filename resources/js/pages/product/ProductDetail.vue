@@ -39,11 +39,8 @@
                 <div class="text-2xl font-medium text-sky-600 p-4 mb-4">
                     {{ formatMoney(state.form.GiaTien) }}đ
                 </div>
-                <!-- <div class="p-4 mb-4">
-                    <span class="text-2xl mr-5">Số lượng tồn kho: {{ state.form.SoLuong }}</span>
-                </div> -->
                 <div class="p-4 mb-4" :class="state.form.SoLuong == 0 ? 'hidden' : ''">
-                    <button v-if="state.SoLuongOrder"
+                    <button v-if="state.SoLuongOrder == 1"
                         class="border border-sky-600 w-10 rounded-lg text-2xl font-bold mr-5 hover:bg-sky-600 hover:text-white cursor-not-allowed"
                         @click="handelQuantity('MINUS')" disabled>
                         -
