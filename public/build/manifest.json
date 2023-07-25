@@ -17,7 +17,7 @@
     "dynamicImports": [
       "resources/js/components/404.vue"
     ],
-    "file": "assets/app-84da9576.js",
+    "file": "assets/app-01e001e3.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   },
@@ -29,7 +29,7 @@
     "css": [
       "assets/404-f0703e72.css"
     ],
-    "file": "assets/404-5542eb19.js",
+    "file": "assets/404-23351491.js",
     "imports": [
       "resources/js/app.js"
     ],
