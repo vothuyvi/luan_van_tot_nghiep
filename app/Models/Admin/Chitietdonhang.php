@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class ChiTietDonHang extends Model
 {
     use HasFactory;
-    protected $table='chitietdonhang';
+    protected $table = 'chitietdonhang';
     public $timestamps = false;
-
+    public function sanpham()
+    {
+        return $this->belongsTo(Sanpham::class, 'MaSP', 'MaSP');
+    }
 }

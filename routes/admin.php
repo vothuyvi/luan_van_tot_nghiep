@@ -76,10 +76,10 @@ Route::resource('/khuyenmai', KhuyenMaiController::class);
 //quản lý đơn hàng
 // Route::get('admin/qldonhang/view', [DonHangController::class, 'index']);
 Route::resource('/donhang', DonHangController::class);
-Route::get('/chitiet/{MaDH}', [DonHangController::class, 'chitiet']);
+Route::get('/chitietdonhang/{MaDH}', [DonHangController::class, 'chitiet']);
 Route::get('/update/{MaDH}', [DonHangController::class, 'updateStatus']);
 //Quản lý phiếu nhập
-// Route::get('admin/qlphieunhap/view', [PhieuNhapController::class, 'index']);
+Route::get('admin/qlphieunhap/view', [PhieuNhapController::class, 'index']);
 Route::resource('/phieunhap', PhieuNhapController::class);
 
 //Quản lý chi tiết phiếu nhập

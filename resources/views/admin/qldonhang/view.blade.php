@@ -66,7 +66,7 @@
                             @endif
                         </td>
                         <td col>
-                            <a href="{{'chitiet/'.$value->MaDH}}" class="btn btn-info">Xem chi tiết</a>
+                            <a href="{{'chitietdonhang/'.$value->MaDH}}" class="btn btn-info">Xem chi tiết</a>
                             <a href="{{'update/'.$value->MaDH}}" class="btn btn-success">Cập nhập trạng thái</a>
                             <form action="" method="post" class="form">
                                 @if ( $value->MaTT== 4)
