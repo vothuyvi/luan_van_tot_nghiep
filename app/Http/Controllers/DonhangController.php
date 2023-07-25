@@ -70,12 +70,13 @@ class DonhangController extends Controller
 
     public function payment(Request $request)
     {
+        $appURL = config('app.url');
         $TongTien = $request->get('TongTien');
         $MaDH = $request->get('MaDH');
         $vnp_TmnCode = 'Z8BRNGSE'; //Mã website tại VNPAY
         $vnp_HashSecret = 'GMKBLBRAUBGXHPLNJSRDTAAKEHOWGAZJ'; //Chuỗi bí mật
         $vnp_Url = 'https://sandbox.vnpayment.vn/paymentv2/vpcpay.html';
-        $vnp_Returnurl = 'http://127.0.0.1:8000/return-vnpay';
+        $vnp_Returnurl = $appURL . 'return-vnpay';
         $vnp_TxnRef = $MaDH; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = 'ThanhToanDonHang';
         $vnp_OrderType = 'billpayment';
@@ -139,6 +140,7 @@ class DonhangController extends Controller
 
     public function paymentMoMo(Request $request)
     {
+        $appURL = config('app.url');
         $TongTien = $request->get('TongTienDonHang');
         $MaDH = $request->get('MaDH');
         $endpoint = 'https://test-payment.momo.vn/v2/gateway/api/create';
@@ -149,8 +151,8 @@ class DonhangController extends Controller
         $orderInfo = 'Thanh toán qua ATM MoMo';
         $amount = $TongTien;
         $orderId = time() . '_' . $MaDH;
-        $redirectUrl = 'http://127.0.0.1:8000/return-momo';
-        $ipnUrl = 'http://127.0.0.1:8000/return-momo';
+        $redirectUrl = $appURL . 'return-momo';
+        $ipnUrl = $appURL . 'return-momo';
         $extraData = '';
 
         $requestId = time() . '_' . $MaDH;

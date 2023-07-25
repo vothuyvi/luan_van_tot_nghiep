@@ -63,7 +63,7 @@
                         <td>{{$value->address}}</td>
                         <td>{{$value->phone}}</td>
                         <td>
-                            <img src="{{ asset('images/uploads/' .$value->hinhanh)}}" alt="" class="img
+                            <img src="{{ asset('public/images/uploads/' .$value->hinhanh)}}" alt="" class="img
                             ">
                         </td>
                         <td>{{$value->birthday}}</td>

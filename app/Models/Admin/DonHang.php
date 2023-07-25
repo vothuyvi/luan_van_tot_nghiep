@@ -15,10 +15,10 @@ class DonHang extends Model
     public $timestamps = false;
     public function thanhtoan()
     {
-        return $this->belongsTo(thanhtoan::class, 'MaThanhToan');
+        return $this->belongsTo(ThanhToan::class, 'MaThanhToan');
     }
     public function chitietdonhang()
     {
-        return $this->hasMany(Chitietdonhang::class, 'MaDH', 'MaDH');
+        return $this->hasMany(ChiTietDonHang::class, 'MaDH', 'MaDH');
     }
 }
