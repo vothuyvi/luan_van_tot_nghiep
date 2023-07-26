@@ -109,13 +109,9 @@
 
 
                         <td col>
-                            <form action="{{route('sanpham.destroy',$value->MaSP)}}" method="post" class="form">
-                                <a href="{{route('sanpham.edit',$value->MaSP)}}" class="btn btn-info"><i
-                                        class='bx bx-pen nav_icon'></i></a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger"><i class='bx bx-x nav_icon'></i></button>
-                            </form>
+                            <a href="{{route('sanpham.edit',$value->MaSP)}}" class="btn btn-info"><i
+                                    class='bx bx-pen nav_icon'></i></a>
+                            @csrf
                         </td>
                     </tr>
                     @endforeach

@@ -24,6 +24,10 @@
     height: 100%;
 }
 
+.width {
+    width: 10rem;
+}
+
 .btn {
     padding-left: 12px;
 }
@@ -72,6 +76,7 @@
                     <tr>
                         <th>MÃ KHUYẾN MÃI</th>
                         <th>TÊN KHUYẾN MÃI</th>
+                        <th>ĐIỀU KIỆN ÁP DỤNG</th>
                         <th>PHẦN TRĂM</th>
                         <th>NGÀY BẮT ĐẦU</th>
                         <th>NGÀY KẾT THÚC</th>
@@ -85,20 +90,18 @@
                     <tr>
                         <td>{{$value->MaKM}}</td>
                         <td>{{$value->TenKM}}</td>
+                        <td>{{number_format($value->DieuKienApDung)}}</td>
                         <td>{{$value->PhanTram}}</td>
                         <td>{{$value->NgayBatDau}}</td>
                         <td>{{$value->NgayKetThuc}}</td>
                         <td>{{$value->TrangThai}}</td>
-
-                        <td col>
-                            <!-- <form action="{{route('khuyenmai.destroy',$value->MaKM)}}" method="post"class="form"> -->
+                        <td col class="width">
                             <a href="{{route('khuyenmai.edit',$value->MaKM)}}" class="btn btn-info"><i
                                     class='bx bx-pen nav_icon'></i></a>
                             @csrf
                             @method('DELETE')
                             <a type="submit" href="{{route('khuyenmai.destroy',$value->MaKM)}}"
                                 class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
-                            <!-- </form> -->
                         </td>
                     </tr>
                     @endforeach
