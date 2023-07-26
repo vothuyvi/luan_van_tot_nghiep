@@ -270,6 +270,7 @@ class DonhangController extends Controller
             $MaDH = $request->MaDH;
             $order = Donhang::with('chitietdonhang', 'chitietdonhang.sanpham')
                 ->where('MaDH', $MaDH)
+                ->where('MaKH', $user->MaKH)
                 ->first();
             return ResponseApi::success($order, '');
         } catch (\Exception $e) {
