@@ -10,7 +10,8 @@
         <div class="cart_list p-2">
             <div v-for="(item, index) in state.orders" :key="index" class="cart_item flex gap-2 items-center">
                 <div class="w-[8rem] h-[8rem] flex items-center justify-center p-2 border border-[#d9d9d9] rounded-lg">
-                    <img :src="`/images/products/${item.HinhAnh}`" />
+                    <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
+                    <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
                 </div>
                 <div>
                     <div class="text-xl font-bold">{{ item.TenSP }}</div>
@@ -47,6 +48,7 @@ import { useAuthStore } from '@/stores';
 import { handelDelete } from '@/utils/helper.js'
 import { useRouter } from 'vue-router'
 import { ElMessageBox } from 'element-plus';
+import { renderFileURL } from '@/utils/helper.js'
 const state = reactive({
     orders: [],
     localOrders: [],

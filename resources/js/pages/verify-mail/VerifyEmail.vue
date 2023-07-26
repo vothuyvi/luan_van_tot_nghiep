@@ -29,6 +29,7 @@ const getVerifyEmail = async () => {
             });
         }
     } catch {
+        state.loading = false;
         router.push({
             name: 'VerifyEmailErrorView',
         });

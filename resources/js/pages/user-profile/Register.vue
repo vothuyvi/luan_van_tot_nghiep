@@ -117,9 +117,8 @@ const handleRegister = async () => {
                 name: 'RegisterSuccessView',
             });
         }
-
-
     } catch (error) {
+        state.loading = false;
         console.log(error);
         console.log(error.response.data);
         state.error = error.response.data.errors;

@@ -46,6 +46,7 @@ const handelForgotPassword = async () => {
         });
 
     } catch (error) {
+        state.loading = false;
         console.log(error);
         console.log(error.response.data);
         state.error = error.response.data.message;

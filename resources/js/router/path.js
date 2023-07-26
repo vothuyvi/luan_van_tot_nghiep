@@ -132,6 +132,16 @@ const path = [
                 path: 'order-detail/:MaDH',
                 name: 'OrderDetailView',
                 component: OrderDetail,
+                beforeEnter: (to, from, next ) => {
+                    const token = getToken()
+                    // console.log(token);
+                    if(!token) {
+                        return next({
+                            name: 'LoginView'
+                        })
+                    }
+                    next();
+                }
             },
             {
                 path: 'register-success',

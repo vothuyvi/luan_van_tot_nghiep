@@ -130,8 +130,8 @@
                                 </div>
                             </div>
                         </el-card>
-                        <input ref="inputUpload" type="file" accept="image/png, image/jpeg, image/jpg, image/webp" class="hidden"
-                            @change="handleChangeFile" />
+                        <input ref="inputUpload" type="file" accept="image/png, image/jpeg, image/jpg, image/webp"
+                            class="hidden" @change="handleChangeFile" />
                     </div>
                     <div v-if="state.type === 'Purchase'" class="text-[1.6rem] w-full ml-8">
                         <el-card>
@@ -162,7 +162,8 @@
                                                     {{ moment(item.NgayDat).format('DD/MM/YYYY HH:mm') }}
                                                 </div>
                                                 <div>
-                                                    <div v-if="item.MaThanhToan === '01'" class="text-sky-500 font-bold"> Đã
+                                                    <div v-if="item.MaThanhToan === '01' || item.MaTT === '4'"
+                                                        class="text-sky-500 font-bold"> Đã
                                                         thanh toán</div>
                                                     <div v-else class="text-sky-500 font-bold"> Chưa thanh toán </div>
                                                 </div>

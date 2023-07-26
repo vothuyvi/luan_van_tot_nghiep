@@ -138,9 +138,6 @@
                     @click="onClickCheckOut()">
                     <button>Thanh toán</button>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -285,22 +282,6 @@ const checkValidate = () => {
         })
         return false;
     }
-    // if (state.form.email === '') {
-    //     ElMessage({
-    //         message: 'Vui lòng nhập email.',
-    //         type: 'error',
-    //         grouping: true,
-    //     })
-    //     return false;
-    // }
-    // if (!isEmailValid(state.form.email)) {
-    //     ElMessage({
-    //         message: 'Email không đúng định dạng',
-    //         type: 'error',
-    //         grouping: true,
-    //     })
-    //     return false;
-    // }
 
     if (state.form.SDTNguoiNhan === '') {
         ElMessage({
@@ -329,6 +310,7 @@ const isEmailValid = (email) => {
 const onClickCheckOut = async () => {
     try {
         const listSP = [];
+        let isError = false;
         state.orders.forEach(item => {
             let totalMoney = Number(item.GiaTien * item.SoLuongOrder);
             if (item.SoLuongOrder <= item.SoLuong) {
@@ -339,13 +321,18 @@ const onClickCheckOut = async () => {
                 })
                 state.form.listSP = listSP;
             } else {
+                isError = true;
+                // console.log('ten sp kh đủ sl', item.TenSP)
                 ElMessage({
-                    message: 'Sản phẩm không đủ số lượng.',
+                    message: 'Sản phẩm' + ' ' + item.TenSP + ' ' + 'số lượng còn' + ' ' + item.SoLuong + ', ' + 'không đủ số lượng đặt hàng.',
                     type: 'error',
                     grouping: true,
                 })
             }
         })
+        if (isError) {
+            return false;
+        }
         state.form.TongTienDonHang = state.totalPrice;
         state.form.MaKM = state.khuyenMai.MaKM;
         if (checkValidate()) {
