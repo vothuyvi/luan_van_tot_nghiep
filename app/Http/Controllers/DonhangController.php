@@ -251,6 +251,7 @@ class DonhangController extends Controller
                     'orderData' => $order->chitietdonhang,
                     'MaPT' => $order->MaPT,
                     'MaThanhToan' => $order->MaThanhToan,
+                    'MaTT' => $order->MaTT,
                     'DiaChiNguoiNhan' => $order->DiaChiNguoiNhan,
                     'SDTNguoiNhan' => $order->SDTNguoiNhan,
                     'TenNguoiNhan' => $order->TenNguoiNhan,
