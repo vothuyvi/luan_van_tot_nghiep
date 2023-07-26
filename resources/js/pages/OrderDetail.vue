@@ -6,7 +6,35 @@
             <i class="fa-regular fa-window-minimize"></i>
             <i class="fa-regular fa-window-minimize"></i>
         </p>
-        <div class="p-4 border bg-[#eff2f6]">
+        <div v-if="state.orderDetail.MaTT === '1'" class="text-orange-600 font-bold text-4xl p-6 bg-[#fffcf5] box">
+            <span class="px-2 py-1 rounded-full border-2 border-orange-600 mr-2"><i
+                    class="fa-regular fa-note-sticky"></i></span>
+            <span>
+                ĐANG CHỜ DUYỆT</span>
+        </div>
+        <div v-if="state.orderDetail.MaTT === '2'" class="text-green-600 font-bold text-4xl p-6 bg-[#fffcf5] box">
+            <span class="px-2 py-1 rounded-full border-2 border-green-600 mr-2"><i
+                    class="fa-solid fa-envelope-open-text"></i></span>
+            <span>
+                ĐÃ DUYỆT ĐƠN</span>
+        </div>
+        <div v-if="state.orderDetail.MaTT === '3'" class="text-green-600 font-bold text-4xl p-6 bg-[#fffcf5] box">
+            <span class="p-2 rounded-full border-2 border-green-600"><i class="fa-solid fa-truck"></i></span> <span>ĐƠN HÀNG
+                ĐANG
+                GIAO</span>
+        </div>
+        <div v-if="state.orderDetail.MaTT === '4'" class="text-green-600 font-bold text-4xl p-6 bg-[#fffcf5] box">
+            <span class="px-3 py-2 rounded-full border-2 border-green-600 mr-2 font-black"><i
+                    class="fa-solid fa-check"></i></span>
+            <span>ĐƠN HÀNG ĐÃ HOÀN THÀNH</span>
+        </div>
+        <div v-if="state.orderDetail.MaTT === '5'" class="text-red-600 font-bold text-4xl p-6 bg-[#fffcf5] box">
+            <span class="px-4 py-1 rounded-full border-2 border-red-600 mr-2 font-black"><i
+                    class="fa-solid fa-xmark"></i></span>
+            <span>ĐÃ HUỶ ĐƠN HÀNG</span>
+        </div>
+
+        <div class="p-4 border bg-[#fafafa] box mt-[5px]">
             <div class="grid grid-flow-col grid-cols-3">
                 <div class="w-full my-1 flex flex-col">
                     <span class="text-[#778393] font-medium">
@@ -102,65 +130,65 @@
             </div>
         </div>
 
+        <div class="box  mt-[5px]">
+            <table>
+                <tr className="tr1">
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th className="quantity">Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tr v-for="(item, index) in state.orderDetail.chitietdonhang" :key="index" class="tr2">
+                    <td>
+                        <!-- <img :src="`/images/products/${item.sanpham.HinhAnh}`" /> -->
+                        <img :src="renderFileURL('/images/products/', item.sanpham.HinhAnh)" />
+                    </td>
+                    <td>{{ item.sanpham.TenSP }}</td>
+                    <td>{{ formatMoney(item.sanpham.GiaTien) }} đ</td>
 
-        <table>
-            <tr className="tr1">
-                <th>Hình ảnh</th>
-                <th>Tên sản phẩm</th>
-                <th>Đơn giá</th>
-                <th className="quantity">Số lượng</th>
-                <th>Thành tiền</th>
-            </tr>
-            <tr v-for="(item, index) in state.orderDetail.chitietdonhang" :key="index" class="tr2">
-                <td>
-                    <!-- <img :src="`/images/products/${item.sanpham.HinhAnh}`" /> -->
-                    <img :src="renderFileURL('/images/products/', item.sanpham.HinhAnh)" />
-                </td>
-                <td>{{ item.sanpham.TenSP }}</td>
-                <td>{{ formatMoney(item.sanpham.GiaTien) }} đ</td>
-
-                <td class="quantity">
-                    x{{ item.quantity }}
-                </td>
-                <td>{{ formatMoney(item.quantity * item.sanpham.GiaTien) }} đ</td>
-            </tr>
-            <tr class="tr3">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="td_tt">Tổng tiền hàng: </td>
-                <td class="td_price">{{ formatMoney(state.totalPriceTmp) }} đ</td>
-            </tr>
-            <tr v-if="state.orderDetail.MaKM" class="tr3">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class=" td_tt text-2xl font-medium text-sky-500"> Khuyến mãi {{ state.khuyenMai.PhanTram }} %</td>
-                <td class="td_pric text-3xl font-medium text-sky-500">- {{
-                    formatMoney(((state.totalPriceTmp *
-                        state.khuyenMai.PhanTram) / 100)) }} đ
-                </td>
-            </tr>
-            <tr class="tr3">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="td_tt">Thành tiền: </td>
-                <td class="td_price">{{ formatMoney(state.orderDetail?.TongTienDonHang) }} đ</td>
-            </tr>
-        </table>
-        <div class="flex justify-end pr-10 mt-4">
-            <div>
-                <router-link :to="{ name: 'UserProfile' }">
-                    <button class="btn-custom ">Xem đơn hàng</button>
-                </router-link>
-            </div>
-            <div>
-                <router-link :to="{ name: 'CheckoutView' }"><button class="btn-custom ml-6">Mua lại</button>
-                </router-link>
+                    <td class="quantity">
+                        x{{ item.quantity }}
+                    </td>
+                    <td>{{ formatMoney(item.quantity * item.sanpham.GiaTien) }} đ</td>
+                </tr>
+                <tr class="tr3">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="td_tt">Tổng tiền hàng: </td>
+                    <td class="td_price">{{ formatMoney(state.totalPriceTmp) }} đ</td>
+                </tr>
+                <tr v-if="state.orderDetail.MaKM" class="tr3">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class=" td_tt text-2xl font-medium text-sky-500"> Khuyến mãi {{ state.khuyenMai.PhanTram }} %</td>
+                    <td class="td_pric text-3xl font-medium text-sky-500">- {{
+                        formatMoney(((state.totalPriceTmp *
+                            state.khuyenMai.PhanTram) / 100)) }} đ
+                    </td>
+                </tr>
+                <tr class="tr3">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="td_tt">Thành tiền: </td>
+                    <td class="td_price">{{ formatMoney(state.orderDetail?.TongTienDonHang) }} đ</td>
+                </tr>
+            </table>
+            <div class="flex justify-end pr-10 mt-[5px] p-4 border-t">
+                <div>
+                    <router-link :to="{ name: 'UserProfile' }">
+                        <button class="btn-custom ">Xem đơn hàng</button>
+                    </router-link>
+                </div>
+                <div>
+                    <router-link :to="{ name: 'CheckoutView' }"><button class="btn-custom ml-6">Mua lại</button>
+                    </router-link>
+                </div>
             </div>
         </div>
-        <div class="body_cart_bot"></div>
     </div>
 </template>
 
@@ -191,6 +219,7 @@ const formatMoney = (money) => {
         })
         ?.replace("₫", "");
 };
+
 
 const getOrderDetail = async () => {
     const { data: res } = await orderDetail(MaDH)
@@ -243,5 +272,9 @@ onMounted(async () => {
     background-color: rgb(14, 165, 233);
     cursor: pointer;
     color: white;
+}
+
+.box {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
 }
 </style>

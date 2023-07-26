@@ -17,62 +17,59 @@
                 </div>
             </router-link>
 
-
         </div>
-        <table :class="state.orders.length == 0 ? 'hidden' : ''">
-            <tr className="tr1">
-                <th>Hình ảnh</th>
-                <th>Tên sản phẩm</th>
-                <th>Đơn giá</th>
-                <th className="quantity">Số lượng</th>
-                <th>Thành tiền</th>
-                <th>Xoá</th>
-            </tr>
-            <tr v-for="(item, index) in state.orders" :key="index" class="tr2">
-                <td>
-                    <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
-                    <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
-                </td>
-                <td>{{ item.TenSP }}</td>
-                <td>{{ formatMoney(item.GiaTien) }} đ</td>
+        <div class="box">
+            <table :class="state.orders.length == 0 ? 'hidden' : ''">
+                <tr className="tr1">
+                    <th>Hình ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th className="quantity">Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tr v-for="(item, index) in state.orders" :key="index" class="tr2">
+                    <td>
+                        <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
+                        <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
+                    </td>
+                    <td>{{ item.TenSP }}</td>
+                    <td>{{ formatMoney(item.GiaTien) }} đ</td>
 
-                <td class="quantity">
-                    <button v-if="item.SoLuongOrder === 1" disabled class="cursor-not-allowed opacity-50">-</button>
-                    <button v-else @click="handelQuantity(item, 'MINUS')">-</button>
-                    {{ item.SoLuongOrder }}
-                    <button @click="handelQuantity(item, 'PLUS')">+</button>
-                </td>
-                <td>{{ formatMoney(item.SoLuongOrder * item.GiaTien) }} đ</td>
-                <td class="delete">
-                    <p @click="handelDelete(item.MaSP)"><i class="fa-solid fa-trash"></i></p>
-                </td>
-            </tr>
-            <tr class="tr3">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="td_tt">Tổng tiền:</td>
-                <td class="td_price">{{ formatMoney(state.totalPrice) }} đ</td>
-            </tr>
-            <tr class="tr3">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td class="td_btn">
-                    <router-link :to="{ name: 'ProductView' }">
-                        <button>Xem thêm sản phẩm</button>
-                    </router-link>
-                </td>
-                <td class="td_btn">
-
-                    <button class="ml-12" @click="handelCheckOut()">Thanh toán</button>
-
-                </td>
-            </tr>
-        </table>
-        <div class="body_cart_bot"></div>
+                    <td class="quantity">
+                        <button v-if="item.SoLuongOrder === 1" disabled class="cursor-not-allowed opacity-50">-</button>
+                        <button v-else @click="handelQuantity(item, 'MINUS')">-</button>
+                        {{ item.SoLuongOrder }}
+                        <button @click="handelQuantity(item, 'PLUS')">+</button>
+                    </td>
+                    <td>{{ formatMoney(item.SoLuongOrder * item.GiaTien) }} đ</td>
+                    <td class="delete">
+                        <p @click="handelDelete(item.MaSP)"><i class="fa-solid fa-trash"></i></p>
+                    </td>
+                </tr>
+                <tr class="tr3">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="td_tt">Tổng tiền:</td>
+                    <td class="td_price">{{ formatMoney(state.totalPrice) }} đ</td>
+                </tr>
+                <tr class="tr3">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="td_btn">
+                        <router-link :to="{ name: 'ProductView' }">
+                            <button>Xem thêm sản phẩm</button>
+                        </router-link>
+                    </td>
+                    <td class="td_btn">
+                        <button class="ml-12" @click="handelCheckOut()">Thanh toán</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </template>
 <script setup>
@@ -226,4 +223,8 @@ onMounted(async () => {
 </script>
 <style lang="scss" scoped>
 @import "@/style/cart.scss";
+
+.box {
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.12);
+}
 </style>

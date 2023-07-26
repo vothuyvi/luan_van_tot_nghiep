@@ -20,7 +20,7 @@
             </p>
             <p class="text-3xl pb-3">
                 <span class="font-bold mr-5"> <i class="fa-regular fa-envelope"></i> Email:</span>
-                <span>vothuyvi0305@gmail.com</span>
+                <span>vothuyvi0305@gmail.com - my2001.2906@gmail.com</span>
             </p>
         </div>
         <div class="text-4xl font-black mt-10">
