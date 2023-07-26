@@ -73,6 +73,8 @@ td {
                     <span>
                         @if ($donhang->MaThanhToan== '01')
                         ĐÃ THANH TOÁN.
+                        @elseif ($donhang->MaTT== 4)
+                        ĐÃ THANH TOÁN.
                         @elseif ($donhang->MaThanhToan== '02')
                         CHƯA THANH TOÁN.
                         @endif
