@@ -238,7 +238,7 @@ class DonhangController extends Controller
             }
             if ($order->MaKM) {
                 // $khuyenmai = Khuyenmai::where('MaKM', $order->MaKM)->first();
-                $khuyenmai = $order->TongTienDonHang - $tongtien;
+                $khuyenmai = $tongtien - $order->TongTienDonHang;
                 $khuyenmai = number_format($khuyenmai, 0, '', ',');
             }
             $tongtien = number_format($tongtien, 0, '', ',');

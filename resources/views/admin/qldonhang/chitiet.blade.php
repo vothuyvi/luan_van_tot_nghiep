@@ -127,7 +127,7 @@ td {
                         @foreach($donhang->chitietdonhang as $id=>$value)
                         <tr>
                             <td>{{$value->MaSP}}</td>
-                            <td><img src="{{ asset('images/products/' .$value->sanpham->HinhAnh)}}" alt="" class="img
+                            <td><img src="{{ asset('public/images/products/' .$value->sanpham->HinhAnh)}}" alt="" class="img
                             ">
                             </td>
                             <td>{{$value->sanpham->TenSP}}</td>
