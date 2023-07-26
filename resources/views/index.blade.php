@@ -396,7 +396,7 @@ a {
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="/index" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i>
-                    <span class="nav_logo-name">AdMin</span> </a>
+                    <span class="nav_logo-name">Admin</span> </a>
                 <div class="nav_list">
                     <a href="/sanpham" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i>
                         <span class="nav_name">Quản lý sản phẩm</span>
