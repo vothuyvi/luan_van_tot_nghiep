@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                         </el-card>
-                        <input ref="inputUpload" type="file" accept="image/png, image/jpeg, image/jpg" class="hidden"
+                        <input ref="inputUpload" type="file" accept="image/png, image/jpeg, image/jpg, image/webp" class="hidden"
                             @change="handleChangeFile" />
                     </div>
                     <div v-if="state.type === 'Purchase'" class="text-[1.6rem] w-full ml-8">

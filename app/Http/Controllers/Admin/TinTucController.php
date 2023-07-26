@@ -39,7 +39,7 @@ class TinTucController extends Controller
             [
                 'TieuDe' => 'required',
                 'NoiDung' => 'required',
-                'upload_file' => 'required|image|mimes:png,jpg,jpeg',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg,bmp,webp',
                 'NgayDang' => 'required',
             ],
             [
@@ -91,7 +91,7 @@ class TinTucController extends Controller
             [
                 'TieuDe' => 'required',
                 'NoiDung' => 'required',
-                'upload_file' => 'image|mimes:png,jpg,jpeg',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg,bmp,webp',
                 'NgayDang' => 'required',
             ],
             [

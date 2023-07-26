@@ -103,7 +103,7 @@ class SanPhamController extends Controller
                 'MoTa' => 'required',
                 'GiaTien' => 'required',
                 'KichThuoc' => 'required',
-                'upload_file' => 'image|mimes:png,jpg,jpeg',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg,bmp,webp',
                 'MaLoai' => 'required',
             ],
             [

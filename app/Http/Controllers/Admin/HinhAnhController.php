@@ -39,7 +39,7 @@ class HinhAnhController extends Controller
         //
         $request->validate(
             [
-                'upload_file' => 'required|image|mimes:png,jpg,jpeg',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg,bmp,webp',
                 'MaSP' => 'required',
             ],
             [
@@ -75,7 +75,7 @@ class HinhAnhController extends Controller
     {
         $request->validate(
             [
-                'upload_file' => 'required|image|mimes:png,jpg,jpeg',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg,bmp,webp',
                 'MaSP' => 'required',
             ],
             [

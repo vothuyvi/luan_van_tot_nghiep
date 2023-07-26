@@ -113,7 +113,7 @@ class KhachhangController extends Controller
                     'name' => 'required|min:2|max:100',
                     'address' => 'required|max:255',
                     'phone' => 'required|numeric|digits_between:10,10',
-                    'hinhanh' => 'nullable|image|mimes:png,jpg,jpeg,bmp',
+                    'hinhanh' => 'nullable|image|mimes:png,jpg,jpeg,webp',
                 ],
                 [
                     'name.required' => 'Họ tên không được để trống.',
