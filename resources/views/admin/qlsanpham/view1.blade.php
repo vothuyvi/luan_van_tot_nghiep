@@ -27,6 +27,12 @@
 .btn {
     padding-left: 12px;
 }
+
+.img {
+    width: 85px;
+    height: 80px;
+    object-fit: cover;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -69,10 +75,11 @@
                     <tr>
                         <th>STT</th>
                         <th>MÃ SẢN PHẨM</th>
+                        <th>HÌNH ẢNH</th>
                         <th>TÊN SẢN PHẨM</th>
                         <th>SỐ LƯỢNG</th>
                         <!-- <th>MÔ TẢ</th> -->
-                        <th>KÍCH THƯỚC</th>
+                        <th>GIÁ TIỀN</th>
                         <th>LOẠI</th>
                         <!-- <th>MÃ KHUYẾN MÃI</th> -->
                         <th>THAO TÁC</th>
@@ -87,12 +94,16 @@
                     <tr>
                         <td>{{++$id+($currentPage*7)}}</td>
                         <td>{{$value->MaSP}}</td>
+                        <td>
+                            <img src="{{ asset('public/images/products/' .$value->HinhAnh)}}" alt="" class="img
+                            ">
+                        </td>
                         <td>{{$value->TenSP}}</td>
                         <td>{{$value->SoLuong}}
 
                         </td>
                         <!-- <td>{{$value->MoTa}}</td> -->
-                        <td>{{$value->KichThuoc}}</td>
+                        <td>{{number_format($value->GiaTien)}}</td>
                         <td>{{$value->loai->TenLoai}}</td>
                         <!-- <td>{{$value->MaKM}}</td> -->
 
