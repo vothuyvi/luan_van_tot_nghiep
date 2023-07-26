@@ -301,7 +301,6 @@ const handelQuantity = (type) => {
     // console.log('type', type);
     if (type === 'PLUS') {
         state.SoLuongOrder += 1;
-
     } else if (state.SoLuongOrder != 1) {
         state.SoLuongOrder -= 1;
     }
@@ -313,12 +312,7 @@ const addOrder = (MaSP) => {
     if (orders) {
         const indexProduct = orders.findIndex(order => order.MaSP == state.form.MaSP);
         if (indexProduct != -1) {
-            if (type === 'PLUS') {
-                orders[indexProduct].SoLuong += state.SoLuongOrder;
-            } else {
-                orders[indexProduct].SoLuong -= state.SoLuongOrder;
-            }
-
+            orders[indexProduct].SoLuong += state.SoLuongOrder;
         } else {
             // nếu chưa có sản phẩm muốn thêm thì tạo mới 1 sản phẩm và thêm vào giỏ hàng
             orders.push({

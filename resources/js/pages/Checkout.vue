@@ -324,7 +324,7 @@ const onClickCheckOut = async () => {
                 isError = true;
                 // console.log('ten sp kh đủ sl', item.TenSP)
                 ElMessage({
-                    message: 'Sản phẩm' + ' ' + item.TenSP + ' ' + 'số lượng còn' + ' ' + item.SoLuong + ', ' + 'không đủ số lượng đặt hàng.',
+                    message: item.TenSP + ' ' + 'số lượng còn' + ' ' + item.SoLuong + ', ' + 'không đủ số lượng.',
                     type: 'error',
                     grouping: true,
                 })
