@@ -16,7 +16,6 @@ class SanPhamController extends Controller
 {
     public function __construct()
     {
-
         $this->middleware('admin');
     }
 
@@ -24,23 +23,23 @@ class SanPhamController extends Controller
     {
         // dd(adminUser()->email);
         // dd(request()->key);
-        $data = sanpham::with('loai')->paginate(7);
+        $data = sanpham::with('loai')
+            ->orderBy('MaSP', 'desc')
+            ->paginate(7);
 
-        if($key = request()->key)
-        {
-            $data = sanpham::with('loai')->where('TenSP','like','%'.$key.'%')->paginate(7);
+        if ($key = request()->key) {
+            $data = sanpham::with('loai')
+                ->where('TenSP', 'like', '%' . $key . '%')
+                ->paginate(7);
             // $data = sanpham::with('loai')->where('TenSP','like','%'.$key.'%')->orWhere('MaSP','like','%'.$key.'%')->paginate(7);
-
         }
         return View('admin/qlsanpham/view1')->with(compact('data'));
     }
 
     public function create()
     {
-
         return View('admin/qlsanpham/insert', ['loai' => loai::all(), 'khuyenmai' => Khuyenmai::all()]);
     }
-
 
     public function store(Request $request)
     {
@@ -104,7 +103,7 @@ class SanPhamController extends Controller
                 'MoTa' => 'required',
                 'GiaTien' => 'required',
                 'KichThuoc' => 'required',
-                'upload_file' => 'image|mimes:png,jpg,jpeg,bmp',
+                'upload_file' => 'image|mimes:png,jpg,jpeg',
                 'MaLoai' => 'required',
             ],
             [

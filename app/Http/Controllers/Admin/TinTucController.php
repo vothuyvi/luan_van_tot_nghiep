@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Tintuc;
 use Illuminate\Http\Request;
+use File;
 
 class TinTucController extends Controller
 {
@@ -12,7 +13,6 @@ class TinTucController extends Controller
      */
     public function __construct()
     {
-
         $this->middleware('admin');
     }
     public function index()
@@ -35,12 +35,11 @@ class TinTucController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate(
             [
                 'TieuDe' => 'required',
                 'NoiDung' => 'required',
-                // 'upload_file' => 'required|image|mimes:png,jpg,jpeg,bmp',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg',
                 'NgayDang' => 'required',
             ],
             [
@@ -54,10 +53,9 @@ class TinTucController extends Controller
         );
         if ($request->hasFile('upload_file')) {
             $file = $request->upload_file;
-
             $file_name = $file->getClientoriginalName();
             // dd($file_name);
-            $file->move(public_path('images/products/'), $file_name);
+            $file->move(public_path('images/news/'), $file_name);
             $request->merge(['HinhAnh' => $file_name]);
         }
         Tintuc::create($request->all());
@@ -69,7 +67,7 @@ class TinTucController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id,)
+    public function show(string $id)
     {
         //
     }
@@ -82,7 +80,6 @@ class TinTucController extends Controller
         //
         $tintuc = Tintuc::find($id);
         return view('admin/qltintuc/edit', compact('tintuc'));
-
     }
 
     /**
@@ -90,12 +87,11 @@ class TinTucController extends Controller
      */
     public function update(Request $request, string $id)
     {
-
         $request->validate(
             [
                 'TieuDe' => 'required',
                 'NoiDung' => 'required',
-                // 'upload_file' => 'image|mimes:png,jpg,jpeg,bmp',
+                'upload_file' => 'image|mimes:png,jpg,jpeg',
                 'NgayDang' => 'required',
             ],
             [
@@ -104,7 +100,6 @@ class TinTucController extends Controller
                 'NgayDang.required' => 'Không được bỏ trống',
                 'upload_file.image' => 'Sai định dạng ảnh.',
                 'upload_file.mimes' => 'Sai định dạng ảnh.',
-
             ],
         );
         $tintuc = Tintuc::find($id);
@@ -113,13 +108,13 @@ class TinTucController extends Controller
 
         if ($request->hasFile('upload_file')) {
             $file = $request->upload_file;
-
             $file_name = $file->getClientoriginalName();
             // dd($file_name);
-            $file->move(public_path('images/products/'), $file_name);
+            $file->move(public_path('images/news/'), $file_name);
             $request->merge(['HinhAnh' => $file_name]);
             $tintuc->HinhAnh = $file_name;
         }
+
         $tintuc->NgayDang = $request->input('NgayDang');
         $tintuc->update();
         return redirect()

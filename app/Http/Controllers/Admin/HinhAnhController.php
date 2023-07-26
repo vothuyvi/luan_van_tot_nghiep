@@ -13,7 +13,6 @@ class HinhAnhController extends Controller
      */
     public function __construct()
     {
-
         $this->middleware('admin');
     }
     public function index()
@@ -30,7 +29,6 @@ class HinhAnhController extends Controller
     {
         //
         return View('admin/qlhinhanh/insert', ['data' => sanpham::all()]);
-
     }
 
     /**
@@ -41,7 +39,6 @@ class HinhAnhController extends Controller
         //
         $request->validate(
             [
-
                 'upload_file' => 'required|image|mimes:png,jpg,jpeg',
                 'MaSP' => 'required',
             ],
@@ -67,9 +64,8 @@ class HinhAnhController extends Controller
 
     public function edit(string $id)
     {
-
-         $hinhanh = Hinhanh::find($id);
-         return view('admin/qlhinhanh/edit', compact('hinhanh'), ['data' => sanpham::all()]);
+        $hinhanh = Hinhanh::find($id);
+        return view('admin/qlhinhanh/edit', compact('hinhanh'), ['data' => sanpham::all()]);
     }
 
     /**
@@ -77,12 +73,9 @@ class HinhAnhController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-         //
-         $request->validate(
+        $request->validate(
             [
-
-                // 'upload_file' => 'required|image|mimes:png,jpg,jpeg',
+                'upload_file' => 'required|image|mimes:png,jpg,jpeg',
                 'MaSP' => 'required',
             ],
             [
@@ -91,9 +84,15 @@ class HinhAnhController extends Controller
             ],
         );
         $hinhanh = Hinhanh::find($id);
-        $hinhanh->HinhAnh = $request->input('upload_file');
+        if ($request->hasFile('upload_file')) {
+            $file = $request->upload_file;
+            $file_name = $file->getClientoriginalName();
+            // dd($file_name);
+            $file->move(public_path('images/products/'), $file_name);
+            $hinhanh->HinhAnh = $file_name;
+        }
+        $request->merge(['HinhAnh' => $file_name]);
         $hinhanh->MaSP = $request->input('MaSP');
-
         $hinhanh->update();
         return redirect()
             ->route('hinhanh.index')

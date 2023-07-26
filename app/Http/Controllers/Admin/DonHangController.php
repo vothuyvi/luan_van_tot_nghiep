@@ -7,7 +7,9 @@ use App\Models\Admin\Khachhang;
 use App\Models\Admin\Sanpham;
 use App\Models\Admin\TrangThaiDon;
 use Illuminate\Http\Request;
-use Mail;
+use App\Mail\Order;
+use Illuminate\Support\Facades\Mail;
+
 class DonHangController extends Controller
 {
     /**
@@ -19,7 +21,9 @@ class DonHangController extends Controller
     }
     public function index()
     {
-        $donhang = DonHang::with('thanhtoan')->paginate(6);
+        $donhang = DonHang::with('thanhtoan')
+            ->orderBy('MaDH', 'desc')
+            ->paginate(6);
         if ($key = request()->key) {
             $donhang = DonHang::where('MaDH', 'like', $key)->paginate(6);
         }
@@ -134,6 +138,8 @@ class DonHangController extends Controller
             ->first();
 
         $MaTTHienTai = $donhang->MaTT;
+        $tongtien = 0;
+        $khuyenmai = 0;
         if ($MaTT == '2') {
             if ($MaTTHienTai != '2') {
                 foreach ($donhang->chitietdonhang as $item) {
@@ -145,6 +151,19 @@ class DonHangController extends Controller
                     }
                 }
             }
+        }
+        if ($donhang->chitietdonhang) {
+            foreach ($donhang->chitietdonhang as $item) {
+                $sanpham = Sanpham::where('MaSP', $item->MaSP)->first();
+                if ($sanpham) {
+                    $tongtien += $item->quantity * $sanpham->GiaTien;
+                }
+            }
+        }
+        if ($donhang->MaKM) {
+            // $khuyenmai = Khuyenmai::where('MaKM', $order->MaKM)->first();
+            $khuyenmai = $tongtien - $donhang->TongTienDonHang;
+            $khuyenmai = number_format($khuyenmai, 0, '', ',');
         }
         if ($MaTT == '5') {
             if ($MaTTHienTai == '2' || $MaTTHienTai == '3') {
@@ -158,8 +177,27 @@ class DonHangController extends Controller
                 }
             }
         }
+        $MaKH = $donhang->MaKH;
+        $khachhang = Khachhang::where('MaKH', $MaKH)->first();
         $donhang->MaTT = $MaTT;
         $donhang->save();
+        if ($MaTT == '4') {
+            $mailData = [
+                'email' => $khachhang->email,
+                'tongtien' => number_format($tongtien, 0, '', ','),
+                'thanhtien' => number_format($donhang->TongTienDonHang, 0, '', ','),
+                'khuyenmai' => $khuyenmai,
+                'orderData' => $donhang->chitietdonhang,
+                'MaPT' => $donhang->MaPT,
+                'MaThanhToan' => $donhang->MaThanhToan,
+                'MaTT' => $donhang->MaTT,
+                'DiaChiNguoiNhan' => $donhang->DiaChiNguoiNhan,
+                'SDTNguoiNhan' => $donhang->SDTNguoiNhan,
+                'TenNguoiNhan' => $donhang->TenNguoiNhan,
+                'NgayDat' => date('d/m/Y', strtotime($donhang->NgayDat)),
+            ];
+            Mail::to($khachhang->email)->send(new Order($mailData));
+        }
         return redirect('chitietdonhang/' . $donhang->MaDH);
     }
 }

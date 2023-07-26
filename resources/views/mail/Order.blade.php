@@ -469,6 +469,18 @@
                                                                 </span>
                                                             </span>
                                                         </p>
+                                                        <p
+                                                            style="margin: 0; font-size: 14px; text-align: left; mso-line-height-alt: 28.8px;">
+                                                            <span style="font-size: 16px;">
+                                                                <span style="">Trạng thái đơn hàng:
+                                                                    <span>
+                                                                        @if($mailData['MaTT'] == '2') ĐÃ DUYỆT ĐƠN
+                                                                        @elseif($mailData['MaTT'] == '4') HOÀN THÀNH
+                                                                        @endif
+                                                                    </span>
+                                                                </span>
+                                                            </span>
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </td>

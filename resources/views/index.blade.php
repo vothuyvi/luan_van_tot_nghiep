@@ -228,6 +228,22 @@ a {
         width: 1000px;
     }
 
+    .container {
+        padding-top: 70px;
+    }
+
+    .table {
+        text-align: center;
+    }
+
+    .char_2 {
+        display: flex;
+    }
+
+    .dunot {
+        width: 1000px;
+    }
+
     .cardBox1 {
         position: relative;
         width: 100%;
@@ -249,7 +265,6 @@ a {
         box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
         justify-content: space-between;
         cursor: pointer;
-        display: flex;
         text-align: center;
 
     }
@@ -263,7 +278,6 @@ a {
         box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
         justify-content: space-between;
         cursor: pointer;
-        display: flex;
 
     }
 
@@ -276,7 +290,7 @@ a {
         box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
         justify-content: space-between;
         cursor: pointer;
-        display: flex;
+
 
     }
 
@@ -289,7 +303,7 @@ a {
         box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
         justify-content: space-between;
         cursor: pointer;
-        display: flex;
+
 
     }
 
@@ -297,13 +311,14 @@ a {
         position: relative;
         font-size: 1.5em;
         font-weight: 500;
+        text-align: center;
 
     }
 
     .cardBox1 .card1 .number {
-        font-weight: 500;
+        font-weight: bold;
+        font-size: 1.8em;
         font-family: 'Noto Serif', serif;
-        font-size: 1.5em;
         text-align: center;
     }
 
@@ -311,12 +326,13 @@ a {
         position: relative;
         font-size: 1.5em;
         font-weight: 500;
+        text-align: center;
 
     }
 
     .cardBox1 .card2 .number {
-        font-weight: 500;
-        font-size: 1.5em;
+        font-weight: bold;
+        font-size: 1.8em;
         text-align: center;
         font-family: 'Noto Serif', serif;
 
@@ -326,12 +342,14 @@ a {
         position: relative;
         font-size: 1.5em;
         font-weight: 500;
+        text-align: center;
+
 
     }
 
     .cardBox1 .card3 .number {
-        font-weight: 500;
-        font-size: 1.5em;
+        font-weight: bold;
+        font-size: 1.8em;
         text-align: center;
         font-family: 'Noto Serif', serif;
 
@@ -341,12 +359,13 @@ a {
         position: relative;
         font-size: 1.5em;
         font-weight: 500;
+        text-align: center;
 
     }
 
     .cardBox1 .card4 .number {
-        font-weight: 500;
-        font-size: 1.5em;
+        font-weight: bold;
+        font-size: 1.8em;
         text-align: center;
         font-family: 'Noto Serif', serif;
 
@@ -414,33 +433,31 @@ a {
 
 
     <div class="height-100 bg-light">
+        <!-- <div id="chart" style="height: 250px; width: 100%;"></div> -->
         <p style="text-align: center;font-weight: 500;font-size: 1.5em;">Thống kê theo tháng {{$thang}}</p>
         <div class="cardBox1">
             <div class="card1">
                 <div>
-                    <div class="name">TỔNG ĐƠN HÀNG</div>
+                    <div class="name">TỔNG ĐƠN</div>
                     <div class="number">{{$don}}</div>
                 </div>
-                <!-- <div class="icon">
-                <i class='bx bx-cart nav_icon'></i>
-                </div> -->
             </div>
             <div class="card2">
                 <div>
-                    <div class="name">TỔNG DOANH THU</div>
+                    <div class="name">TỔNG TIỀN</div>
                     <div class="number">{{number_format($total)}}</div>
                 </div>
             </div>
             <div class="card3">
                 <div>
-                    <div class="name"></div>
-                    <div class="number"></div>
+                    <div class="name">DOANH THU</div>
+                    <div class="number">{{$doanhThuThucTe}}</div>
                 </div>
             </div>
             <div class="card4">
                 <div>
-                    <div class="name"></div>
-                    <div class="number"></div>
+                    <div class="name">ĐƠN HUỶ</div>
+                    <div class="number">{{$donhanghuy}}</div>
                 </div>
             </div>
 
@@ -461,10 +478,12 @@ a {
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                            $currentPage = Request::get('page') ? Request::get('page') - 1 : 0;
+                            @endphp
                             @foreach($data as $id=>$value)
                             <tr>
-                                <td>{{++$id}}</td>
+                                <td>{{++$id+($currentPage*7)}}</td>
                                 <td>{{$value->MaSP}}</td>
                                 <td>{{$value->TenSP}}</td>
                                 <td>{{$value->SoLuong}}</td>

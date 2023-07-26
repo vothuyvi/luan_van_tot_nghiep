@@ -82,9 +82,6 @@ td {
                         </td>
                         <td class="custom-operation">
                             <a href=" {{'chitietdonhang/'.$value->MaDH}}" class="btn btn-info">Xem chi tiết</a>
-                            <form action="" method="post" class="form">
-                                <a href="{{route('mail.edit',$value->MaDH)}}" class="btn btn-danger">Gửi mail</a>
-                            </form>
                             @csrf
                         </td>
                     </tr>

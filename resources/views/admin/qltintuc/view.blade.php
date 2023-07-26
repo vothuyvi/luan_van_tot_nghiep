@@ -7,6 +7,16 @@
 .table {
     text-align: center;
 }
+
+.img {
+    width: 62px;
+    height: 62px;
+
+}
+
+.width {
+    width: 40rem;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -37,33 +47,31 @@
             <table class="table table-bordered ">
                 <thead>
                     <tr>
-                        <th>MaTT</th>
-                        <!-- <th>NỘI DUNG</th> -->
+                        <th>MÃ TIN TỨC</th>
+                        <th class="width">TIÊU ĐỀ</th>
+                        <th>HÌNH ẢNH</th>
                         <th>NGÀY ĐĂNG</th>
                         <th>THAO TÁC</th>
 
                     </tr>
                 </thead>
                 <tbody>
-
                     @foreach($Tintuc as $id=>$value)
                     <tr>
                         <td>{{$value->MaTT}}</td>
-                        <!-- <td>{{$value->NoiDung}}</td> -->
+                        <td>{{$value->TieuDe}}</td>
+                        <td>
+                            <img src="{{ asset('public/images/news/' .$value->HinhAnh)}}" alt="" class="img
+                            ">
+                        </td>
                         <td>{{$value->NgayDang}}</td>
-
-
-
-
                         <td col>
-                            <!-- <form action="{{route('tintuc.destroy',$value->MaTT)}}" method="post" class="form"> -->
                             <a href="{{route('tintuc.edit',$value->MaTT)}}" class="btn btn-info"><i
                                     class='bx bx-pen nav_icon'></i></a>
                             @csrf
                             @method('DELETE')
                             <a type="submit" href="{{route('tintuc.destroy',$value->MaTT)}}"
                                 class="btn btn-danger btndelete"><i class='bx bx-x nav_icon'></i></a>
-                            <!-- </form> -->
                         </td>
                     </tr>
                     @endforeach

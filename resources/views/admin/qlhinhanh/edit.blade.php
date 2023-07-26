@@ -1,18 +1,17 @@
 @extends('layout')
 <style>
+.form-group1 {
+    display: flex;
+    padding-bottom: 100px;
+    padding-left: 12px;
+    border: 1px solid #ced4da;
 
-    .form-group1 {
-        display: flex;
-        padding-bottom: 100px;
-        padding-left: 12px;
-        border: 1px solid #ced4da;
+}
 
-    }
-
-    .select {
-        padding-left: 12px;
-        border: none;
-    }
+.select {
+    padding-left: 12px;
+    border: none;
+}
 </style>
 <div class="container">
     <div class="card">
@@ -25,12 +24,12 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{route('hinhanh.update',$hinhanh->MaAnh)}}" method="post">
+            <form action="{{route('hinhanh.update',$hinhanh->MaAnh)}}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="col-md-6">
-                    <div class="form-group">
+                        <div class="form-group">
                             <td>HÌNH ẢNH</td>
                             <input type="file" name='upload_file' class="form-control">
                             @if($errors->has('upload_file'))
@@ -42,10 +41,10 @@
                         <div class="form-group">
                             <td>MÃ SẢN PHẨM</td>
                             <select name="MaSP" id="" class="select">
-                                    @foreach($data as $id=>$value)
-                                    <option>{{$value->MaSP}}</option>
-                                    @endforeach
-                                </select>
+                                @foreach($data as $id=>$value)
+                                <option>{{$value->MaSP}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
 
@@ -55,4 +54,3 @@
         </div>
     </div>
 </div>
-

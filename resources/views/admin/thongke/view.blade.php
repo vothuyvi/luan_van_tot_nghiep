@@ -37,7 +37,6 @@
     box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
     justify-content: space-between;
     cursor: pointer;
-    display: flex;
     text-align: center;
 
 }
@@ -51,7 +50,6 @@
     box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
     justify-content: space-between;
     cursor: pointer;
-    display: flex;
 
 }
 
@@ -64,7 +62,7 @@
     box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
     justify-content: space-between;
     cursor: pointer;
-    display: flex;
+
 
 }
 
@@ -77,7 +75,7 @@
     box-shadow: 0 7px 25px rgba(223, 235, 236, 0);
     justify-content: space-between;
     cursor: pointer;
-    display: flex;
+
 
 }
 
@@ -85,13 +83,14 @@
     position: relative;
     font-size: 1.5em;
     font-weight: 500;
+    text-align: center;
 
 }
 
 .cardBox1 .card1 .number {
-    font-weight: 500;
+    font-weight: bold;
+    font-size: 1.8em;
     font-family: 'Noto Serif', serif;
-    font-size: 1.5em;
     text-align: center;
 }
 
@@ -99,12 +98,13 @@
     position: relative;
     font-size: 1.5em;
     font-weight: 500;
+    text-align: center;
 
 }
 
 .cardBox1 .card2 .number {
-    font-weight: 500;
-    font-size: 1.5em;
+    font-weight: bold;
+    font-size: 1.8em;
     text-align: center;
     font-family: 'Noto Serif', serif;
 
@@ -114,12 +114,14 @@
     position: relative;
     font-size: 1.5em;
     font-weight: 500;
+    text-align: center;
+
 
 }
 
 .cardBox1 .card3 .number {
-    font-weight: 500;
-    font-size: 1.5em;
+    font-weight: bold;
+    font-size: 1.8em;
     text-align: center;
     font-family: 'Noto Serif', serif;
 
@@ -129,12 +131,13 @@
     position: relative;
     font-size: 1.5em;
     font-weight: 500;
+    text-align: center;
 
 }
 
 .cardBox1 .card4 .number {
-    font-weight: 500;
-    font-size: 1.5em;
+    font-weight: bold;
+    font-size: 1.8em;
     text-align: center;
     font-family: 'Noto Serif', serif;
 
@@ -154,29 +157,26 @@
     <div class="cardBox1">
         <div class="card1">
             <div>
-                <div class="name">TỔNG ĐƠN HÀNG</div>
+                <div class="name">TỔNG ĐƠN</div>
                 <div class="number">{{$don}}</div>
             </div>
-            <!-- <div class="icon">
-                <i class='bx bx-cart nav_icon'></i>
-                </div> -->
         </div>
         <div class="card2">
             <div>
-                <div class="name">TỔNG DOANH THU</div>
+                <div class="name">TỔNG TIỀN</div>
                 <div class="number">{{number_format($total)}}</div>
             </div>
         </div>
         <div class="card3">
             <div>
-                <div class="name"></div>
-                <div class="number"></div>
+                <div class="name">DOANH THU</div>
+                <div class="number">{{$doanhThuThucTe}}</div>
             </div>
         </div>
         <div class="card4">
             <div>
-                <div class="name"></div>
-                <div class="number"></div>
+                <div class="name">ĐƠN HUỶ</div>
+                <div class="number">{{$donhanghuy}}</div>
             </div>
         </div>
 
