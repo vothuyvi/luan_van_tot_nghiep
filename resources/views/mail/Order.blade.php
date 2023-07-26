@@ -462,6 +462,7 @@
                                                                     <span>
                                                                         @if($mailData['MaThanhToan'] == '01') ĐÃ
                                                                         THANH TOÁN.
+                                                                        @elseif($mailData['MaTT'] == '4') ĐÃ THANH TOÁN
                                                                         @elseif($mailData['MaThanhToan'] == '02') CHƯA
                                                                         THANH TOÁN.
                                                                         @endif
