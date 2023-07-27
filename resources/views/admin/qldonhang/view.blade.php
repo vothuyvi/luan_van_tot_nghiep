@@ -62,9 +62,8 @@ td {
                     <tr>
                         <td>{{$value->MaDH}}</td>
                         <td>{{$value->TenNguoiNhan}}</td>
-                        <!-- <td>{{$value->DiaChiNguoiNhan}}</td> -->
                         <td>{{$value->SDTNguoiNhan}}</td>
-                        <td>{{date('d/m/Y H:m:s', strtotime($value->NgayDat))}}</td>
+                        <td>{{$value->NgayDat}}</td>
                         <td>
                             @if ( $value->MaTT== 1)
                             <span class="error-text1">Đang chờ duyệt</span>

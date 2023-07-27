@@ -82,12 +82,14 @@
           <span class="text-sky-500 hover:text-red-600 rounded-md px-10 py-2 text-4xl font-bold">TRANG CHỦ</span>
         </router-link>
         <span class="">
-          <a href="/product">
+          <!-- <a href="/product"> -->
+          <router-link :to="{ name: 'ProductView' }">
             <span class="text-sky-500 hover:text-red-600 rounded-md px-10 py-2 text-4xl font-bold">
               SẢN PHẨM
               <i class="fa-solid fa-chevron-down"></i>
             </span>
-          </a>
+          </router-link>
+          <!-- </a> -->
           <div class="subnav">
             <span v-for="(item, index) in state.allProductTypeData" :key="index" class="text-sky-500 hover:text-red-600"
               @click="onClickCategory(item.MaLoai, item.TenLoai)">

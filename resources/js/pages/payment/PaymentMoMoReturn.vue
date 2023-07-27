@@ -1,4 +1,7 @@
-<template></template>
+<template>
+    <div v-loading.fullscreen.lock="true">
+    </div>
+</template>
 <script setup>
 import { onMounted } from "vue";
 import { useRouter, useRoute } from 'vue-router'
@@ -24,9 +27,17 @@ onMounted(async () => {
             });
         }
     } else {
-        router.push({
-            name: 'PaymentErrorView',
-        });
+        const form = {
+            MaDH: orderId.slice(-3),
+            MaThanhToan: '02',//chưa thanh toán
+            MaTT: '5'// đã huỷ
+        }
+        const { data: res } = await updateOrder(form);
+        if (res) {
+            router.push({
+                name: 'PaymentErrorView',
+            });
+        }
     }
 })
 
