@@ -87,7 +87,17 @@ td {
                     @endforeach
                 </tbody>
             </table>
-            {{$donhang->appends(request()->all())->links()}}
+            <table>
+                <div class="form-group">
+                    <td><a href="https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm?ReturnUrl=%2fmerchantv2%2fTransaction%2fPaymentSearch.htm"
+                            class="btn btn-primary mt-4">Quản lý thanh toán VNPAY</a>
+                    </td>
+                </div>
+            </table>
+            <div class="mt-4">
+                {{$donhang->appends(request()->all())->links()}}
+            </div>
+
 
         </div>
     </div>
