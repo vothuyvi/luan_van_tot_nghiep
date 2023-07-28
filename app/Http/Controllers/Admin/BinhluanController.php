@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Binhluan;
+use App\Models\Admin\Khachhang;
 use Illuminate\Http\Request;
 
 class BinhluanController extends Controller
@@ -12,16 +13,14 @@ class BinhluanController extends Controller
      */
     public function __construct()
     {
-
         $this->middleware('admin');
     }
     public function index()
     {
-        //
-        $binhluan = Binhluan::with('products')->paginate(8);
-        if($key = request()->key)
-        {
-            $binhluan = Binhluan::where('MaSP','like','%'.$key.'%')->paginate(8);
+        $binhluan = Binhluan::with('products', 'khachhang')->paginate(8);
+
+        if ($key = request()->key) {
+            $binhluan = Binhluan::where('MaSP', 'like', '%' . $key . '%')->paginate(8);
         }
         // $binhluan = Binhluan::with('products')->paginate(8);
         return View('admin/qlbinhluan/view')->with(compact('binhluan'));
@@ -34,8 +33,5 @@ class BinhluanController extends Controller
         $binhluan = Binhluan::find($data['comment_MaBL']);
         $binhluan->Status = $data['comment_status'];
         $binhluan->save();
-
     }
-
-
 }

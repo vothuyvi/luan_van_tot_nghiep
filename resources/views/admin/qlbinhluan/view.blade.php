@@ -49,6 +49,7 @@
                         <th>NỘI DUNG</th>
                         <th>NGÀY BÌNH LUẬN</th>
                         <th>MÃ KHÁCH HÀNG</th>
+                        <th>EMAIL</th>
                         <th>MÃ SẢN PHẨM</th>
                         <th>TÊN SẢN PHẨM</th>
                         <th>TRẠNG THÁI</th>
@@ -62,6 +63,7 @@
                         <td>{{$value->NoiDung}}</td>
                         <td>{{$value->NgayBinhLuan}}</td>
                         <td>{{$value->MaKH}}</td>
+                        <td>{{$value->khachhang->email}}</td>
                         <td>{{$value->MaSP}}</td>
                         <td>{{$value->products->TenSP}} </td>
                         <td col>
