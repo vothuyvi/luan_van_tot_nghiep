@@ -7,9 +7,10 @@
                 Chưa có sản phẩm
             </div>
         </div>
-        <div class="cart_list p-2">
+        <div class="cart_list p-2 max-h-[35rem] overflow-y-auto">
             <div v-for="(item, index) in state.orders" :key="index" class="cart_item flex gap-2 items-center">
-                <div class="w-[8rem] h-[8rem] flex items-center justify-center p-2 border border-[#d9d9d9] rounded-lg">
+                <div
+                    class="min-w-[6rem] w-[7rem] h-[6rem] flex items-center justify-center p-2 border border-[#d9d9d9] rounded-lg">
                     <!-- <img :src="`/images/products/${item.HinhAnh}`" /> -->
                     <img :src="renderFileURL('/images/products/', item.HinhAnh)" />
                 </div>
