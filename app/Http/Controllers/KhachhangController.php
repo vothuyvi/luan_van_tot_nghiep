@@ -124,6 +124,7 @@ class KhachhangController extends Controller
                     'phone.digits_between' => 'Số điện thoại chưa đúng định dạng.',
                     'phone.required' => 'Số điện thoại không được để trống.',
                     'hinhanh.mimes' => 'Hình ảnh sai định dạng.',
+                    'hinhanh.image' => 'Hình ảnh sai định dạng.',
                 ],
             );
             if ($validator->fails()) {
