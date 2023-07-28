@@ -57,9 +57,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                    $currentPage = Request::get('page') ? Request::get('page') - 1 : 0;
+                    @endphp
                     @foreach($binhluan as $id=>$value)
                     <tr>
-                        <td>{{++$id}}</td>
+                        <td>{{++$id+($currentPage*8)}}</td>
                         <td>{{$value->NoiDung}}</td>
                         <td>{{$value->NgayBinhLuan}}</td>
                         <td>{{$value->MaKH}}</td>
