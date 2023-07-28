@@ -14,6 +14,13 @@
                         <i class="fa-solid fa-location-dot mr-2"></i> THÔNG TIN
                         KHÁCH HÀNG
                     </div>
+                    <div v-if="state.error" class="text-red-600 text-xl font-medium">
+                        <div v-for="(key, value) in state.error" :key="key">
+                            <div v-for="(item, index) in state.error[value]" :key="index">
+                                {{ item }}
+                            </div>
+                        </div>
+                    </div>
                     <div class="grid grid-rows-3">
                         <input v-model="state.form.TenNguoiNhan" type="text" name="name" id=""
                             class="fontAwesome p-4 border border-sky-600 mt-4 mb-4"
@@ -167,7 +174,8 @@ const state = reactive({
         listSP: [],
     },
     khuyenMai: {},
-    listKM: []
+    listKM: [],
+    error: '',
 })
 const authStore = useAuthStore();
 const router = useRouter();
@@ -335,38 +343,39 @@ const onClickCheckOut = async () => {
         }
         state.form.TongTienDonHang = state.totalPrice;
         state.form.MaKM = state.khuyenMai.MaKM;
-        if (checkValidate()) {
-            if (state.form.listSP.length != 0) {
-                const { data: res } = await checkOut(state.form)
-                if (state.form.MaPT === 'PTOL') {
-                    handlePayment(res);
-                }
-                else if (state.form.MaPT === 'PTOLMOMO') {
-                    handlePaymentMoMo(res);
-                }
-                ElMessage({
-                    message: 'Đặt hàng thành công.',
-                    type: 'success',
-                    grouping: true,
-                })
-                state.form = {
-                    email: '',
-                    TenNguoiNhan: '',
-                    DiaChiNguoiNhan: '',
-                    SDTNguoiNhan: '',
-                    GhiChu: '',
-                    MaPT: 'PTOFF',
-                    listSP: [],
-                }
-                state.orders = [];
-                state.totalPrice = 0;
-                handelDeleteCart();
-                router.push({
-                    name: 'HomeView',
-                });
+        // if (checkValidate()) {
+        if (state.form.listSP.length != 0) {
+            const { data: res } = await checkOut(state.form)
+            if (state.form.MaPT === 'PTOL') {
+                handlePayment(res);
             }
+            else if (state.form.MaPT === 'PTOLMOMO') {
+                handlePaymentMoMo(res);
+            }
+            ElMessage({
+                message: 'Đặt hàng thành công.',
+                type: 'success',
+                grouping: true,
+            })
+            state.form = {
+                email: '',
+                TenNguoiNhan: '',
+                DiaChiNguoiNhan: '',
+                SDTNguoiNhan: '',
+                GhiChu: '',
+                MaPT: 'PTOFF',
+                listSP: [],
+            }
+            state.orders = [];
+            state.totalPrice = 0;
+            handelDeleteCart();
+            router.push({
+                name: 'HomeView',
+            });
         }
-    } catch {
+        // }
+    } catch (error) {
+        state.error = error.response.data.errors;
         ElMessage({
             message: 'Đặt hàng không thành công, bạn vui lòng thử lại!',
             type: 'error',

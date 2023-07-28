@@ -24,7 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/product-best', 'SanphamController@best');
     Route::get('/product-all', 'SanphamController@index');
     Route::get('/product-type-all', 'LoaispController@index');
-    Route::get('/product-type/{MaLoai}', 'LoaispController@product');
+    Route::post('/product-related', 'LoaispController@relatedProducts');
     Route::get('/product-detail/{MaSP}', 'SanphamController@product');
     Route::post('/product-list', 'SanphamController@productList');
     Route::get('/news-detail', 'TintucController@newsDetail');

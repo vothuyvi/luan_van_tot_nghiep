@@ -17,13 +17,17 @@ class LoaispController extends Controller
         }
     }
 
-    function product(Request $request)
+    function relatedProducts(Request $request)
     {
         try {
-            $MaLoai = $request->MaLoai;
+            $MaSP = $request->MaSP;
+            $sanpham = Sanpham::where('MaSP', $MaSP)->first();
+            $MaLoai = $sanpham->MaLoai;
+            // dd($sanpham->MaLoai);
             $product = Loaisp::with(['sanpham'])
                 ->where('MaLoai', $MaLoai)
                 ->first();
+            // dd($product);
             return json_decode($product);
         } catch (\Exception $e) {
             return ResponseApi::fails('Server Error!');

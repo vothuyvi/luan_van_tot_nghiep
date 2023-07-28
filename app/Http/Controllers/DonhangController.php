@@ -38,9 +38,28 @@ class DonhangController extends Controller
     public function checkOut(Request $request)
     {
         try {
+            $validator = \Validator::make(
+                $request->all(),
+                [
+                    'TenNguoiNhan' => 'required|min:2|max:100',
+                    'DiaChiNguoiNhan' => 'required|max:255',
+                    'SDTNguoiNhan' => 'required|numeric|digits_between:10,10',
+                ],
+                [
+                    'TenNguoiNhan.required' => 'Tên người nhận không được để trống.',
+                    'TenNguoiNhan.min' => 'Tên người nhận chưa đủ độ dài cho phép.',
+                    'TenNguoiNhan.max' => 'Tên người nhận vượt quá độ dài cho phép.',
+                    'DiaChiNguoiNhan.required' => 'Địa chỉ không được để trống.',
+                    'DiaChiNguoiNhan.max' => 'Địa chỉ vượt quá độ dài cho phép.',
+                    'SDTNguoiNhan.digits_between' => 'Số điện thoại chưa đúng định dạng.',
+                    'SDTNguoiNhan.required' => 'Số điện thoại không được để trống.',
+                ],
+            );
+            if ($validator->fails()) {
+                return ResponseApi::errors($validator->errors());
+            }
             $user = Auth::user();
             $order = new Donhang();
-            // $order->email = $request->email;
             $order->TenNguoiNhan = $request->TenNguoiNhan;
             $order->DiaChiNguoiNhan = $request->DiaChiNguoiNhan;
             $order->SDTNguoiNhan = $request->SDTNguoiNhan;

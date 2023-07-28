@@ -158,7 +158,7 @@
                 </p>
             </div>
             <div class="mt-6">
-                <ProductBest />
+                <ProductRelated />
             </div>
         </div>
     </div>
@@ -168,7 +168,7 @@
 import { useRoute, useRouter } from 'vue-router'
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import { reactive, ref, onMounted, watch } from "vue";
-import ProductBest from "@/components/ProductBest.vue";
+import ProductRelated from "@/components/ProductRelated.vue";
 import { productDetail, comments, commentStore } from "@/api/auth";
 import { useAuthStore } from '@/stores'
 import { UserFilled } from '@element-plus/icons-vue'
@@ -190,7 +190,6 @@ watch(
     },
     { deep: true } // WATCH OBJECT
 )
-
 
 const authStore = useAuthStore();
 const state = reactive({

@@ -162,6 +162,7 @@ watch(
         query.MinPrice = newValue.MinPrice;
         query.MaxPrice = newValue.MaxPrice;
         query.TenSP = newValue.TenSP;
+        query.page = newValue.page;
         state.filterValue2 = [newValue.MinPrice, newValue.MaxPrice]
         await getProductList();
     },

@@ -21,9 +21,7 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                   </span>
                 </router-link>
-
               </el-badge>
-
               <div class="cart-model">
                 <span>
                   <CartModel />
@@ -32,12 +30,7 @@
             </span>
           </div>
           <div v-else class="flex items-center mr-4">
-            <!-- <div class="text-sky-500 text-2xl mr-7 font-bold hover:text-red-600 cursor-pointer">
-            Yêu thích
-            <i class="fa-solid fa-heart"></i>
-          </div> -->
             <span class="mr-7">
-
               <el-badge :value="authStore.orderCount" class="item">
                 <router-link :to="{ name: 'CartView' }">
                   <span class="text-sky-500 text-2xl font-bold hover:text-red-600 cursor-pointer pb-12">
@@ -45,7 +38,6 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                   </span>
                 </router-link>
-
               </el-badge>
               <div class="cart-model">
                 <span>
@@ -77,14 +69,14 @@
     </header>
 
     <nav class="header_top">
-      <div class="header_left">
+      <div class="header_left text-4xl lg:text-[1.6rem]">
         <router-link :to="{ name: 'HomeView' }">
-          <span class="text-sky-500 hover:text-red-600 rounded-md px-10 py-2 text-4xl font-bold">TRANG CHỦ</span>
+          <span class="text-sky-500 hover:text-red-600 rounded-md px-10 lg:px-6 py-2  font-bold">TRANG CHỦ</span>
         </router-link>
         <span class="">
           <!-- <a href="/product"> -->
           <router-link :to="{ name: 'ProductView' }">
-            <span class="text-sky-500 hover:text-red-600 rounded-md px-10 py-2 text-4xl font-bold">
+            <span class="text-sky-500 hover:text-red-600 rounded-md px-10 lg:px-6 py-2 font-bold">
               SẢN PHẨM
               <i class="fa-solid fa-chevron-down"></i>
             </span>
@@ -97,10 +89,10 @@
           </div>
         </span>
         <router-link :to="{ name: 'NewsView' }">
-          <span class="text-sky-500 hover:text-red-600 rounded-md px-10 py-2 text-4xl font-bold">TIN TỨC</span>
+          <span class="text-sky-500 hover:text-red-600 rounded-md px-10 lg:px-6 py-2 font-bold">TIN TỨC</span>
         </router-link>
         <router-link :to="{ name: 'ContactView' }">
-          <span class="text-sky-500 hover:text-red-600 rounded-md px-10 py-2 text-4xl font-bold">LIÊN HỆ</span>
+          <span class="text-sky-500 hover:text-red-600 rounded-md px-10 lg:px-6 py-2 font-bold">LIÊN HỆ</span>
         </router-link>
       </div>
       <div class="header_right">

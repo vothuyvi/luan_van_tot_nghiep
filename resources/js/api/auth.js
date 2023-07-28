@@ -65,10 +65,11 @@ export function productDetail(MaSP) {
     method: 'GET',
   });
 }
-export function productType(MaLoai) {
+export function productRelated(form) {
   return request({
-    url: `/product-type/${MaLoai}`,
-    method: 'GET',
+    url: `/product-related`,
+    method: 'POST',
+    data: form
   });
 }
 
