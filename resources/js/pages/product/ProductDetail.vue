@@ -51,17 +51,11 @@
                         -
                     </button>
                     <span class="text-2xl mr-5">{{ state.SoLuongOrder }}</span>
-                    <button v-if="state.SoLuongOrder < state.form.SoLuong"
+                    <button
                         class="border border-sky-600 w-10 rounded-lg text-2xl font-bold hover:bg-sky-600 hover:text-white"
                         @click="handelQuantity('PLUS')">
                         +
                     </button>
-                    <button v-else
-                        class="border border-sky-600 w-10 rounded-lg text-2xl font-bold hover:bg-sky-600 hover:text-white cursor-not-allowed"
-                        @click="handelQuantity('PLUS')" disabled>
-                        +
-                    </button>
-
                 </div>
                 <div class="btn_buy mb-4">
                     <button v-if="state.form.SoLuong === 0" disabled class="cursor-not-allowed opacity-50">Thêm vào giỏ
